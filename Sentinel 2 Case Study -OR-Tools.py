@@ -1,4 +1,4 @@
-"""Test Code sample to demonstrate how to build a NoOverlap constraint."""
+"""Code sample to demonstrate how to build a NoOverlap constraint."""
 
 from __future__ import print_function
 from ortools.sat.python import cp_model
@@ -304,28 +304,11 @@ def processing_time(day, month, year,country):
 
         return idle_time
 
-class VarArraySolutionPrinter(cp_model.CpSolverSolutionCallback):
-    """Print intermediate solutions."""
-
-    def __init__(self, variables):
-        cp_model.CpSolverSolutionCallback.__init__(self)
-        self.__variables = variables
-        self.__solution_count = 0
-
-    def on_solution_callback(self):
-        self.__solution_count += 1
-        for v in self.__variables:
-            print('%s=%i' % (v, self.Value(v)), end=' ')
-        print()
-
-    def solution_count(self):
-        return self.__solution_count
-
 
 #if __name__ == '__main__':
 def main():
 
-    global actions, binary_form
+
     occurence_list=[]
     import sys
 
@@ -441,25 +424,26 @@ def main():
         # sorted_list2 = sorted(jobs_data, key=lambda x: x[0])
         # np.set_printoptions(threshold=np.inf)
         jobs_data = np.array(jobs_data)
-        print(jobs_data)
         print(occurence_list)
         print(jobs_data)
 
-            # Computes horizon dynamically as the sum of all durations.
-        #horizon = sum((dt.datetime.strptime(task[2],'%H:%M:%S.%f') - dt.datetime(1900,1,1)) for task in jobs_data)
-        horizon = sum(int(float(task[3])*1000) for task in jobs_data)
+        # total memory onboard
+
         end_jobs =[]
         start_jobs = []
         duration_vars=[]
         all_tasks = {}
         weight = []
         j_tasks =[]
+        total_mem = []
+        onboard_mem = 2.4 * 10 ** 12
         jobs_model_list=collections.defaultdict(list)
         task_type = collections.namedtuple('task_type', 'start job_task end interval')
 
         #initialize variables
         for task in range (0,len(jobs_data)):
 
+            #total memory onboard memory allocation
 
             start_variables = int(((dt.datetime.strptime(str(jobs_data[task][1]),'%H:%M:%S.%f') - dt.datetime(1900,1,1)).total_seconds())*1000)
             end_variables =  int(((dt.datetime.strptime(str(jobs_data[task][2]),'%H:%M:%S.%f') - dt.datetime(1900,1,1)).total_seconds())*1000)
@@ -469,14 +453,16 @@ def main():
             duration_var = model.NewIntVar(0,int(float(jobs_data[task][3])*1000),'duration' + suffix)
             interval_var = model.NewIntervalVar(start_var, duration_var, end_var, 'task' + suffix)
 
-            if jobs_data[task][0]==1:
+            if jobs_data[task][0]=='1':
                 weights = 3
-            elif jobs_data[task][0]==4:
+            elif jobs_data[task][0]=='4':
                 weights = 2
-            elif jobs_data[task][0]==0:
+            elif jobs_data[task][0]=='0':
                 weights = 0
             else:
                 weights = 1
+
+
 
 
             all_tasks[task] = task_type(start=start_var, job_task=(jobs_data[task][0]), end=end_var,interval=interval_var)
@@ -486,7 +472,7 @@ def main():
             end_jobs.append(end_var)
             start_jobs.append(start_var)
             duration_vars.append(duration_var)
-        print(weight)
+        #print(weight)
 
 
 
@@ -496,29 +482,56 @@ def main():
 
         #model.AddDecisionStrategy([start_jobs[jobs] for jobs in range (0,len(jobs_data))], cp_model.CHOOSE_FIRST,cp_model.SELECT_MIN_VALUE)
 
-        #for task in range(0, len(jobs_data)):
-        #model.AddNoOverlap(jobs_model_list[task]for task in range(0, len(jobs_data)))
-
-        #model.Maximize((sum((duration_vars[task]) for task in range(0, len(jobs_data)) if jobs_data[task][0] == 4)))
         model.Maximize(sum((weight[task] * duration_vars[task]) for task in range(0, len(jobs_data))))
 
-        #model.Maximize(sum(weighting[task]) for task in range(0, len(jobs_data)))
+        boolean_list = []
+        w = [model.NewBoolVar('w_%i' % v) for v in range(0, len(jobs_data))]
+        x = [model.NewBoolVar('x_%i' % v) for v in range(0, len(jobs_data))]
+        y = [model.NewBoolVar('y_%i' % v) for v in range(0, len(jobs_data))]
+        z = [model.NewBoolVar('z_%i' % v) for v in range(0, len(jobs_data))]
 
-        #obj = model.NewIntVar(0, horizon, 'makespan')
-        #model.AddMaxEquality(obj, [end_jobs[jobs] for jobs in range (0, len(end_jobs)-1)])
-        #model.Minimize(obj)
+        for i in range(0, len(jobs_data)):
+
+            f = model.NewIntVar(int(all_tasks[i].job_task), int(all_tasks[i].job_task), 'f')
+
+
+            model.Add(f == 1).OnlyEnforceIf(w[i])
+            model.Add(f != 1).OnlyEnforceIf(w[i].Not())
+            model.Add(f == 2).OnlyEnforceIf(x[i])
+            model.Add(f != 2).OnlyEnforceIf(x[i].Not())
+            model.Add(f == 3).OnlyEnforceIf(y[i])
+            model.Add(f != 3).OnlyEnforceIf(y[i].Not())
+            model.Add(f == 4).OnlyEnforceIf(z[i])
+            model.Add(f != 4).OnlyEnforceIf(z[i].Not())
+            boolean_list.append([f, w, x, y, z])
+
+
+
 
         solver = cp_model.CpSolver()
         status = solver.Solve(model)
-        print(model)
+        #print(model)
 
         solver.parameters.search_branching = cp_model.FIXED_SEARCH
+
+        final_start =[]
+        final_end =[]
+        final_duration = []
+        final_jobs = []
 
         if status == cp_model.OPTIMAL:
         # Print out makespan and the start times for all tasks.
             print('Optimal Schedule Length: %i' % solver.ObjectiveValue())
             for jobs in jobs_model_list:
-                print('Job',jobs,' starts at %i' % solver.Value(start_jobs[jobs]),' ends at %i' % solver.Value(end_jobs[jobs]),' duration is %i' % solver.Value(duration_vars[jobs]))
+                #print('Job',jobs,' starts at %i' % solver.Value(start_jobs[jobs]),' ends at %i' % solver.Value(end_jobs[jobs]),' duration is %i' % solver.Value(duration_vars[jobs]))
+
+                #convert micro seconds to time hh mm ss
+                start = str(dt.timedelta(seconds=((solver.Value(start_jobs[jobs]))/1000)))[:-3]
+                end = str(dt.timedelta(seconds=((solver.Value(end_jobs[jobs]))/1000)))[:-3]
+                duration = (solver.Value(duration_vars[jobs]))/1000
+                final_jobs = (all_tasks[jobs].job_task)
+                print('Job',jobs,' starts at ', start,' ends at ',end,' duration is ',duration,' job task: ',final_jobs, '[',solver.Value(w[jobs]),solver.Value(x[jobs]),solver.Value(y[jobs]),solver.Value(z[jobs]),']')
+
                 # print('Job',jobs,' ends at %i' % solver.Value(end_jobs[jobs]))
                 # print('Job',jobs,' duration is %i' % solver.Value(duration_vars[jobs]))
                 # print(' job task %i' % solver.Value(all_tasks[jobs].job_task)')
