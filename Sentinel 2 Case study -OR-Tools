@@ -1,4 +1,4 @@
-"""Code sample to demonstrate how to build a NoOverlap constraint."""
+"""Test Code sample to demonstrate how to build a NoOverlap constraint."""
 
 from __future__ import print_function
 from ortools.sat.python import cp_model
