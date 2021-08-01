@@ -2,11 +2,12 @@
 
 from __future__ import print_function
 from ortools.sat.python import cp_model
+import matplotlib.pyplot as plt
 import math, sys
 from ortools.constraint_solver import pywrapcp
 import datetime as dt
 #from SatelliteCoord import Xband_stations, country_access
-
+import SatelliteCoord
 from collections import namedtuple
 import collections
 
@@ -592,9 +593,10 @@ def main():
         Actives =[]
         tasks_list=[]
         weights2=[]
-        h=0
 
-        for task in range(3,6):
+
+        for task in range(0,len(final_jobs)):
+            h = 0
             #Actives1 = [model2.NewBoolVar('Actives_%i' % v) for v in range(0, int(final_duration[task]))]
             #Actives = [model2.NewBoolVar('Actives_%i' % v) for v in range(0, (final_end[task]-final_start[task])-1)]
             while h <= (int(final_end[task] / 1000) - int(final_start[task] / 1000)) :
@@ -628,14 +630,14 @@ def main():
         model2.AddReservoirConstraintWithActive(start_ints, Demands_mem, Actives, 0, onboard_mem)
 
         model2.Maximize(sum([(Actives[i] * weights2[i]) for i in range(0, len(Actives))]))
-        #model2.AddDecisionStrategy((Actives[i] for i in range(0, len(Actives))), cp_model.CHOOSE_LOWEST_MIN,cp_model.SELECT_MIN_VALUE)
+              #model2.AddDecisionStrategy((Actives[i] for i in range(0, len(Actives))), cp_model.CHOOSE_LOWEST_MIN,cp_model.SELECT_MIN_VALUE)
         solver2 = cp_model.CpSolver()
         status2 = solver2.Solve(model2)
 
-        #solver2.parameters.search_branching = cp_model.LP_SEARCH
+        solver2.parameters.stop_after_first_solution = cp_model.FIXED_SEARCH
         solver2.parameters.num_search_workers = 6
         solver.parameters.log_search_progress = True
-        #solution_printer2 = cp_model.ObjectiveSolutionPrinter()
+                  #solution_printer2 = cp_model.ObjectiveSolutionPrinter()
         solution_printer2 = cp_model.VarArrayAndObjectiveSolutionPrinter([Actives[i] for i in range(0, len(Actives))])
         solver2.SolveWithSolutionCallback(model2, solution_printer2)
 
