@@ -2,6 +2,7 @@
 
 from __future__ import print_function
 from ortools.sat.python import cp_model
+import matplotlib.pyplot as plt
 import math, sys
 from ortools.constraint_solver import pywrapcp
 import datetime as dt
@@ -330,7 +331,7 @@ def main():
         np.set_printoptions(threshold=np.inf)
         occurence_list= np.array(sorted_list)
 
-        model = cp_model.CpModel()
+
 
         jobs_data = []
 
@@ -365,7 +366,7 @@ def main():
                         prenum_repeat = 0
                         a = z
 
-
+                    #if country is seen at night
                     elif occurence_list[z][0] >= penumbra_starttime and occurence_list[z][
                         0] <= penumbra_endtime and any(
                             e[3] == occurence_list[z][3] for e in country_access(day, month, year, country)):
@@ -427,7 +428,7 @@ def main():
         print(occurence_list)
         print(jobs_data)
 
-        # total memory onboard
+
 
         end_jobs =[]
         start_jobs = []
@@ -435,11 +436,22 @@ def main():
         all_tasks = {}
         weight = []
         j_tasks =[]
-        total_mem = []
-        onboard_mem = 2.4 * 10 ** 12
+        #Demands_mem = []
+
+        # total memory onboard
+        # onboard_mem = 24 * 10 ** 11
+        # #memory required per image
+        # image_mem = 2688 * 10 **3
+        # download_data_rate = 28 *10 **5
+        # #5Kbit/s to process images
+        # process_im_mem = 5 *10**3
+        # Demands =0
+
+        model = cp_model.CpModel()
+
         jobs_model_list=collections.defaultdict(list)
         task_type = collections.namedtuple('task_type', 'start job_task end interval')
-
+        #Actives = [model.NewBoolVar('Actives_%i' % v) for v in range(0, len(jobs_data))]
         #initialize variables
         for task in range (0,len(jobs_data)):
 
@@ -453,14 +465,32 @@ def main():
             duration_var = model.NewIntVar(0,int(float(jobs_data[task][3])*1000),'duration' + suffix)
             interval_var = model.NewIntervalVar(start_var, duration_var, end_var, 'task' + suffix)
 
+            #take pictures 1 per second
             if jobs_data[task][0]=='1':
                 weights = 3
+
+                #Demands = model.NewIntervalVar(0, int(image_mem * (duration_var)),'Demands' +suffix)
+                #Demands = image_mem * duration_var
+            #dump images
             elif jobs_data[task][0]=='4':
                 weights = 2
+                #data downloaded to ground station - data rate (MBit/s) * duration
+                #Demands = model.NewIntervalVar(0,-int(download_data_rate * duration_var),'Demands' +suffix)
+                #Demands = -(download_data_rate * duration_var)
+            #if land of interest is seen at nights
             elif jobs_data[task][0]=='0':
                 weights = 0
+                #Demands = 0
+            #process images
+            elif jobs_data[task][0]=='2':
+                weights = 1
+                # data rate to process images (KBit/s) * duration
+                #Demands = model.NewIntervalVar(0,(process_im_mem*(duration_var)),'Demands' +suffix)
+                #Demands = process_im_mem*duration_var
+                #calibrate when jobs_data[task][0]=='3'
             else:
                 weights = 1
+
 
 
 
@@ -472,17 +502,19 @@ def main():
             end_jobs.append(end_var)
             start_jobs.append(start_var)
             duration_vars.append(duration_var)
+            #Demands_mem.append(Demands)
+
         #print(weight)
-
-
 
         for task in range(0, len(jobs_data) - 1):
             model.Add(all_tasks[task+ 1].start >= all_tasks[task].end)
 
 
+
         #model.AddDecisionStrategy([start_jobs[jobs] for jobs in range (0,len(jobs_data))], cp_model.CHOOSE_FIRST,cp_model.SELECT_MIN_VALUE)
 
         model.Maximize(sum((weight[task] * duration_vars[task]) for task in range(0, len(jobs_data))))
+        #model.AddReservoirConstraintWithActive(start_jobs, Demands_mem, Actives, 0, onboard_mem)
 
         boolean_list = []
         w = [model.NewBoolVar('w_%i' % v) for v in range(0, len(jobs_data))]
@@ -494,6 +526,7 @@ def main():
 
             f = model.NewIntVar(int(all_tasks[i].job_task), int(all_tasks[i].job_task), 'f')
 
+            #model.AddReservoirConstraintWithActive(start_jobs[i], Demands_mem[i], Actives[i], 0, onboard_mem)
 
             model.Add(f == 1).OnlyEnforceIf(w[i])
             model.Add(f != 1).OnlyEnforceIf(w[i].Not())
@@ -526,19 +559,104 @@ def main():
                 #print('Job',jobs,' starts at %i' % solver.Value(start_jobs[jobs]),' ends at %i' % solver.Value(end_jobs[jobs]),' duration is %i' % solver.Value(duration_vars[jobs]))
 
                 #convert micro seconds to time hh mm ss
-                start = str(dt.timedelta(seconds=((solver.Value(start_jobs[jobs]))/1000)))[:-3]
-                end = str(dt.timedelta(seconds=((solver.Value(end_jobs[jobs]))/1000)))[:-3]
-                duration = (solver.Value(duration_vars[jobs]))/1000
-                final_jobs = (all_tasks[jobs].job_task)
-                print('Job',jobs,' starts at ', start,' ends at ',end,' duration is ',duration,' job task: ',final_jobs, '[',solver.Value(w[jobs]),solver.Value(x[jobs]),solver.Value(y[jobs]),solver.Value(z[jobs]),']')
+                start = solver.Value(start_jobs[jobs])
+                end = solver.Value(end_jobs[jobs])
+                duration = (solver.Value(duration_vars[jobs]))
 
-                # print('Job',jobs,' ends at %i' % solver.Value(end_jobs[jobs]))
-                # print('Job',jobs,' duration is %i' % solver.Value(duration_vars[jobs]))
-                # print(' job task %i' % solver.Value(all_tasks[jobs].job_task)')
+
+                print('Job',jobs,' starts at ', str(dt.timedelta(seconds=(start/1000)))[:-3],' ends at ',str(dt.timedelta(seconds=(end/1000)))[:-3],' duration is ',duration/1000,' job task: ',all_tasks[jobs].job_task,
+                      '[',solver.Value(w[jobs]),solver.Value(x[jobs]),solver.Value(y[jobs]),solver.Value(z[jobs]),']')
+                final_start.append(start)
+                final_end.append(end)
+                final_duration.append(duration)
+                final_jobs.append(all_tasks[jobs].job_task)
+
 
 
         else:
             print('Solver exited with nonoptimal status: %i' % status)
+
+
+        model2 = cp_model.CpModel()
+
+        #Actives = [model2.NewBoolVar('Actives_%i' % v) for v in range(0, len(final_jobs))]
+
+        onboard_mem = 24*10**11
+        # memory required per image
+        image_mem = 2688*10**6
+        downlink_data_rate = 280*10**6
+        # 5Kbit/s to process images
+        process_im_mem = 5*10**3
+
+        Demands_mem = []
+        start_ints=[]
+        Actives =[]
+        tasks_list=[]
+        weights2=[]
+
+
+        for task in range(0,len(final_jobs)):
+            h = 0
+            #Actives1 = [model2.NewBoolVar('Actives_%i' % v) for v in range(0, int(final_duration[task]))]
+            #Actives = [model2.NewBoolVar('Actives_%i' % v) for v in range(0, (final_end[task]-final_start[task])-1)]
+            while h <= (int(final_end[task] / 1000) - int(final_start[task] / 1000)) :
+            #for i in range(int(final_start[task]/1000),int(final_end[task]/1000)):
+                start = int(final_start[task]/1000)+h
+                tasks = final_jobs[task]
+                Actives1 = model2.NewBoolVar('Actives_%i' % h)
+                if final_jobs[task] =='1':
+                    weight2 = 3
+                    Demands = image_mem*2
+                elif final_jobs[task] =='2':
+                    weight2 = 2
+                    Demands = process_im_mem*2
+                elif final_jobs[task] == '3':
+                    weight2 = 0
+                    Demands = 0
+                elif final_jobs[task] =='4':
+                    weight2 = 1
+                    Demands = -(downlink_data_rate)*2
+                else:
+                    weight2 = 0
+                    Demands = 0
+                #print(i)
+                Demands_mem.append(Demands)
+                start_ints.append(start)
+                tasks_list.append(tasks)
+                Actives.append(Actives1)
+                weights2.append(weight2)
+                h+=2
+
+        model2.AddReservoirConstraintWithActive(start_ints, Demands_mem, Actives, 0, onboard_mem)
+
+        model2.Maximize(sum([(Actives[i] * weights2[i]) for i in range(0, len(Actives))]))
+              #model2.AddDecisionStrategy((Actives[i] for i in range(0, len(Actives))), cp_model.CHOOSE_LOWEST_MIN,cp_model.SELECT_MIN_VALUE)
+        solver2 = cp_model.CpSolver()
+        status2 = solver2.Solve(model2)
+
+        solver2.parameters.stop_after_first_solution = cp_model.FIXED_SEARCH
+        solver2.parameters.num_search_workers = 6
+        solver.parameters.log_search_progress = True
+                  #solution_printer2 = cp_model.ObjectiveSolutionPrinter()
+        solution_printer2 = cp_model.VarArrayAndObjectiveSolutionPrinter([Actives[i] for i in range(0, len(Actives))])
+        solver2.SolveWithSolutionCallback(model2, solution_printer2)
+
+        #solver2.SearchForAllSolutions(model2, solution_printer2)
+
+        if status2 == cp_model.FEASIBLE or status2 == cp_model.OPTIMAL:
+            for task in range(0, len(Actives)):
+
+                final_Demand_mem = (Demands_mem[task])
+
+                print(' starts at ', str(dt.timedelta(seconds=(start_ints[task]))),' job task: ',tasks_list[task],' Demands ', final_Demand_mem, solver2.BooleanValue(Actives[task]))
+
+                #print('Job',task,' starts at ', str(dt.timedelta(seconds=(final_start[task]/1000)))[:-3],' ends at ',str(dt.timedelta(seconds=(final_end[task]/1000)))[:-3],' duration is ',final_duration[task]/1000,' job task: ',final_jobs[task],
+                 #     '[',solver.Value(w[task]),solver.Value(x[task]),solver.Value(y[task]),solver.Value(z[task]),']'' Demands ', final_Demand_mem, solver2.Value(Actives[task]))
+
+        else:
+            print('Solver exited with nonoptimal status: %i' % status2)
+
+
 
 
 
