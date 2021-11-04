@@ -9,7 +9,7 @@ country_vis = namedtuple("country_vis", ['index', 'Country', 'day', 'month', 'ye
 
 
 # Visual of countries
-path_country = '../Land Coverage/all countries2.txt'
+path_country = '../Environment/Data/all countries2.txt'
 f_country = open(path_country, "r")
 
 line_count_country = 0
