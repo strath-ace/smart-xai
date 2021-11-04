@@ -19,7 +19,7 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
 
 
 ##########   Eclipse times
-path_Eclipse = '../SENTINEL-2A_40697_Eclipse_Summary.txt'
+path_Eclipse = '../Environment/Data/SENTINEL-2A_40697_Eclipse_Summary.txt'
 
 f_Eclipse = open(path_Eclipse, "r")
 
