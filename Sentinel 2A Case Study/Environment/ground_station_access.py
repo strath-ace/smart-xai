@@ -8,7 +8,7 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
                                                'duration'])
 
 # Xband to ground stations
-path_station = '../X-band Visibility/Facility-EUMETSAT_Maspalomas-To-Satellite-Satellite-Sensor-XBand_Access.txt'
+path_station = '../Environment/Data/Facility-EUMETSAT_Maspalomas-To-Satellite-Satellite-Sensor-XBand_Access.txt'
 f_station = open(path_station, "r")
 content_station = f_station.read()
 lines_station = content_station.split('\n')
