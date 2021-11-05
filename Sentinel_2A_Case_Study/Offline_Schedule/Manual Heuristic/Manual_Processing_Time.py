@@ -41,4 +41,4 @@ def processing_time(day, month, year, country):
                     # idle_time.append([str(idle_start_time)[:-3],str(idle_end_time)[:-3],str(idle_duration)[:-3], Satellite_status])
                     idle_time.append([str(idle_start_time)[:-3], str(idle_end_time)[:-3], str(idle_duration.total_seconds()), Satellite_status])
 
-        return idle_time,Total_Table
+        return idle_time,Total_Table,country_access_summary,stations_summary, eclipse_final
