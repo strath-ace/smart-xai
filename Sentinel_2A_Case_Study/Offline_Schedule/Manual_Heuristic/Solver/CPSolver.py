@@ -6,10 +6,13 @@ import os
 from ortools.sat.python import cp_model
 
 
-def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
+def CP_solver(b, c, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
     all_actions = range(0, 3)
     if not os.path.isfile(filename):
         print('file: ' + filename + ' does not exists')
+
+        file1 = open(filename, 'w')
+        file1.close()
 
         pics_count = 0
         processed_pics_count = 0
@@ -18,7 +21,7 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
         memory_total = 0
         processed_images = 0
         pics_taken = 0
-        c = 0
+
 
     else:
         print('file: ' + filename + ' exists')
@@ -36,15 +39,15 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
         results_data = results_coord[results_count_coord - 1].split()
 
         # Carry over last data stored in table
-        pics_count = results_data[6]
-        processed_pics_count = results_data[8]
-        downloaded_instances = results_data[10]
-        idle_time = results_data[12]
+        pics_count = int(results_data[6])
+        processed_pics_count = int(results_data[8])
+        downloaded_instances = int(results_data[10])
+        idle_time = int(results_data[12])
 
-        memory_total = results_data[4]
-        processed_images = int(results_data[7] * 100)
-        pics_taken = int(results_data[5] * 100)
-        c = results_count_coord
+        memory_total = int(results_data[4])
+        processed_images = int(float(results_data[7]) * 100)
+        pics_taken = int(float(results_data[5]) * 100)
+
 
     solver = cp_model.CpSolver()
 
@@ -57,7 +60,8 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
     print(status)
 
     final_list = []
-
+    downlink_count = 0
+    icount =0
     for n in range(b, c):
         if 0 < n < c:
             s = n - b
@@ -78,6 +82,11 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
                 check_single_action = check_single_action + 1
                 if a == 2:
                     downloaded_instances += 1
+                if a == 2 and icount <=1000:
+                    downlink_count += 1
+                elif icount > 1000:
+                    downlink_count = 0
+                    icount = 0
                 if a == 0:
                     pics_count += 1
                 if a == 1:
@@ -97,7 +106,7 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
                         [country_data_list[n][0], country_data_list[n][0] + time_interval, a, n,
                          memory_total, pics_taken, pics_count, processed_images, processed_pics_count,
                          processed_pics_count / (image_mem / process_im_mem),
-                         downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),
+                         downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),downlink_count,downlink_count/ (image_mem / downlink_data_rate),
                          idle_time, 'YES'])
                 else:
                     print('Action', a, 'works shift', n, 'time start', country_data_list[n][0],
@@ -106,7 +115,7 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
                         [country_data_list[n][0], country_data_list[n][0] + time_interval, a, n,
                          memory_total, pics_taken, pics_count, processed_images, processed_pics_count,
                          processed_pics_count / (image_mem / process_im_mem),
-                         downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),
+                         downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),downlink_count,downlink_count/ (image_mem / downlink_data_rate),
                          idle_time, 'YES'])
 
             elif any(e[3] == n for e in final_list):
@@ -119,13 +128,14 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
                     [country_data_list[n][0], country_data_list[n][0] + time_interval, a, n, memory_total,
                      pics_taken, pics_count, processed_images, processed_pics_count,
                      processed_pics_count / (image_mem / process_im_mem),
-                     downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),
+                     downloaded_instances, downloaded_instances / (image_mem / downlink_data_rate),downlink_count,downlink_count/ (image_mem / downlink_data_rate),
                      idle_time, 'NO'])
 
         if check_single_action > 1:
             print('ERROR: more than one action per time step')
             # combined_lists=final_list
             # combined_lists.append([final_list1])
+    #print(final_list)
     final_list = sorted(final_list, key=lambda x: x[0])
     np.set_printoptions(threshold=np.inf)
     final_list = np.array(final_list)

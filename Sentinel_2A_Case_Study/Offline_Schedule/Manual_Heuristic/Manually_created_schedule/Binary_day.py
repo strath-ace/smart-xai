@@ -1,5 +1,5 @@
 import pandas as pd
-
+import datetime as dt
 from Sentinel_2A_Case_Study.Environment.start_end_points_data import time_select
 
 
@@ -72,6 +72,11 @@ def manual_data_retrieved(path, time_interval, day, month):
             mem_data_list.append([g, g + time_interval, mem_access])
             g += time_interval
 
-    df = pd.DataFrame(mem_data_list)
+    #convert seconds to time H:M:S
+    mem_data_list_time=[]
+    for i in range(0, len(mem_data_list)):
+        mem_data_list_time.append([str(dt.timedelta(seconds=(mem_data_list[i][0]))),str(dt.timedelta(seconds=(mem_data_list[i][1]))),mem_data_list[i][2]])
+
+    df = pd.DataFrame(mem_data_list_time)
     file.writelines(df.to_string(header=False, index=False))
-    return mem_data_list
+    return mem_data_list, mem_data_list_time

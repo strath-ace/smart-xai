@@ -33,12 +33,12 @@ def CPModel_data(interval,onboard_mem, image_mem, downlink_data_rate, process_im
         results_count_coord = results_count_coord
         results_coord = results_coord.read()
         results_coord = results_coord.split('\n')
-        results_data = results_coord[results_count_coord - 1].split()
+        results_data = results_coord[results_count_coord-1].split()
 
         # Carry over last data stored in table
-        memory = results_data[4]
-        num_pics = int(results_data[5] * 100)
-        num_processed = int(results_data[7] * 100)
+        memory = int(results_data[4])
+        num_pics = int(float(results_data[5])*100)
+        num_processed = int(float(results_data[7]) * 100)
 
         memory_keep = [memory]
         processed_keep = [num_processed]
@@ -137,4 +137,4 @@ def CPModel_data(interval,onboard_mem, image_mem, downlink_data_rate, process_im
             if mem_data_list[n][2] == 2:
                 model.AddHint(shifts[(2, s)], 1)
 
-    return model, summary, shifts,b
+    return model, summary, shifts,b,c
