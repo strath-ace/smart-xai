@@ -74,4 +74,4 @@ def manual_data_retrieved(path, time_interval, day, month):
 
     df = pd.DataFrame(mem_data_list)
     file.writelines(df.to_string(header=False, index=False))
-    #return mem_data_list, manual_list
+    return mem_data_list

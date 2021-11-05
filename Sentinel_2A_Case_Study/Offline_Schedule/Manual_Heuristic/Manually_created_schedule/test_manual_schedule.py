@@ -6,8 +6,8 @@ day = 1
 month = 'Dec'
 year = 2020
 country = 'All'
-path = '../Results/Day ' + str(day)
+path = '../../Results/Day ' + str(day)
 time_interval = 5
-heuristic(path,time_interval, day, month, year, country)
+heuristic(path, day, month, year, country)
 Heuristic_memory_calculation(path,day)
 manual_data_retrieved(path, time_interval, day, month)

@@ -9,7 +9,7 @@ from Sentinel_2A_Case_Study.Environment.ground_station_access import xband_stati
 
 
 def processing_time(day, month, year, country):
-    path = '../../Environment/'
+    path = '../../../Environment/'
     time_interval = 5
     time_second_interval = dt.datetime.strptime('00:00:01.52', '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)
     country_access_summary = country_access(path, time_interval, day, month, year, country)[1]
