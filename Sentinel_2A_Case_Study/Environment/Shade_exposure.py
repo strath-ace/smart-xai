@@ -1,12 +1,8 @@
-
-from start_end_points_data import time_select
+import sys
 from collections import namedtuple
 import numpy as np
 import datetime as dt
-
-
-
-#from pympler.tracker import SummaryTracker
+from Sentinel_2A_Case_Study.Environment.start_end_points_data import time_select
 
 satellite_coordinates = namedtuple("satellite_coordinates", ['index', 'day', 'month', 'year', 'time', 'latitude',
                                                              'longitude'])
@@ -18,27 +14,30 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
                                                'duration'])
 
 
-##########   Eclipse times
-path_Eclipse = '../Environment/Data/SENTINEL-2A_40697_Eclipse_Summary.txt'
 
-f_Eclipse = open(path_Eclipse, "r")
+def eclipse(path,time_interval, day, month, year):
+    #   Eclipse times
+    path_Eclipse = path+'Data/SENTINEL-2A_40697_Eclipse_Summary.txt'
 
-line_count_Eclipse = 0
-for line in f_Eclipse:
-    if line != "\n":
-        line_count_Eclipse += 1
-f_Eclipse.close()
+    f_Eclipse = open(path_Eclipse, "r")
 
-f_Eclipse = open(path_Eclipse, "r")
-# print(line_count)
-node_count_eclipse = line_count_Eclipse
-content_eclipse = f_Eclipse.read()
-lines_eclipse = content_eclipse.split('\n')
+    line_count_Eclipse = 0
+    for line in f_Eclipse:
+        if line != "\n":
+            line_count_Eclipse += 1
+    f_Eclipse.close()
 
-def eclipse(time_interval,day, month, year):
+    f_Eclipse = open(path_Eclipse, "r")
+    # print(line_count)
+    node_count_eclipse = line_count_Eclipse
+    content_eclipse = f_Eclipse.read()
+    lines_eclipse = content_eclipse.split('\n')
+
+
+
     eclipse_sum = []
     eclipse_final = []
-    start_second_interval, end_second_interval = time_select(day,month)
+    start_second_interval, end_second_interval = time_select(day, month)
     # for i in range (6,node_count_eclipse+1):
     for i in range(6, node_count_eclipse + 1):
         # print(i)
@@ -76,9 +75,9 @@ def eclipse(time_interval,day, month, year):
         else:
             e = (day_data_list[len(day_data_list) - 1][1])
 
-        while e >= (start_second_interval) and (e < dn_end):
+        while e >= start_second_interval and (e < dn_end):
 
-            if (e < dn_start):
+            if e < dn_start:
                 dn_access = 1
             elif e in range(dn_start, dn_end):
                 dn_access = 0
@@ -96,5 +95,4 @@ def eclipse(time_interval,day, month, year):
 
     # print(day_data_list)
 
-    return day_data_list
-
+    return day_data_list, eclipse_final
