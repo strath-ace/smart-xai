@@ -21,20 +21,18 @@ country_vis = namedtuple("country_vis", ['index', 'Country', 'day', 'month', 'ye
 station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 'start_time', 'stop_time',
                                                'duration'])
 
-def heuristic(day, month, year, country):
-    month = 'Dec'
-    year = 2020
-    country = 'All'
-    path = 'Results/Day ' + str(day)
+def heuristic(path,time_interval, day, month, year, country):
+
+
     file1 = open(path+'/daily_schedule' + str(day) + '.txt', 'w')
     file2 = open(path+'/jobs_daily_schedule' + str(day) + '.txt', 'w')
     file3 = open(path+'/Manual_Results' + str(day) + '.txt', 'w')
-    
-    Total_Table = processing_time(day, month, year, country)
-    occurence_list=[Total_Table]
-    occurence_list = list(itertools.chain.from_iterable(list(itertools.chain.from_iterable(occurence_list))))
+
+    idle_time,Total_Table,country_access_summary,stations_summary, eclipse_final = processing_time(day, month, year, country)
+    occurence_list=[Total_Table,idle_time]
+    occurence_list = (list(itertools.chain.from_iterable(occurence_list)))
     print(occurence_list)
-    print([str(occurence_list[i][0]) for i in range(0,len(occurence_list))])
+    #print([str(occurence_list[i][0]) for i in range(0,len(occurence_list))])
 
     occurence_list_revised = []
     for i in range(0, len(occurence_list)):
@@ -86,7 +84,7 @@ def heuristic(day, month, year, country):
             for z in range(a, len(occurence_list)):
 
                 if occurence_list[z][0] >= penumbra_starttime and occurence_list[z][0] <= penumbra_endtime and any(
-                        e[3] == occurence_list[z][3] for e in xband_stations(path, time_interval, day, month, year)[1]) and (occurence_list[z][0]<occurence_list[z][1]):
+                        e[3] == occurence_list[z][3] for e in stations_summary) and (occurence_list[z][0]<occurence_list[z][1]):
                     start_time = occurence_list[z][0]
                     end_time = occurence_list[z][1]
                     duration = occurence_list[z][2]
@@ -97,11 +95,11 @@ def heuristic(day, month, year, country):
 
                 #if country is seen at night
                 elif occurence_list[z][0] >= penumbra_starttime and occurence_list[z][
-                    0] <= penumbra_endtime and any(e[3] == occurence_list[z][3] for e in country_access(day, month, year, country)) and (occurence_list[z][0]<occurence_list[z][1]):
+                    0] <= penumbra_endtime and any(e[3] == occurence_list[z][3] for e in country_access_summary) and (occurence_list[z][0]<occurence_list[z][1]):
                     start_time = occurence_list[z][0]
                     end_time = occurence_list[z][1]
                     duration = occurence_list[z][2]
-                    job_action = 2#2#0
+                    job_action = 2
                     prenum_repeat = 0
                     jobs_data.append([job_action, start_time, end_time, duration])
                     a = z
@@ -117,14 +115,14 @@ def heuristic(day, month, year, country):
                     a = z
 
 
-        elif any(e[3] == occurence_list[a][3] for e in xband_stations(day, month, year)) and (prenum_repeat == 1) and (occurence_list[a][0]<occurence_list[a][1]):
+        elif any(e[3] == occurence_list[a][3] for e in stations_summary) and (prenum_repeat == 1) and (occurence_list[a][0]<occurence_list[a][1]):
             start_time = occurence_list[a][0]
             end_time = occurence_list[a][1]
             duration = occurence_list[a][2]
             job_action = 4
 
 
-        elif any(e[3] == occurence_list[a][3] for e in country_access(day, month, year, country)) and (
+        elif any(e[3] == occurence_list[a][3] for e in country_access_summary) and (
                 job_action != 0) and (prenum_repeat == 1) and (occurence_list[a][0]<occurence_list[a][1]):
             start_time = occurence_list[a][0]
             end_time = occurence_list[a][1]
