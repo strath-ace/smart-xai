@@ -18,10 +18,6 @@ downlink_data_rate = 280 * time_interval
 # 5000Kbit/s to process images
 process_im_mem = 50 * time_interval
 
-pics_count = 0
-downloaded_instances = 0
-processed_pics_count = 0
-idle_time = 0
 
 filename = '../../Results/Day ' + str(day) + '/Solver/Optimized_results/' + str(day) + '.txt'
 path = '../../../Environment/'
