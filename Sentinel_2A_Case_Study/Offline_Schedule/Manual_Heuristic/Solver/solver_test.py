@@ -19,20 +19,22 @@ downlink_data_rate = 280 * time_interval
 process_im_mem = 50 * time_interval
 
 
-filename = '../../Results/Day ' + str(day) + '/Solver/Optimized_results/' + str(day) + '.txt'
+filename = '../../Results/Day ' + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
 path = '../../../Environment/'
 path1 = '../../Results/Day ' + str(day)
 
 country_data_list, gnd_data_list, day_data_list = environment_data(path,time_interval, day, month, year, country)
-mem_data_list = manual_data_retrieved(path1, time_interval, day, month)
+mem_data_list = manual_data_retrieved(path1, time_interval, day, month)[0]
 
 i = 0
 horizon = len(country_data_list)
 
 while i in range(0, horizon):
-    model, summary, shifts, b = CPModel_data(interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
+    model, summary, shifts, b,c = CPModel_data(interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
                                              gnd_data_list, day_data_list, horizon)
 
-    c = CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval)
+    c = CP_solver(b,c, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval)
 
     i = c
+
+
