@@ -126,19 +126,19 @@ def CP_solver(b, shifts, image_mem, downlink_data_rate, process_im_mem, filename
             print('ERROR: more than one action per time step')
             # combined_lists=final_list
             # combined_lists.append([final_list1])
-        final_list = sorted(final_list, key=lambda x: x[0])
-        np.set_printoptions(threshold=np.inf)
-        final_list = np.array(final_list)
+    final_list = sorted(final_list, key=lambda x: x[0])
+    np.set_printoptions(threshold=np.inf)
+    final_list = np.array(final_list)
 
-        with open(filename, "a+") as file:
-            # Move read cursor to the start of file.
-            file.seek(0)
-            # If file is not empty then append '\n'
-            data = file.read(100)
-            if len(data) > 0:
-                file.write("\n")
-            df = pd.DataFrame(final_list)
-            file.writelines(df.to_string(header=False, index=False))
+    with open(filename, "a+") as file:
+        # Move read cursor to the start of file.
+        file.seek(0)
+        # If file is not empty then append '\n'
+        data = file.read(100)
+        if len(data) > 0:
+            file.write("\n")
+        df = pd.DataFrame(final_list)
+        file.writelines(df.to_string(header=False, index=False))
 
     return c
     # return memory_total, processed_images, pics_taken
