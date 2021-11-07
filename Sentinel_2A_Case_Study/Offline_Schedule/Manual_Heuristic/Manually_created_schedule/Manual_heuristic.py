@@ -19,9 +19,9 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
 
 
 def heuristic(path, day, month, year, country):
-    file1 = open(path + '/daily_schedule' + str(day) + '.txt', 'w')
-    file2 = open(path + '/jobs_daily_schedule' + str(day) + '.txt', 'w')
-    file3 = open(path + '/Manual_Results' + str(day) + '.txt', 'w')
+    file1 = open(path + str(day) + '/daily_schedule' + str(day) + '.txt', 'w')
+    file2 = open(path + str(day) + '/jobs_daily_schedule' + str(day) + '.txt', 'w')
+    file3 = open(path + str(day) + '/Manual_Results' + str(day) + '.txt', 'w')
 
     idle_time, Total_Table, country_access_summary, stations_summary, eclipse_final = processing_time(day, month, year, country)
     occurence_list = [Total_Table, idle_time]

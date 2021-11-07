@@ -1,14 +1,17 @@
 from __future__ import print_function
+from file_recall import file_recall
 import numpy as np
 import pandas as pd
 import os
 
 from ortools.sat.python import cp_model
+#def filename_alter(day):
 
-
-def CP_solver(b, c, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
+def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
+    filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     all_actions = range(0, 3)
-    if not os.path.isfile(filename):
+    list_num = 0
+    if not os.path.isfile(filename)and day == 1:
         print('file: ' + filename + ' does not exists')
 
         file1 = open(filename, 'w')
@@ -23,30 +26,23 @@ def CP_solver(b, c, shifts, image_mem, downlink_data_rate, process_im_mem, filen
         pics_taken = 0
 
 
-    else:
-        print('file: ' + filename + ' exists')
-        results_coord = open(filename, "r")
-        results_count_coord = 0
-        for line in results_coord:
-            if line != "\n":
-                results_count_coord += 1
-        results_coord.close()
-        results_coord = open(filename, "r")
-        # print(results_count)
-        results_count_coord = results_count_coord
-        results_coord = results_coord.read()
-        results_coord = results_coord.split('\n')
-        results_data = results_coord[results_count_coord - 1].split()
+    elif not os.path.isfile(filename) and day > 1:
+        print('file: ' + filename + ' does not exists')
+
+        file1 = open(filename, 'w')
+        file1.close()
+
+        day = day - 1
+        filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken=file_recall(filename,list_num)
 
         # Carry over last data stored in table
-        pics_count = int(results_data[6])
-        processed_pics_count = int(results_data[8])
-        downloaded_instances = int(results_data[10])
-        idle_time = int(results_data[12])
 
-        memory_total = int(results_data[4])
-        processed_images = int(float(results_data[7]) * 100)
-        pics_taken = int(float(results_data[5]) * 100)
+
+    else:
+        print('file: ' + filename + ' exists')
+        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken = file_recall(filename,list_num)
+
 
 
     solver = cp_model.CpSolver()
@@ -63,9 +59,9 @@ def CP_solver(b, c, shifts, image_mem, downlink_data_rate, process_im_mem, filen
     downlink_count = 0
     icount =0
     for n in range(b, c):
-        if 0 < n < c:
+        if 0 < n < c-2:
             s = n - b
-        elif n == c:
+        elif n == c-1:
             s = n - b
             time_interval = time_interval - 1
         else:

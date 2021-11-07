@@ -28,7 +28,7 @@ def manual_memory_plot(path, path1,manual_plot_image):
     memory_land_list_binary=[]
     binary_memory_coord = open(path1, "r")
     binary_memory_count_coord = 0
-    for line in memory_coord:
+    for line in binary_memory_coord:
         if line != "\n":
             binary_memory_count_coord += 1
     binary_memory_coord.close()
@@ -41,16 +41,17 @@ def manual_memory_plot(path, path1,manual_plot_image):
 
 
     for i in range(0, binary_memory_count_coord):
+        #print(binary_memory_count_coord)
         binary_memory_details = binary_memory_coord[i].split()
 
         if binary_memory_details[2] == '0':
             action = 'man_take_pictures'
         elif binary_memory_details[2] == '1':
-            action='man_Process_Image'
+            action='man_process_Image'
         # elif memory_details[2] == '3':
         #     action = 'man_Calibrate'
         elif binary_memory_details[2] == '2':
-            action = 'man_Dump'
+            action = 'man_dump'
         else:
             action = 'man_idle'
 
@@ -104,7 +105,7 @@ def manual_memory_plot(path, path1,manual_plot_image):
     ax3.set_ylabel('No. Of Images in Memory', fontweight='bold', fontsize=15)
     ax4.set_ylabel('Memory', fontweight='bold', fontsize=15)
     ax4.legend(bbox_to_anchor=(0.9, 1.1))
-    ax3.legend(bbox_to_anchor=(0.3, 1.1))#, ncol=len(df.columns))
+    ax3.legend(bbox_to_anchor=(0.3, 1.1), ncol=len(x.columns))
     ax4.set_ylim([0, 2000000])
     ax3.set_ylim([-20, 800])
     ax3.grid('on', which='minor', axis='x')
@@ -112,7 +113,7 @@ def manual_memory_plot(path, path1,manual_plot_image):
 
     ax3.xaxis.set_major_formatter(myFmt1)
 
-    plt.savefig(manual_plot_image, dpi=1500)
+    plt.savefig(manual_plot_image)#, dpi=1500)
 
 
     return memory_land_list_binary

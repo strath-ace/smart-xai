@@ -1,1 +1,1 @@
-from Sentinel_2A_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Binary_day import *
+from Sentinel_2A_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Manual_binary_data import *

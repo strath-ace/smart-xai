@@ -3,9 +3,9 @@ import datetime as dt
 from Sentinel_2A_Case_Study.Environment.start_end_points_data import time_select
 
 
-def manual_data_retrieved(path, time_interval, day, month):
-    memory_states = path + '/manual_memory_states_seconds' + str(day) + '.txt'
-    file = open(path + '/binary_daily_schedule' + str(day) + '.txt', 'w')
+def manual_binary_data(path, time_interval, day, month):
+    memory_states = path + str(day) + '/manual_memory_states_seconds' + str(day) + '.txt'
+    file = open(path + str(day) + '/binary_daily_schedule' + str(day) + '.txt', 'w')
     memory_coord = open(memory_states, "r")
     memory_count_coord = 0
     for line in memory_coord:
@@ -57,18 +57,18 @@ def manual_data_retrieved(path, time_interval, day, month):
         while e >= start_second_interval and (e < mem_end):
 
             if e < mem_start:
-                mem_access = 0
+                mem_access = -1
             elif e in range(mem_start, mem_end):
                 mem_access = manual_list[i][3]
             else:
-                mem_access = 0
+                mem_access = -1
 
             mem_data_list.append([e, e + time_interval, mem_access])
             e += time_interval
 
         g = (mem_data_list[len(mem_data_list) - 1][1])
         while (g >= mem_end) and (g <= end_second_interval) and (i >= len(manual_list) - 1):
-            mem_access = 0
+            mem_access = -1
             mem_data_list.append([g, g + time_interval, mem_access])
             g += time_interval
 
