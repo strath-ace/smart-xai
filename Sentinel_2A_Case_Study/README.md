@@ -18,7 +18,7 @@ Sentinel 2A Case Study<br/>
              - start_end_points_data.py
 
  - ## Offline_Schecule
-      - # Manual_Heuristic
+      - ### Manual_Heuristic
           - Manually_created_schedule
                - test_manual_schedule.py 
                     - Manual_heuristic.py
@@ -29,7 +29,7 @@ Sentinel 2A Case Study<br/>
                     - Manual_binary_data.py
                          - start_end_points_data.py
         
-           - # Solver
+           - ### Solver
              - solver_test.py
                 - environment_data_to_solver.py
                 - Manual_binary_data.py
@@ -38,7 +38,7 @@ Sentinel 2A Case Study<br/>
                 - CPSolver.py
                    - file_recall.py
           
-           - # graph_plot_code
+           - ### graph_plot_code
                - call_plots_test.py
                    - manual_memory_plot.py
                    - Solver_plot.py
