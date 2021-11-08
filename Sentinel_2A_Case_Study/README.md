@@ -5,8 +5,8 @@ The structure of this folder is shown below<br/>
 
 Sentinel 2A Case Study<br/>
 
-*Environment
-     * Data
+-Environment
+ -Data
 |    |    |<br/>
 |    |    |-Land
 |    |    |-Ground Stations
