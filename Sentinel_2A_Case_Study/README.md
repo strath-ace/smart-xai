@@ -28,11 +28,10 @@ Sentinel 2A Case Study<br/>
                          - Memory_calculation_support_2.py
                     - Manual_binary_data.py
                          - start_end_points_data.py
-|    |     |
-|    |     | - Solver
-     |     |     |-solver_test.py
-     |     |         |
-     |     |         |-environment_data_to_solver.py
+        
+           - Solver
+             - solver_test.py
+                - environment_data_to_solver.py
      |     |         |-Manual_binary_data.py
      |     |         |-CPModel_with_Hint.py
      |     |         |    |-file_recall.py
