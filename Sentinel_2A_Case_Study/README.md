@@ -32,18 +32,18 @@ Sentinel 2A Case Study<br/>
            - Solver
              - solver_test.py
                 - environment_data_to_solver.py
-     |     |         |-Manual_binary_data.py
-     |     |         |-CPModel_with_Hint.py
-     |     |         |    |-file_recall.py
-     |     |         |-CPSolver.py
-     |     |              |-file_recall.py
-     |     |
-     |     | - graph_plot_code
-     |               |-call_plots_test.py
-     |                   |-manual_memory_plot.py
-     |                   |-Solver_plot.py
-     |                   |-gantt_plot.py
-     |
+                - Manual_binary_data.py
+                - CPModel_with_Hint.py
+                   - file_recall.py
+                - CPSolver.py
+                   - file_recall.py
+          
+           - graph_plot_code
+               - call_plots_test.py
+                   - manual_memory_plot.py
+                   - Solver_plot.py
+                   - gantt_plot.py
+     
      |-Results
           |-Day 1
               |-Solver
