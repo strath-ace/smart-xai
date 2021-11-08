@@ -6,8 +6,7 @@ Sentinel 2A Case Study<br/>
 
  - Environment
       - Data
-|    |    |<br/>
-|    |    |-Land
+          - Land
 |    |    |-Ground Stations
 |    |    |-Day/Night
 |    |
