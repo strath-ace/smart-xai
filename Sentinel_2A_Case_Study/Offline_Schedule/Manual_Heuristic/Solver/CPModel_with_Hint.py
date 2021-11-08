@@ -1,49 +1,35 @@
 from __future__ import print_function
 from ortools.sat.python import cp_model
+from file_recall import file_recall
 import os
 
 
-def CPModel_data(interval,onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
+
+
+def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
                  gnd_data_list, day_data_list, horizon):
     all_actions = range(0, 3)
-    if not os.path.isfile(filename):
+    filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+    list_num = 1
+    if not os.path.isfile(filename) and day == 1:
         print('file: ' + filename + ' does not exists')
         memory_keep = []
         processed_keep = []
         photos_keep = []
-
         num_processed = 0
         num_pics = 0
         memory = 0
-
         c = 0
 
+    elif not os.path.isfile(filename) and day > 1:
+        print('file: ' + filename + ' does not exists')
+        day = day - 1
+        filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename,list_num)
+        c = 0
     else:
         print('file: ' + filename + ' exists')
-
-        results_coord = open(filename, "r")
-        results_count_coord = 0
-        for line in results_coord:
-            if line != "\n":
-                results_count_coord += 1
-        results_coord.close()
-
-        results_coord = open(filename, "r")
-        # print(results_count)
-        results_count_coord = results_count_coord
-        results_coord = results_coord.read()
-        results_coord = results_coord.split('\n')
-        results_data = results_coord[results_count_coord-1].split()
-
-        # Carry over last data stored in table
-        memory = int(results_data[4])
-        num_pics = int(float(results_data[5])*100)
-        num_processed = int(float(results_data[7]) * 100)
-
-        memory_keep = [memory]
-        processed_keep = [num_processed]
-        photos_keep = [num_pics]
-
+        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename,list_num)
         c = results_count_coord
 
     hot_start = 1
@@ -137,4 +123,4 @@ def CPModel_data(interval,onboard_mem, image_mem, downlink_data_rate, process_im
             if mem_data_list[n][2] == 2:
                 model.AddHint(shifts[(2, s)], 1)
 
-    return model, summary, shifts,b,c
+    return model, summary, shifts, b, c

@@ -24,20 +24,20 @@ def solver_plot(path,solver_plot_image):
     for i in range(0, cp_count_coord):
         daily_cp_details = lines_cp_coord[i].split()
         #print(daily_cp_details[13])
-        if daily_cp_details[2] == '0' and daily_cp_details[13]=='YES':
+        if daily_cp_details[2] == '0' and daily_cp_details[15]=='YES':
             action = 'optm_take_pictures'
-        elif daily_cp_details[2]== '1' and daily_cp_details[13]=='YES':
+        elif daily_cp_details[2]== '1' and daily_cp_details[15]=='YES':
             action='optm_Process_Image'
         # elif daily_cp_details[2] == '2':
         #     action = 'optm_Calibrate'
-        elif daily_cp_details[2] =='2'and daily_cp_details[13]=='YES':
+        elif daily_cp_details[2] =='2'and daily_cp_details[15]=='YES':
             action = 'optm_Dump'
         else:
             action = 'optm_idle'
 
         #data from exported data format - start time| end time| action- optm for optimized| memory | pictures in memory| processed images in memory| photos downloaded
         constraint_land_list.append(
-            [(dt.timedelta(seconds=(int(daily_cp_details[0])))), (dt.timedelta(seconds=int(daily_cp_details[1]))), action, daily_cp_details[4], float(daily_cp_details[5]), daily_cp_details[7], daily_cp_details[11]])
+            [(dt.timedelta(seconds=(int(daily_cp_details[0])))), (dt.timedelta(seconds=int(daily_cp_details[1]))), action, daily_cp_details[4], float(daily_cp_details[5]), daily_cp_details[7],daily_cp_details[13]])
 
     time_interval = 5
     image_mem = 2688
@@ -85,7 +85,7 @@ def solver_plot(path,solver_plot_image):
     ax1.set_xlabel('Day 1', fontweight='bold', fontsize=15)
     ax2.set_ylabel('Memory', fontweight='bold', fontsize=15)
     ax2.legend(bbox_to_anchor=(0.9, 1.1))
-    ax1.legend(bbox_to_anchor=(0.3, 1.1))#, ncol=len(df.columns))
+    ax1.legend(bbox_to_anchor=(0.3, 1.1), ncol=len(z.columns))
     ax2.set_ylim([-60000, 2000000])
     ax1.set_ylim([-20, 800])
     # ax1.legend(loc="upper center")
