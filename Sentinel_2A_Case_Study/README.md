@@ -1,9 +1,9 @@
 # smart-xai - Google OR-Tools Sentjinel-2A Case study
 
-The structure of this folder is shown below
+The structure of this folder is shown below<br/>
 
 
-Sentinel 2A Case Study
+Sentinel 2A Case Study<br/>
 |
 |
 |-Environment
