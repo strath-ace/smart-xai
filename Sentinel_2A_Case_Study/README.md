@@ -11,12 +11,11 @@ Sentinel 2A Case Study<br/>
           - Day/Night
       - test_environment_data.py and environment_data_to_solver.py uses the following codes
           - Land_visibility.py
+              - start_end_points_data.py
+          - ground_station_access.py
+              - start_end_points_data.py
+          - Shade_exposure.py
              - start_end_points_data.py
-|               |-
-|           |-ground_station_access.py
-|               |-start_end_points_data.py
-|           |-Shade_exposure.py
-|               |-start_end_points_data.py
 |
 |
 |-Offline_Schecule
