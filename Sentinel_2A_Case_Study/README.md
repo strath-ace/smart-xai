@@ -4,11 +4,10 @@ The structure of this folder is shown below<br/>
 
 
 Sentinel 2A Case Study<br/>
-|<br/>
-|<br/>
-|-Environment<br/>
-|&nbsp;    |<br/>
-|    | - Data<br/>
+
+-Environment<br/>
+
+     - Data<br/>
 |    |    |<br/>
 |    |    |-Land
 |    |    |-Ground Stations
