@@ -9,6 +9,7 @@ Sentinel 2A Case Study<br/>
           - Land
           - Ground Stations
           - Day/Night
+      - test_environment_data.py and environment_data_to_solver.py uses the following codes
 
 |    |
 |    | - test_environment_data.py and environment_data_to_solver.py uses the following codes
