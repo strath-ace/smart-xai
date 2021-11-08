@@ -8,13 +8,13 @@ from ortools.sat.python import cp_model
 #def filename_alter(day):
 
 def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
-    filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+    filename1 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     all_actions = range(0, 3)
     list_num = 0
-    if not os.path.isfile(filename)and day == 1:
-        print('file: ' + filename + ' does not exists')
+    if not os.path.isfile(filename1)and day == 1:
+        print('file: ' + filename1 + ' does not exists')
 
-        file1 = open(filename, 'w')
+        file1 = open(filename1, 'w')
         file1.close()
 
         pics_count = 0
@@ -26,22 +26,22 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
         pics_taken = 0
 
 
-    elif not os.path.isfile(filename) and day > 1:
-        print('file: ' + filename + ' does not exists')
+    elif not os.path.isfile(filename1) and day > 1:
+        print('file: ' + filename1 + ' does not exists')
 
-        file1 = open(filename, 'w')
+        file1 = open(filename1, 'w')
         file1.close()
 
         day = day - 1
-        filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
-        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken=file_recall(filename,list_num)
+        filename2 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken=file_recall(filename2,list_num)
 
         # Carry over last data stored in table
 
 
     else:
-        print('file: ' + filename + ' exists')
-        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken = file_recall(filename,list_num)
+        print('file: ' + filename1 + ' exists')
+        results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken = file_recall(filename1,list_num)
 
 
 
@@ -136,7 +136,7 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
     np.set_printoptions(threshold=np.inf)
     final_list = np.array(final_list)
 
-    with open(filename, "a+") as file:
+    with open(filename1, "a+") as file:
         # Move read cursor to the start of file.
         file.seek(0)
         # If file is not empty then append '\n'
