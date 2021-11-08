@@ -7,7 +7,7 @@ Sentinel 2A Case Study<br/>
 |<br/>
 |<br/>
 |-Environment<br/>
-|    |<br/>
+|&nbsp    |<br/>
 |    | - Data<br/>
 |    |    |<br/>
 |    |    |-Land
