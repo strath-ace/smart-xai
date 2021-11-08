@@ -1,5 +1,5 @@
 
-
+#to call last read data in file n-1 or n depending on the day and if file already exists
 def file_recall(filename,list_num):
     results_coord = open(filename, "r")
     results_count_coord = 0
