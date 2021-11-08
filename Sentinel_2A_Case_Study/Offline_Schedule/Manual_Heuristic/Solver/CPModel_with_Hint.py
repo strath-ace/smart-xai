@@ -9,10 +9,10 @@ import os
 def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
                  gnd_data_list, day_data_list, horizon):
     all_actions = range(0, 3)
-    filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+    filename1 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     list_num = 1
-    if not os.path.isfile(filename) and day == 1:
-        print('file: ' + filename + ' does not exists')
+    if not os.path.isfile(filename1) and day == 1:
+        print('file: ' + filename1 + ' does not exists')
         memory_keep = []
         processed_keep = []
         photos_keep = []
@@ -21,15 +21,15 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
         memory = 0
         c = 0
 
-    elif not os.path.isfile(filename) and day > 1:
-        print('file: ' + filename + ' does not exists')
+    elif not os.path.isfile(filename1) and day > 1:
+        print('file: ' + filename1 + ' does not exists')
         day = day - 1
-        filename = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
-        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename,list_num)
+        filename2 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename2,list_num)
         c = 0
     else:
-        print('file: ' + filename + ' exists')
-        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename,list_num)
+        print('file: ' + filename1 + ' exists')
+        results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep = file_recall(filename1,list_num)
         c = results_count_coord
 
     hot_start = 1
