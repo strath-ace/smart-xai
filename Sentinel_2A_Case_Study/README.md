@@ -20,14 +20,14 @@ Sentinel 2A Case Study<br/>
  - ## Offline_Schecule
       - Manual_Heuristic
           - Manually_created_schedule
-                - test_manual_schedule.py 
-                       - Manual_heuristic.py
-                             - Manual_Processing_Time.py
-                       - Heuristic_memory_calculation.py
-                             - Memory_calculation_support_1.py
-                             - Memory_calculation_support_2.py
-                       - Manual_binary_data.py
-                             - start_end_points_data.py
+               - test_manual_schedule.py 
+                    - Manual_heuristic.py
+                          - Manual_Processing_Time.py
+                    - Heuristic_memory_calculation.py
+                           - Memory_calculation_support_1.py
+                           - Memory_calculation_support_2.py
+                     - Manual_binary_data.py
+                           - start_end_points_data.py
 |    |     |
 |    |     | - Solver
      |     |     |-solver_test.py
