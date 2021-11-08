@@ -5,11 +5,11 @@ The structure of this folder is shown below<br/>
 Sentinel 2A Case Study<br/>
 
  - ## Environment
-      - Data
+      - ### Data
           - Land
           - Ground Stations
           - Day/Night
-      - test_environment_data.py and environment_data_to_solver.py uses the following codes
+      - ### test_environment_data.py and environment_data_to_solver.py uses the following codes
           - Land_visibility.py
               - start_end_points_data.py
           - ground_station_access.py
@@ -44,10 +44,10 @@ Sentinel 2A Case Study<br/>
                    - Solver_plot.py
                    - gantt_plot.py
      
-     |-Results
-          |-Day 1
-              |-Solver
-              |-Garphs
-          |-Day 2
-              |-Solver
-              |-Graphs
+     - ### Results
+          - #### Day 1
+              - Solver
+              - Garphs
+          - #### Day 2
+              - Solver
+              - Graphs
