@@ -5,7 +5,7 @@ The structure of this folder is shown below<br/>
 
 Sentinel 2A Case Study<br/>
 
--Environment
+1.Environment
  -Data
 |    |    |<br/>
 |    |    |-Land
