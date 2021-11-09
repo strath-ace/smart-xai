@@ -17,7 +17,7 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
 
 def eclipse(path,time_interval, day, month, year):
     #   Eclipse times
-    path_Eclipse = path+'Data/SENTINEL-2A_40697_Eclipse_Summary.txt'
+    path_Eclipse = path+'Data/Light_Shade_exposure.txt'
 
     f_Eclipse = open(path_Eclipse, "r")
 

@@ -7,7 +7,7 @@ import os
 from ortools.sat.python import cp_model
 #def filename_alter(day):
 
-def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval):
+def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, filename, country_data_list, model, summary, time_interval,horizon):
     filename1 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     all_actions = range(0, 3)
     list_num = 0
@@ -58,12 +58,13 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
     final_list = []
     downlink_count = 0
     icount =0
+
     for n in range(b, c):
-        if 0 < n < c-2:
-            s = n - b
-        elif n == c-1:
+        if  n == horizon-1:
             s = n - b
             time_interval = time_interval - 1
+        elif 0 < n < c:
+            s = n - b
         else:
             s = 0
         check_single_action = 0
@@ -90,14 +91,16 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
                 # print('Action', a, 'works shift', n, 'time start', country_data_list[n][0])
 
                 if any(e[3] == n for e in final_list):
-                    z = [i for i, lst in enumerate(final_list) if n in lst][0]
-                    # print('Removing Action', a, 'works shift', n, 'time start', country_data_list[n][0],
-                    #      'NO')
-                    # print('pop')
-                    # print('Adding Action', a, 'works shift', n, 'time start', country_data_list[n][0],
-                    #      'YES')
-                    final_list.pop(z)
-                    # print('Action', a, 'works shift', n, 'time start', country_data_list[n][0])  # ,summary[s][0],summary[s][1])
+                    z = ([e[3] == n for e in final_list])
+                    d = [i for i in range(len(z)) if z[i] == True]
+                    print(d)
+                    for index in sorted(d, reverse=True):
+                        del final_list[index]
+
+                    print('pop')
+                    if idle_time > 0:
+                        idle_time -= 1
+
                     final_list.append(
                         [country_data_list[n][0], country_data_list[n][0] + time_interval, a, n,
                          memory_total, pics_taken, pics_count, processed_images, processed_pics_count,
