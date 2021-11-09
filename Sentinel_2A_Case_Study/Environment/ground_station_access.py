@@ -7,16 +7,12 @@ from Sentinel_2A_Case_Study.Environment.start_end_points_data import time_select
 station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 'start_time', 'stop_time',
                                                'duration'])
 
-
-
-
 def xband_stations(path,time_interval, day, month, year):
-    # Xband to ground stations
-    path_station = path+'Data/Facility-EUMETSAT_Maspalomas-To-Satellite-Satellite-Sensor-XBand_Access.txt'
+    # Xband to ground stations text file
+    path_station = path+'Data/Ground_stations.txt'
     f_station = open(path_station, "r")
     content_station = f_station.read()
     lines_station = content_station.split('\n')
-
 
     station_accesses = []
     station_accesses1 = []
@@ -24,31 +20,28 @@ def xband_stations(path,time_interval, day, month, year):
     station_accesses3 = []
     stations_summary = []
 
+    # import start and end time function
     start_second_interval, end_second_interval = time_select(day, month)
     xband = 'Eumetsat'
 
-    # for a in range (0,4):
+    # loop for storing the durations the 4 ground stations have communication to the satellite
     for a in range(0, 4):
-        # while xband != '':
-        # print(a)
+
         if xband == 'Eumetsat':
 
             for i in range(8, 864):
-                # for i in range(8, 10 + 1):
-                # print(i)
+
                 line_details_station = lines_station[i].split()
                 station_accesses.append(
                     station_access(i - 8, int(line_details_station[1]), str(line_details_station[2]),
                                    int(line_details_station[3]), str(line_details_station[4]),
                                    str(line_details_station[8]), float(line_details_station[9])))
-            # print(station_accesses)
+
             for i in range(0, len(station_accesses)):
                 if station_accesses[i].day == day and station_accesses[i].month == month and station_accesses[i].year == year:
                     stations_summary.append([station_accesses[i].start_time, station_accesses[i].stop_time, station_accesses[i].duration, xband])
 
             xband = 'Matera'
-
-            # return stations_summary
 
         elif xband == 'Matera':
 
@@ -88,7 +81,6 @@ def xband_stations(path,time_interval, day, month, year):
                             i].duration, xband])
             xband = 'Svalbard'
 
-            # return stations_summary
 
         elif xband == 'Svalbard':
 
@@ -152,4 +144,6 @@ def xband_stations(path,time_interval, day, month, year):
             gnd_access = 0
             gnd_data_list.append([g, g + time_interval, gnd_access])
             g += time_interval
+
+    # return the binary groud stations list and summary stations
     return gnd_data_list, stations_summary
