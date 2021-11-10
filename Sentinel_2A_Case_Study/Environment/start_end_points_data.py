@@ -1,3 +1,5 @@
+# This file is used for determining the start and end times for each day
+
 import datetime as dt
 #import function to determine start and end time of the day
 def time_select(day,month):

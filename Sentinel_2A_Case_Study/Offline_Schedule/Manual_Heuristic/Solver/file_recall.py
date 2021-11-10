@@ -18,7 +18,7 @@ def file_recall(filename,list_num):
     pics_count = int(results_data[6])
     processed_pics_count = int(results_data[8])
     downloaded_instances = int(results_data[10])
-    idle_time = int(results_data[12])
+    idle_time = int(results_data[14])
 
     # Carry over last data stored in table
     memory_total = memory = int(results_data[4])

@@ -1,3 +1,5 @@
+# This function is used to send satellites position data to the function solver test
+
 from Sentinel_2A_Case_Study.Environment.Land_visibility import country_access
 from Sentinel_2A_Case_Study.Environment.ground_station_access import xband_stations
 from Sentinel_2A_Case_Study.Environment.Shade_exposure import eclipse

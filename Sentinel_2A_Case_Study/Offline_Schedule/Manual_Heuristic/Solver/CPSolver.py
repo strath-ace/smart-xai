@@ -1,3 +1,4 @@
+#This function call the OR-Tools solver and stores the values of actions determined into a file
 from __future__ import print_function
 from file_recall import file_recall
 import numpy as np
@@ -150,4 +151,4 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
         file.writelines(df.to_string(header=False, index=False))
 
     return c
-    # return memory_total, processed_images, pics_taken
+
