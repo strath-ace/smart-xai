@@ -11,7 +11,7 @@ import pandas as pd
 
 from ortools.sat.python import cp_model
 from collections import namedtuple
-from Manual_Processing_Time import processing_time
+from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Manual_Processing_Time import processing_time
 
 satellite_coordinates = namedtuple("satellite_coordinates", ['index', 'day', 'month', 'year', 'time', 'latitude',
                                                              'longitude'])
@@ -34,17 +34,17 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
     # job action = 2 -> processing
     # job action = 3 -> calibrate
     # job action = 4 -> downlink images
-    if day ==1:
-        job_action = 0
-    else:
-        job_action = 5
+
+
+
 
     # assign integer values to condition situations
     while a < len(occurrence_list):
 
         start_time = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
         end_time = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
-        #duration = occurrence_list[a][2].total_seconds()
+        #print(start_time,end_time)
+        #duration = occurrence_list[a][2]
 
         prenum_repeat = 1
         #print(occurrence_list[a][3], prenum_repeat, occurrence_list[a][0], occurrence_list[a][1],any(e[3] == str(occurrence_list[a][3]) for e in stations_summary),(occurrence_list[a][0] < occurrence_list[a][1]))
@@ -53,10 +53,8 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
 
             penumbra_starttime = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
             penumbra_endtime = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
-
-
-            #duration = occurrence_list[a][2].total_seconds()
-            job_action = 5
+            #duration = occurrence_list[a][2]
+            #job_action = 5
 
             for z in range(a, len(occurrence_list)):
                 start_time = (int(((dt.datetime.strptime(str(occurrence_list[z][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
@@ -98,21 +96,21 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
             job_action = 4
-            #jobs_data.append([job_action, start_time, end_time, duration])
+            jobs_data.append([job_action, start_time, end_time, duration])
 
         elif any(e[3] == str(occurrence_list[a][3]) for e in country_access_summary) and (prenum_repeat == 1) and (start_time  < end_time):
             start_time = occurrence_list[a][0]
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
             job_action = 1
-            #jobs_data.append([job_action, start_time, end_time, duration])
+            jobs_data.append([job_action, start_time, end_time, duration])
 
         elif occurrence_list[a][3] == 'Process_images' and (prenum_repeat == 1) and (start_time  < end_time):
             start_time = occurrence_list[a][0]
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
             job_action = 2
-            #jobs_data.append([job_action, start_time, end_time, duration])
+            jobs_data.append([job_action, start_time, end_time, duration])
 
         else:
 
@@ -120,10 +118,10 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
             job_action = 2
-            #jobs_data.append([job_action, start_time, end_time, duration])
-
-        if prenum_repeat == 1 and job_action != 5 and occurrence_list[a][0] < occurrence_list[a][1]:
             jobs_data.append([job_action, start_time, end_time, duration])
+
+        # if prenum_repeat == 1 and job_action != 5 and occurrence_list[a][0] < occurrence_list[a][1]:
+        #     jobs_data.append([job_action, start_time, end_time, duration])
 
         a += 1
     jobs_data = np.array(jobs_data)
@@ -209,10 +207,10 @@ def heuristic(path, day, month, year, country, time_interval):
 
         # take 1 picture per x seconds
         if jobs_data[task][0] == '1':
-            weights = 1
+            weights = 2
         # downlink images
         elif jobs_data[task][0] == '4':
-            weights = 1
+            weights = 2
         # process images
         elif jobs_data[task][0] == '2':
             weights = 1

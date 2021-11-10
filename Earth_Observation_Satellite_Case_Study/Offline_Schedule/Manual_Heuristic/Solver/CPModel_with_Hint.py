@@ -89,7 +89,6 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
 
         if len(memory_keep) >= 1 and s == 0:
             num_pics = int(photos_keep[len(photos_keep) - 1])
-            print(num_pics)
             memory = memory_keep[len(memory_keep) - 1]
             num_processed = int(processed_keep[len(processed_keep) - 1])
 

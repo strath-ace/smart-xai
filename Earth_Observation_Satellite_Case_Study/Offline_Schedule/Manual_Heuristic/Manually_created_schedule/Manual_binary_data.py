@@ -59,7 +59,7 @@ def manual_binary_data(path, time_interval, day, month):
         else:
             e = (mem_data_list[len(mem_data_list) - 1][1])
 
-        while e >= start_second_interval and (e < mem_end):
+        while e >= start_second_interval and (e < mem_end) and (e< end_second_interval-5):
 
             if e < mem_start:
                 mem_access = -1

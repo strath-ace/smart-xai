@@ -3,9 +3,9 @@
 
 import pandas as pd
 import datetime as dt
-from Manual_file_recall import Manual_file_recall
-from Memory_calculation_support_1 import Memory_calculation_support_1
-from Memory_calculation_support_2 import Memory_calculation_support_2
+from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Manual_file_recall import Manual_file_recall
+from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Memory_calculation_support_1 import Memory_calculation_support_1
+from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Memory_calculation_support_2 import Memory_calculation_support_2
 
 
 def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem):

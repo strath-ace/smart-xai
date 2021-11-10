@@ -31,6 +31,8 @@ def file_recall(filename,list_num):
     processed_keep = [num_processed]
     photos_keep = [num_pics]
     if list_num == 1:
+        print(results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep)
         return results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep
     else:
+        print(results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken)
         return results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images,pics_taken
