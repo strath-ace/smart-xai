@@ -90,7 +90,7 @@ Sentinel 2A Case Study
                   - Solver_plot.py
                   - gantt_plot.py
      
-      - ### Results
+      - ### Results - folders automatically created per daily result
            - #### Day 1
                - Solver
                - Garphs
