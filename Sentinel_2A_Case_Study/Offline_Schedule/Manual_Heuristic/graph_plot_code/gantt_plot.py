@@ -1,3 +1,6 @@
+# This file creates the gantt plots and saves the image
+# creates the gantt plot for the manual schedule, the positions of the satellite as well as the solver
+
 import pandas as pd
 import plotly.express as px
 
@@ -11,7 +14,6 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
     daily_coord.close()
 
     daily_coord = open(daily, "r")
-    # print(line_count)
     node_count_coord = line_count_coord
     content_coord = daily_coord.read()
     lines_coord = content_coord.split('\n')
@@ -19,8 +21,7 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
     for i in range(0, node_count_coord):
         daily_details = lines_coord[i].split()
 
-        # if daily_details[3] == 'Process_images':
-        #     land='Process_Image'
+
         if daily_details[3] == 'Matera' or daily_details[3] == 'Eumetsat' or daily_details[3] == 'PrudhoeBay' or daily_details[3] == 'Svalbard':
             Position = 'Ground_stations'
         elif daily_details[3] == 'Penumbra' or daily_details[3] == 'Penumbra Shade':
@@ -31,10 +32,8 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
             Position = 'Land'
 
         else:
-            Position = ''  # 'Process_Image'
-        # elif any(e[3] == daily_details[3] for e in country_access(1, 'Dec', 2020, 'All')):
+            Position = ''
 
-        # Task= 'Job_Land'
         if Position != '':
             daily_land_list.append([daily_details[0], daily_details[1], daily_details[2], Position])
 
@@ -53,17 +52,14 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
     fig1 = px.timeline(df2, x_start="Start", x_end="Finish", y="Resource", color="Resource", hover_name="Task"
                       , color_discrete_sequence= px.colors.qualitative.Prism
                       , opacity=.7
-    #                   , text="Task"
                       , range_x=None
                       , range_y=None
                       , template='plotly_white'
                       , height=1200
-    #                   , width=1500
 
                       , title ="<b>TimeStamp</b>"
-    #                   , color=colors
                      )
-    #fig.add_bar(dl, x_start="Start", x_end="Finish", y="Resource", color="Resource")
+
 
 
     #
@@ -74,7 +70,6 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
         , xaxis_range=[df.Start.min(), df.Finish.max()]
         , xaxis=dict(
             showgrid=True
-            #, rangeslider_visible=True
             , side="bottom"
             , tickmode='array'
             , dtick="M1"
@@ -83,7 +78,6 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
             , ticks="outside"
             , tickson="boundaries"
             , tickwidth=.1
-            #, layer='below traces'
             , ticklen=20
             , tickfont=dict(
                 family='Old Standard TT, serif', size=50, color='gray')
@@ -91,9 +85,7 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
 
         , yaxis=dict(
             title=""
-            #, autorange="reversed"
             , automargin=True
-            #         ,anchor="free"
             , ticklen=10
             , showgrid=True
             , showticklabels=True
@@ -112,8 +104,7 @@ def gantt_plot(memory_land_list_binary, daily, constraint_land_list, gantt_file)
                 , size=15
                 , color="black"))
     )
-    fig1.update_traces( #marker_color='rgb(158,202,225)'
-                       marker_line_color='rgb(8,48,107)'
+    fig1.update_traces(marker_line_color='rgb(8,48,107)'
                        ,marker_line_width=0.5, opacity=0.95)
 
     fig1.write_image(file=gantt_file, format='png',scale=1, width=2500, height=1250)

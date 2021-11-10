@@ -1,9 +1,12 @@
+# Function used for plotting the line graph for the manual day schedule
+
 import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
 
-def manual_memory_plot(path, path1,manual_plot_image):
-    memory_land_list=[]
+
+def manual_memory_plot(day, path, path1, manual_plot_image):
+    memory_land_list = []
     memory_coord = open(path, "r")
     memory_count_coord = 0
     for line in memory_coord:
@@ -23,9 +26,7 @@ def manual_memory_plot(path, path1,manual_plot_image):
             [memory_details[0], memory_details[1], memory_details[2], memory_details[3], memory_details[4], memory_details[5], memory_details[6], memory_details[7], memory_details[8], memory_details[9],
              memory_details[10]])
 
-
-
-    memory_land_list_binary=[]
+    memory_land_list_binary = []
     binary_memory_coord = open(path1, "r")
     binary_memory_count_coord = 0
     for line in binary_memory_coord:
@@ -39,15 +40,14 @@ def manual_memory_plot(path, path1,manual_plot_image):
     binary_memory_coord = binary_memory_coord.read()
     binary_memory_coord = binary_memory_coord.split('\n')
 
-
     for i in range(0, binary_memory_count_coord):
-        #print(binary_memory_count_coord)
+        # print(binary_memory_count_coord)
         binary_memory_details = binary_memory_coord[i].split()
 
         if binary_memory_details[2] == '0':
             action = 'man_take_pictures'
         elif binary_memory_details[2] == '1':
-            action='man_process_Image'
+            action = 'man_process_Image'
         # elif memory_details[2] == '3':
         #     action = 'man_Calibrate'
         elif binary_memory_details[2] == '2':
@@ -58,23 +58,12 @@ def manual_memory_plot(path, path1,manual_plot_image):
         memory_land_list_binary.append(
             [binary_memory_details[0], binary_memory_details[1], action])
 
-
-        #order start| end| predicted action| actual action| memory size of action| count of action| [5] memory| [6]true/false| [7]total pics left in memory|[8] number of photos processed in memory| [9] total downloaded| [10] idle time
-
-        #memory_time.append(memory_details[0])
-        # memory_end_time.append(memory_details[2]).
-        #print(memory_land_list[i][0])
-
     # line graph for manual data
     data1 = {'Time': [str(memory_land_list[i][0]) for i in range(0, len(memory_land_list))],
              'Memory': [(memory_land_list[i][5]) for i in range(0, len(memory_land_list))],
              'Pics': [(memory_land_list[i][7]) for i in range(0, len(memory_land_list))],
              'Process': [str(float(memory_land_list[i][8])) for i in range(0, len(memory_land_list))],
              'Dump': [str(float(memory_land_list[i][9])) for i in range(0, len(memory_land_list))]}
-    # x=pd.DataFrame({'Time':[str(memory_land_list[i][0]) for i in range (0, len(memory_land_list))]})
-    # y=[int(memory_land_list[i][6]) for i in range (0, len(memory_land_list))]
-    # x= np.array([(dt.datetime((2018,1,1)+memory_land_list[i][0])) for i in range (0, len(memory_land_list))])
-    # y=[(int(constraint_land_list[i][3]),int(constraint_land_list[i][4]),int(constraint_land_list[i][5]),int(constraint_land_list[i][6])) for i in range (0, len(constraint_land_list))]
 
     x = pd.DataFrame(data=data1)
     x['Time'] = pd.to_datetime(x['Time'])
@@ -92,17 +81,14 @@ def manual_memory_plot(path, path1,manual_plot_image):
     x1['Memory'] = x1['Memory'].astype(float)
     x1 = x1[["Time", "Memory"]].set_index("Time")
 
-    # myFmt1 = mdates.DateFormatter("%H:%M:%S")
-    # ax =x.plot(grid=True)
-
     myFmt1 = mdates.DateFormatter("%H:%M:%S")
-    # fig, ax = plt.subplots()
 
     ax3 = x.plot(grid=True)
 
     ax4 = ax3.twinx()
     x1.Memory.plot(ax=ax4, color='purple', label='Memory')
     ax3.set_ylabel('No. Of Images in Memory', fontweight='bold', fontsize=15)
+    ax3.set_xlabel('Day ' + str(day), fontweight='bold', fontsize=15)
     ax4.set_ylabel('Memory', fontweight='bold', fontsize=15)
     ax4.legend(bbox_to_anchor=(0.9, 1.1))
     ax3.legend(bbox_to_anchor=(0.3, 1.1), ncol=len(x.columns))
@@ -113,7 +99,6 @@ def manual_memory_plot(path, path1,manual_plot_image):
 
     ax3.xaxis.set_major_formatter(myFmt1)
 
-    plt.savefig(manual_plot_image)#, dpi=1500)
-
+    plt.savefig(manual_plot_image)  # , dpi=1500)
 
     return memory_land_list_binary

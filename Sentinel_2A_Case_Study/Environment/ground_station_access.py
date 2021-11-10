@@ -1,4 +1,6 @@
-import sys
+# This function is used to extract all the selected ground station access for an Earth Observation satellite
+# for selected day from the txt file
+
 import datetime as dt
 from collections import namedtuple
 import numpy as np
@@ -8,7 +10,7 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
                                                'duration'])
 
 def xband_stations(path,time_interval, day, month, year):
-    # Xband to ground stations text file
+    # Xband to ground stations text file imported
     path_station = path+'Data/Ground_stations.txt'
     f_station = open(path_station, "r")
     content_station = f_station.read()
@@ -20,15 +22,17 @@ def xband_stations(path,time_interval, day, month, year):
     station_accesses3 = []
     stations_summary = []
 
-    # import start and end time function
+    # import start and end time of the day function
     start_second_interval, end_second_interval = time_select(day, month)
+
+    #first station initialised is based on the order of the raw text file
     xband = 'Eumetsat'
 
-    # loop for storing the durations the 4 ground stations have communication to the satellite
+    # loop for storing the durations the 4 ground stations have communication to the satellite based on the date selected
     for a in range(0, 4):
 
         if xband == 'Eumetsat':
-
+            # ground station row position number in txt file
             for i in range(8, 864):
 
                 line_details_station = lines_station[i].split()
@@ -43,11 +47,11 @@ def xband_stations(path,time_interval, day, month, year):
 
             xband = 'Matera'
 
+        # next ground station in file
         elif xband == 'Matera':
-
+            # ground station row position number in txt file
             for i in range(876, 1917):
-                # for i in range(876, 879 + 1):
-                # print(i)
+
                 line_details_station = lines_station[i].split()
                 station_accesses1.append(
                     station_access(i - 876, int(line_details_station[1]), str(line_details_station[2]),
@@ -59,13 +63,11 @@ def xband_stations(path,time_interval, day, month, year):
                     stations_summary.append([station_accesses1[i].start_time, station_accesses1[i].stop_time, station_accesses1[i].duration, xband])
             xband = 'PrudhoeBay'
 
-            # return stations_summary
-
+        # next ground station in file
         elif xband == 'PrudhoeBay':
-
+            # ground station row position number in txt file
             for i in range(1929, 4096):
-                # for i in range(1929, 1930 + 1):
-                # print(i)
+
                 line_details_station = lines_station[i].split()
                 station_accesses2.append(
                     station_access(i - 1929, int(line_details_station[1]), str(line_details_station[2]),
@@ -81,12 +83,11 @@ def xband_stations(path,time_interval, day, month, year):
                             i].duration, xband])
             xband = 'Svalbard'
 
-
+        # next ground station in file
         elif xband == 'Svalbard':
-
+            # ground station row position number in txt file
             for i in range(4108, 6510):
-                # for i in range(4108, 4110 + 1):
-                # print(i)
+
                 line_details_station = lines_station[i].split()
                 station_accesses3.append(
                     station_access(i - 4108, int(line_details_station[1]), str(line_details_station[2]),
@@ -100,21 +101,21 @@ def xband_stations(path,time_interval, day, month, year):
                     stations_summary.append(
                         [station_accesses3[i].start_time, station_accesses3[i].stop_time, station_accesses3[
                             i].duration, xband])
-
+            # no more stations after all stations have been explored
             xband = ''
 
         else:
 
             print('Error no data found')
 
+    # sort list in ascending order based on start time - list contains the full summary based on the date selected
     stations_summary = sorted(stations_summary, key=lambda x: x[0])
     np.set_printoptions(threshold=np.inf)
-
     stations_summary = np.array(stations_summary)
 
     gnd_data_list = []
 
-    # to create a list where ground station is visible out of selected day
+    # to create a boolean list where ground station is visible out of selected day based on start and end time of actions
     for i in range(0, len(stations_summary)):
         ground_start = int((dt.datetime.strptime(str(stations_summary[i][0]), '%H:%M:%S.%f') - dt.datetime(1900,
                                                                                                            1,
@@ -140,10 +141,12 @@ def xband_stations(path,time_interval, day, month, year):
             e += time_interval
 
         g = (gnd_data_list[len(gnd_data_list) - 1][1])
-        while (g >= ground_end) and (g <= end_second_interval) and (i >= len(stations_summary) - 1):
+        while (g >= ground_end) and (g <= end_second_interval-5) and (i >= len(stations_summary) - 1):
             gnd_access = 0
             gnd_data_list.append([g, g + time_interval, gnd_access])
             g += time_interval
 
-    # return the binary groud stations list and summary stations
+    # returns the list of ground stations in boolean form at time intervals of x seconds and returns the summary of all accessible ground stations
+    # ground data list in the form of start, end, and 1/0 based on accessibility of ground stations
+    # stations summary is in the form of start, end, duration and whether or not station is accessible
     return gnd_data_list, stations_summary

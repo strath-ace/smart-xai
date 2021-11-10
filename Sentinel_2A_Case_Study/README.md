@@ -11,10 +11,12 @@ The aim of this project is to generate a schedule for an EO satellite, to captur
 and down-link data when access to ground station is possible which can occur in either the shade/sunlight. 
 In order to down-link data, the satellite has to process the images and as a result processing can occur any time.
 
-When processing however, the satellite will retain the images until down-linking has occurred in case the
+When processing images however, the satellite will retain the images until down-linking has occurred in case the
 processed images becomes corrupt, the original file is there to be reprocessed.
 
-
+The amount of images processed and downlink is based on the hardware limitations of the satellite and as a result, 
+depending on the on-board processing capabilities, it can take several processing instances to complete a image and 
+several downlinking instances to send 1 image after it has been processed.
 
 The structure of this folder is shown below
 
@@ -69,7 +71,7 @@ Sentinel 2A Case Study
         
           - #### Solver
             This folder generates the final schedules using the manual results in a boolean format
-            in combination with the satellites positions
+            in combination with the satellites positions using the constraints
             
             - solver_test.py
                Uses the 4 functions below.
@@ -88,7 +90,7 @@ Sentinel 2A Case Study
                   - Solver_plot.py
                   - gantt_plot.py
      
-      - ### Results
+      - ### Results - folders automatically created per daily result
            - #### Day 1
                - Solver
                - Garphs

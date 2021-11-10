@@ -1,3 +1,5 @@
+# This function is used for generating land visibility data for a selected day extracted from the text file
+
 from collections import namedtuple
 import numpy as np
 import datetime as dt
@@ -52,7 +54,7 @@ def country_access(path, time_interval, day, month, year, country):
     country_access_summary = np.array(country_access_summary)
 
     country_data_list = []
-    # to create a binary list where land is visible out of selected day at every time interval t
+    # to create a boolean list where land is visible out of selected day at every time interval t
     for i in range(0, len(country_access_summary)):
         country_start = int((dt.datetime.strptime(str(country_access_summary[i][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1,
                                                                                                                   1)).total_seconds())
@@ -77,9 +79,11 @@ def country_access(path, time_interval, day, month, year, country):
             e += time_interval
 
         g = (country_data_list[len(country_data_list) - 1][1])
-        while (g >= country_end) and (g <= end_second_interval) and (i >= len(country_access_summary) - 1):
+        while (g >= country_end) and (g <= end_second_interval-5) and (i >= len(country_access_summary) - 1):
             c_access = 0
             country_data_list.append([g, g + time_interval, c_access])
             g += time_interval
-    # returns the list of country/countries in binary form at time intervals of x seconds and returns the summary of all countries visible
+    # returns the list of country/countries in boolean form at time intervals of x seconds and returns the summary of all countries visible
+    # country data list in the form of start, end, and 1/0 based on visibility of a country
+    # country access summary is in the form of start, end, duration and whether or not land is visible
     return country_data_list, country_access_summary

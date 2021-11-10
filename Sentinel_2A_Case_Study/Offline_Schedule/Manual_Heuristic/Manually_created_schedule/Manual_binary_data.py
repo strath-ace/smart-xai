@@ -1,3 +1,5 @@
+# This function is used for generating the boolean data to be sent to the solver and for generating the gantt plot
+
 import pandas as pd
 import datetime as dt
 from Sentinel_2A_Case_Study.Environment.start_end_points_data import time_select
@@ -25,6 +27,8 @@ def manual_binary_data(path, time_interval, day, month):
     for i in range(0, memory_count_coord):
         memory_details = memory_coord[i].split()
 
+        # This section determines and changes the values for the actions -1 for idle, '1' changed to '0' for taking images,
+        # '2' changed to '1' for processing and '4' changed to 2 for downlinking.
         if memory_details[5] > '0':
             if memory_details[2] == '1' and memory_details[6] == 'True':
                 action = 0
@@ -51,6 +55,7 @@ def manual_binary_data(path, time_interval, day, month):
 
         if i == 0:
             e = start_second_interval
+
         else:
             e = (mem_data_list[len(mem_data_list) - 1][1])
 
@@ -67,15 +72,16 @@ def manual_binary_data(path, time_interval, day, month):
             e += time_interval
 
         g = (mem_data_list[len(mem_data_list) - 1][1])
-        while (g >= mem_end) and (g <= end_second_interval) and (i >= len(manual_list) - 1):
+        while (g >= mem_end) and (g <= end_second_interval - 5) and (i >= len(manual_list) - 1):
             mem_access = -1
             mem_data_list.append([g, g + time_interval, mem_access])
             g += time_interval
 
-    #convert seconds to time H:M:S
-    mem_data_list_time=[]
+    # convert seconds to time H:M:S for start and end time followed by action number
+    # -1 for idle, 0 for taking images, 1 for processing and 2 for downlinking
+    mem_data_list_time = []
     for i in range(0, len(mem_data_list)):
-        mem_data_list_time.append([str(dt.timedelta(seconds=(mem_data_list[i][0]))),str(dt.timedelta(seconds=(mem_data_list[i][1]))),mem_data_list[i][2]])
+        mem_data_list_time.append([str(dt.timedelta(seconds=(mem_data_list[i][0]))), str(dt.timedelta(seconds=(mem_data_list[i][1]))), mem_data_list[i][2]])
 
     df = pd.DataFrame(mem_data_list_time)
     file.writelines(df.to_string(header=False, index=False))

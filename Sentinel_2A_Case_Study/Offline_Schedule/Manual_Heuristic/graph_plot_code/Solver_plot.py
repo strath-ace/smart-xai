@@ -1,12 +1,13 @@
+# function used for creating the line plot for the generated schedule by the solver
+
 import datetime as dt
+import matplotlib.dates as mdates
 import pandas as pd
 from matplotlib import pyplot as plt
-import matplotlib.dates as mdates
-from matplotlib.dates import DateFormatter
 
 
-def solver_plot(day,path,solver_plot_image,image_mem,process_im_mem,onboard_mem,Max_pictures):
-    constraint_land_list=[]
+def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard_mem, Max_pictures):
+    constraint_land_list = []
 
     cp_coord = open(path, "r")
     cp_count_coord = 0
@@ -23,43 +24,44 @@ def solver_plot(day,path,solver_plot_image,image_mem,process_im_mem,onboard_mem,
 
     for i in range(0, cp_count_coord):
         daily_cp_details = lines_cp_coord[i].split()
-        #print(daily_cp_details[13])
-        if daily_cp_details[2] == '0' and daily_cp_details[15]=='YES':
+        # print(daily_cp_details[13])
+        if daily_cp_details[2] == '0' and daily_cp_details[15] == 'YES':
             action = 'optm_take_pictures'
-        elif daily_cp_details[2]== '1' and daily_cp_details[15]=='YES':
-            action='optm_Process_Image'
+        elif daily_cp_details[2] == '1' and daily_cp_details[15] == 'YES':
+            action = 'optm_Process_Image'
         # elif daily_cp_details[2] == '3':
         #     action = 'optm_Calibrate'
-        elif daily_cp_details[2] =='2'and daily_cp_details[15]=='YES':
+        elif daily_cp_details[2] == '2' and daily_cp_details[15] == 'YES':
             action = 'optm_Dump'
         else:
             action = 'optm_idle'
 
-        #data from exported data format - start time| end time| action- optm for optimized| memory | pictures in memory| processed images in memory| photos downloaded
+        # data from exported data format - start time| end time| action- optm for optimized| memory | pictures in memory| processed images in memory| photos downloaded
         constraint_land_list.append(
-            [(dt.timedelta(seconds=(int(daily_cp_details[0])))), (dt.timedelta(seconds=int(daily_cp_details[1]))), action, daily_cp_details[4], float(daily_cp_details[5]), daily_cp_details[7],float(daily_cp_details[13])])
+            [(dt.timedelta(seconds=(int(daily_cp_details[0])))), (dt.timedelta(seconds=int(daily_cp_details[1]))), action, daily_cp_details[4], float(daily_cp_details[5]), daily_cp_details[7],
+             float(daily_cp_details[13])])
 
-
-    i=0
-    constraints=[]
+    i = 0
+    constraints = []
     while i in range(0, len(constraint_land_list)):
-        constraints.append([constraint_land_list[i][0],constraint_land_list[i][1],constraint_land_list[i][2],constraint_land_list[i][3],constraint_land_list[i][4],constraint_land_list[i][5],constraint_land_list[i][6]])
-        i+=1
+        constraints.append(
+            [constraint_land_list[i][0], constraint_land_list[i][1], constraint_land_list[i][2], constraint_land_list[i][3], constraint_land_list[i][4], constraint_land_list[i][5], constraint_land_list[i][6]])
+        i += 1
 
     data = {'Time': [str(constraints[i][0]) for i in range(0, len(constraints))],
             'Memory': [str(constraints[i][3]) for i in range(0, len(constraints))],
-            'Max_Memory': [(onboard_mem) for i in range(0, len(constraints))],
-            'Max_pics': [(Max_pictures) for i in range(0, len(constraints))],
+            'Max_Memory': [onboard_mem for _ in range(0, len(constraints))],
+            'Max_pics': [Max_pictures for _ in range(0, len(constraints))],
             'Pics': [(constraints[i][4]) for i in range(0, len(constraints))],
             'Process': [str(float(constraints[i][5]) / float(image_mem / process_im_mem)) for i in range(0, len(constraints))],
             'Dump': [str(float(constraints[i][6])) for i in range(0, len(constraints))]}
 
     z = pd.DataFrame(data=data)
-    #z["Date"] = "2019-09-09"
+    # z["Date"] = "2019-09-09"
     z['Time'] = pd.to_datetime(z['Time'], format='%H:%M:%S')
 
     z['Time'] = mdates.date2num(z['Time'])
-    print(z['Time'])
+    # print(z['Time'])
     z['Process'] = z['Process'].astype(float)
     z['Dump'] = z['Dump'].astype(float)
     z['Memory'] = z['Memory'].astype(int)
@@ -83,7 +85,7 @@ def solver_plot(day,path,solver_plot_image,image_mem,process_im_mem,onboard_mem,
     z1.Memory.plot(ax=ax2, color='purple', label='Memory')
     z1.Max_Memory.plot(ax=ax2, color='grey', label='Max_Memory', linestyle='dashed')
     ax1.set_ylabel('No. Of Images in Memory', fontweight='bold', fontsize=15)
-    ax1.set_xlabel('Day '+str(day), fontweight='bold', fontsize=15)
+    ax1.set_xlabel('Day ' + str(day), fontweight='bold', fontsize=15)
     ax2.set_ylabel('Memory', fontweight='bold', fontsize=15)
     ax2.legend(bbox_to_anchor=(0.9, 1.1))
     ax1.legend(bbox_to_anchor=(0.3, 1.1), ncol=len(z.columns))
@@ -92,9 +94,9 @@ def solver_plot(day,path,solver_plot_image,image_mem,process_im_mem,onboard_mem,
     ax1.grid('on', which='minor', axis='x')
 
     plt.gcf().set_size_inches(15, 8)
-    myFmt =  mdates.DateFormatter('%H:%M:%S')
+    myFmt = mdates.DateFormatter('%H:%M:%S')
     ax1.xaxis.set_major_formatter(myFmt)
-    #plt.show()
+    # plt.show()
     plt.savefig(solver_plot_image)
 
     return constraint_land_list
