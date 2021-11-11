@@ -1,6 +1,5 @@
-
-#to call last read data in file n-1 or n depending on the day and if file already exists
-def file_recall(filename,list_num):
+# to call last read data in file n-1 or n depending on the day and if file already exists
+def file_recall(filename, list_num):
     results_coord = open(filename, "r")
     results_count_coord = 0
     for line in results_coord:
@@ -23,9 +22,7 @@ def file_recall(filename,list_num):
     # Carry over last data stored in table
     memory_total = memory = int(results_data[4])
     pics_taken = num_pics = int(float(results_data[5]) * 100)
-    processed_images =num_processed = int(float(results_data[7]) * 100)
-
-
+    processed_images = num_processed = int(float(results_data[7]) * 100)
 
     memory_keep = [memory]
     processed_keep = [num_processed]
@@ -35,4 +32,4 @@ def file_recall(filename,list_num):
         return results_count_coord, memory, num_pics, num_processed, memory_keep, processed_keep, photos_keep
     else:
         print(results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken)
-        return results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images,pics_taken
+        return results_count_coord, pics_count, processed_pics_count, downloaded_instances, idle_time, memory_total, processed_images, pics_taken

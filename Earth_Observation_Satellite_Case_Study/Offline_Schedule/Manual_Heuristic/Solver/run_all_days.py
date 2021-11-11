@@ -12,7 +12,7 @@ from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.gr
 from Earth_Observation_Satellite_Case_Study.Environment.environment_data_to_solver import environment_data
 
 days = 8
-n = 1
+n = 3
 while n in range(1, days):
     # Manual Schedule generation function
     day = n
@@ -67,12 +67,12 @@ while n in range(1, days):
     # functions called
     heuristic(filename, day, month, year, country, time_interval)
     Manual_heuristic_memory_calculation(filename, day, month, time_interval, onboard_mem, image_mem, -downlink_data_rate, process_im_mem)
-    manual_binary_data(filename, time_interval, day, month)
+    # manual_binary_data(filename, time_interval, day, month)
 
     # calling the model and solver
     country_data_list, gnd_data_list, day_data_list = environment_data(path, time_interval, day, month, year, country)
-    mem_data_list = manual_binary_data(filename, time_interval, day, month)[0]
-
+    mem_data_list, mem_data_list_time = manual_binary_data(filename, time_interval, day, month)
+    # print(mem_data_list[0][1][2])
     i = 0
     horizon = len(country_data_list)
 

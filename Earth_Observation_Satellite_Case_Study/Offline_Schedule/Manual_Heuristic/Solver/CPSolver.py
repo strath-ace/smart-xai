@@ -70,13 +70,15 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
             s = 0
         check_single_action = 0
         for a in all_actions:
-
+            memory_total = solver.Value(summary[s][2])
+            pics_taken = solver.Value(summary[s][0]) / 100
+            processed_images = solver.Value(summary[s][1]) / 100
             print(a, n, b, s)
             print('shifts', solver.Value(shifts[(a, s)]))
             if solver.Value(shifts[(a, s)]) == 1:
-                memory_total = solver.Value(summary[s][2])
-                pics_taken = solver.Value(summary[s][0]) / 100
-                processed_images = solver.Value(summary[s][1]) / 100
+                # memory_total = solver.Value(summary[s][2])
+                # pics_taken = solver.Value(summary[s][0]) / 100
+                # processed_images = solver.Value(summary[s][1]) / 100
                 check_single_action = check_single_action + 1
                 if a == 2:
                     downloaded_instances += 1
