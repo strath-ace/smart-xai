@@ -12,7 +12,7 @@ from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.gr
 from Earth_Observation_Satellite_Case_Study.Environment.environment_data_to_solver import environment_data
 
 days = 8
-n = 4
+n = 6
 while n in range(1, days):
     # Manual Schedule generation function
     day = n

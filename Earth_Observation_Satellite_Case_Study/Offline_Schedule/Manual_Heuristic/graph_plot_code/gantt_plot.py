@@ -25,7 +25,7 @@ def gantt_plot(day, memory_land_list_binary, daily, constraint_land_list, gantt_
         if daily_details[3] == 'Matera' or daily_details[3] == 'Eumetsat' or daily_details[3] == 'PrudhoeBay' or daily_details[3] == 'Svalbard':
             Position = 'Ground_stations'
         elif daily_details[3] == 'Penumbra' or daily_details[3] == 'Penumbra Shade':
-            Position = 'night'
+            Position = 'Night'
 
         elif daily_details[3] != 'Process_images' and (daily_details[3] != 'Matera' or daily_details[3] != 'Eumetsat' or daily_details[3] != 'PrudhoeBay' or daily_details[3] != 'Svalbard'):
             # and any(e[3] == daily_details[3] for e in country_access(1, 'Dec', 2020, 'All')):
@@ -47,7 +47,8 @@ def gantt_plot(day, memory_land_list_binary, daily, constraint_land_list, gantt_
     dc = pd.DataFrame({'Task': ['Job_%i' for _ in range(0, len(constraint_land_list))], 'Start': ['1970-01-01 ' + str(constraint_land_list[i][0]) for i in range(0, len(constraint_land_list))],
                        'Finish': ['1970-01-01 ' + str(constraint_land_list[i][1]) for i in range(0, len(constraint_land_list))], 'Resource': [(constraint_land_list[i][2]) for i in range(0, len(constraint_land_list))]})
 
-    df2 = pd.concat([dl, df, dc])
+    df2 = pd.concat([dl.sort_values('Resource', ascending=True), df.sort_values('Resource', ascending=True), dc.sort_values('Resource', ascending=True)])
+
     fig1 = px.timeline(df2, x_start="Start", x_end="Finish", y="Resource", color="Resource", hover_name="Task", color_discrete_sequence=px.colors.qualitative.Prism, opacity=.7, range_x=None, range_y=None,
                        template='plotly_white', height=1200, title="<b>Day</b>" + str(day))
 

@@ -93,7 +93,8 @@ def manual_memory_plot(day, path, path1, manual_plot_image):
     ax4.legend(bbox_to_anchor=(0.9, 1.1))
     ax3.legend(bbox_to_anchor=(0.3, 1.1), ncol=len(x.columns))
     ax4.set_ylim([0, 2000000])
-    ax3.set_ylim([-20, 1100])
+    # if (memory_land_list[len(memory_land_list)-1][7] > 1000
+    ax3.set_ylim([-20, 800])
     ax3.grid('on', which='minor', axis='x')
     plt.gcf().set_size_inches(15, 8)
 

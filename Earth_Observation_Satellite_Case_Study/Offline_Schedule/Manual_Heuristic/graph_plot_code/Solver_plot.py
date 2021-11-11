@@ -28,11 +28,11 @@ def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard
         if daily_cp_details[2] == '0' and daily_cp_details[15] == 'YES':
             action = 'optm_take_pictures'
         elif daily_cp_details[2] == '1' and daily_cp_details[15] == 'YES':
-            action = 'optm_Process_Image'
+            action = 'optm_process_image'
         # elif daily_cp_details[2] == '3':
         #     action = 'optm_Calibrate'
         elif daily_cp_details[2] == '2' and daily_cp_details[15] == 'YES':
-            action = 'optm_Dump'
+            action = 'optm_dump'
         else:
             action = 'optm_idle'
 

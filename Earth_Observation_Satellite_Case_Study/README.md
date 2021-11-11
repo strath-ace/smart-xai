@@ -73,6 +73,7 @@ The structure of this folder is shown below
             in combination with the satellites positions using the constraints
             
             - solver_test.py
+            
                Uses the 4 functions below.
                - environment_data_to_solver.py
                - Manual_binary_data.py
@@ -82,6 +83,11 @@ The structure of this folder is shown below
                - CPSolver.py
                  Uses the function below.
                   - file_recall.py
+            - Run_all_days.py
+                Uses all the codes and generates all the schedules over x period of days
+                carrying over all the data from each day to the next as well as plotting all the graphs 
+                for each respective day. 
+                This code initially creates the folder and files for each day if they don't exist to generate results
           
           - #### graph_plot_code
               - call_plots_test.py
