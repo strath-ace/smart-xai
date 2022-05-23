@@ -74,7 +74,7 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
         model.Add(((country_data_list[n][2] == day_data_list[n][2]) and (
                 country_data_list[n][2] == 1))).OnlyEnforceIf(shifts[(0, s)])
 
-        # action '2' is assigned a boolean value of '1' when ground station is accessible at any time over a day period
+        # action '2' - downlink is assigned a boolean value of '1' when ground station is accessible at any time over a day period
         model.Add(gnd_data_list[n][2] == 1).OnlyEnforceIf(shifts[(2, s)])
 
     # constraints are applied here, based on the calculations, float values are created that the model is unable to handle, therefore
@@ -112,9 +112,11 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
         model.Add(num_processed <= total_to_process)
         model.Add(memory < onboard_mem)
         summary.append([num_pics, num_processed, memory])
-    # the objective function is to maximize the occurrences of images taken, processed and dwnlinked. Can be altered
-    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
 
+    # the objective function is to maximize the occurrences of images taken, processed and downlinked. Can be altered
+    #model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
+    #shifts[(2, s)] = downlink, shifts[(1, s)] = process, shifts[(0, s)] = pics
+    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
     # manual schedule inputted here as a hint to the solution
     if hot_start == 1:
 

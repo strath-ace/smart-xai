@@ -80,9 +80,11 @@ def manual_binary_data(path, time_interval, day, month):
     # convert seconds to time H:M:S for start and end time followed by action number
     # -1 for idle, 0 for taking images, 1 for processing and 2 for downlinking
     mem_data_list_time = []
+    mem_data_list_time1 = []
     for i in range(0, len(mem_data_list)):
         mem_data_list_time.append([str(dt.timedelta(seconds=(mem_data_list[i][0]))), str(dt.timedelta(seconds=(mem_data_list[i][1]))), mem_data_list[i][2]])
 
-    df = pd.DataFrame(mem_data_list_time)
+    mem_data_list_time1 = mem_data_list_time
+    df = pd.DataFrame(mem_data_list_time1)
     file.writelines(df.to_string(header=False, index=False))
     return mem_data_list, mem_data_list_time

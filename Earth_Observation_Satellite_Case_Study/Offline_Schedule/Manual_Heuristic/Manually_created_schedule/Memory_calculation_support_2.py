@@ -51,11 +51,16 @@ def Memory_calculation_support_2(Demands, final_total, h, tot_idle, onboard_mem,
         total = Demands + final_total[len(final_total) - 1]
         Actives = False
 
-    if final_jobs == '2' and Actives is False and tot_proc > 1:
-        tot_proc -= 1
-        count_proc -= 1
+    # if final_jobs == '2' and Actives is False and tot_proc > 1:
+    #     tot_proc -= 1
+    #     count_proc -= 1
 
-    if final_jobs == '1' and Actives is False and tot_pic > 1:
+    # if len(total_pics)-1 > 0:
+    #     if final_jobs == '1' and Actives is False and tot_pic > total_pics[len(total_pics)-1]:
+    #         tot_pic -= 1
+    #         count_pic -= 1
+
+    if final_jobs == '1' and Actives is False and tot_pic > 0:
         tot_pic -= 1
         count_pic -= 1
 

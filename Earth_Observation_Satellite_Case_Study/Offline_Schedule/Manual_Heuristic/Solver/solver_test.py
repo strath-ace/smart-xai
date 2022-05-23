@@ -37,7 +37,7 @@ country_data_list, gnd_data_list, day_data_list = environment_data(path, time_in
 mem_data_list = manual_binary_data(path1, time_interval, day, month)[0]
 
 i = 0
-horizon = len(country_data_list)
+horizon = min(len(country_data_list),len(gnd_data_list),len(day_data_list))
 
 while i in range(0, horizon):
     model, summary, shifts, b, c = CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,

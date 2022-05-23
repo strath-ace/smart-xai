@@ -2,7 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cf18f13-4a7e-459f-881b-3986059e0b51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Sentinel 2A Case Study/Environment/Offline_Schedule/Results/test" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/graphs/gantt_plot1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/graphs/manual_memory_plot1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/graphs/optimal_memory_plot1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/Manual_Results2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/Solver/Optimized_results2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/binary_daily_schedule2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/daily_schedule2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/graphs/optimal_memory_plot2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/jobs_daily_schedule2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/manual_memory_states2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 2/manual_memory_states_seconds2.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/Manual_Results3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/Solver/Optimized_results3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/binary_daily_schedule3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/daily_schedule3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/jobs_daily_schedule3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/manual_memory_states3.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 3/manual_memory_states_seconds3.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Environment/Data/Land.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Environment/Data/Land.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Heuristic_memory_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Heuristic_memory_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Manual_binary_data.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Manual_binary_data.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Manual_heuristic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Manual_heuristic.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Memory_calculation_support_1.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Memory_calculation_support_1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Memory_calculation_support_2.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/Memory_calculation_support_2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/test_manual_schedule.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Manually_created_schedule/test_manual_schedule.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Solver/run_all_days.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Solver/run_all_days.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Solver/solver_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/Solver/solver_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/graph_plot_code/call_plots_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Manual_Heuristic/graph_plot_code/call_plots_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/Manual_Results1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/Manual_Results1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/Solver/Optimized_results1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/Solver/Optimized_results1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/binary_daily_schedule1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/binary_daily_schedule1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/manual_memory_states1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/manual_memory_states1.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/manual_memory_states_seconds1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Offline_Schedule/Results/Day 1/manual_memory_states_seconds1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +55,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../PhD/ESA/Satellite data/Sentinel 2/Sentinel2A" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -34,6 +68,8 @@
       <workItem from="1636016575971" duration="93000" />
       <workItem from="1636016764501" duration="9000" />
       <workItem from="1636018062341" duration="9000" />
+      <workItem from="1638795714593" duration="607000" />
+      <workItem from="1640011166780" duration="366000" />
     </task>
     <servers />
   </component>

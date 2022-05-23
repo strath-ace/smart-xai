@@ -2,14 +2,14 @@
 
 # Prevents memory usage from exceeding the onboard memory and counts the occurrences for each action
 def action_determination(final_jobs, onboard_mem, tot_pic, image_mem, process_im_mem, tot_proc, count_pic, count_proc, tot_down, count_down, downlink_data_rate, final_total):
-    if final_jobs == '1' and final_total[len(final_total) - 1] < onboard_mem and ((image_mem * tot_pic) + (process_im_mem * tot_proc)) < onboard_mem:
+    if final_jobs == '1' and ((image_mem * tot_pic) + (process_im_mem * tot_proc)) < onboard_mem:
 
         pic_chosen = 1
         tot_pic += 1
         count_pic += 1
         Demands = image_mem * pic_chosen
 
-    elif final_jobs == '2' and final_total[len(final_total) - 1] < onboard_mem and tot_proc < (tot_pic * image_mem / process_im_mem) and ((image_mem * tot_pic) + (process_im_mem * tot_proc)) < onboard_mem:
+    elif final_jobs == '2' and tot_proc < (tot_pic * image_mem / process_im_mem) and ((image_mem * tot_pic) + (process_im_mem * tot_proc)) < onboard_mem:
         tot_proc += 1
         count_proc += 1
         Demands = process_im_mem  # * time_interval

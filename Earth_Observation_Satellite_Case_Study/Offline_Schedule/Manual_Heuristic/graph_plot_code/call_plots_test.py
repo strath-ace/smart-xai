@@ -5,7 +5,7 @@ from Solver_plot import solver_plot
 from gantt_plot import gantt_plot
 
 # constants for satellite
-day = 2
+day = 1
 time_interval = 5
 image_mem = 2688
 downlink_data_rate = 280 * time_interval
