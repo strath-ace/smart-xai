@@ -114,9 +114,10 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
         summary.append([num_pics, num_processed, memory])
 
     # the objective function is to maximize the occurrences of images taken, processed and downlinked. Can be altered
-    #model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
-    #shifts[(2, s)] = downlink, shifts[(1, s)] = process, shifts[(0, s)] = pics
-    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
+    # shifts[(2, s)] = downlink, shifts[(1, s)] = process, shifts[(0, s)] = pics
+    # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
+    # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
+    model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
     # manual schedule inputted here as a hint to the solution
     if hot_start == 1:
 
