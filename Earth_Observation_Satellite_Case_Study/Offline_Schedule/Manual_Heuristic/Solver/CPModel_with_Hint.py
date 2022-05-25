@@ -8,7 +8,10 @@ import os
 
 def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem, filename, mem_data_list, country_data_list,
                  gnd_data_list, day_data_list, horizon):
+    # using idle time
     all_actions = range(0, 3)
+    # without idle time implemented
+    # all_actions = range(0, 3)
     filename1 = filename + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     list_num = 1
     if not os.path.isfile(filename1) and day == 1:
@@ -77,6 +80,8 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
         # action '2' - downlink is assigned a boolean value of '1' when ground station is accessible at any time over a day period
         model.Add(gnd_data_list[n][2] == 1).OnlyEnforceIf(shifts[(2, s)])
 
+
+
     # constraints are applied here, based on the calculations, float values are created that the model is unable to handle, therefore
     # multiples of 100 are used.
     # The constraints here means an image has to be taken first and once taken, processing can occur at any time, followed by downlinking based on the images processed
@@ -107,7 +112,12 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
 
         model.Add(num_processed > (int(100 * downlink_data_rate / process_im_mem))).OnlyEnforceIf(
             shifts[(2, s)])
+
         model.Add(num_pics > 0).OnlyEnforceIf(shifts[(1, s)])
+
+        # action '3' - idle time is assigned a boolean value of '1' when no actions are present
+       # model.Add(shifts[(0, s)] == shifts[(1, s)] == shifts[(2, s)]== 0).OnlyEnforceIf(shifts[(3, s)])
+
         total_to_process = (num_pics * int((image_mem / process_im_mem)))
         model.Add(num_processed <= total_to_process)
         model.Add(memory < onboard_mem)
@@ -118,6 +128,7 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
     # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
     # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
     model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
+    #model.Minimize(sum((shifts[(3, s)]) for s in mod_shifts))
     # manual schedule inputted here as a hint to the solution
     if hot_start == 1:
 
@@ -133,5 +144,7 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
                 model.AddHint(shifts[(1, s)], 1)
             if mem_data_list[n][2] == 2:
                 model.AddHint(shifts[(2, s)], 1)
+
+    model.Maximize(sum((shifts[(0, s)]) for s in mod_shifts))
     # returns the overall model to the solver, the summary table, shifts, the start and end time for the loop (intervals) can be altered
     return model, summary, shifts, b, c
