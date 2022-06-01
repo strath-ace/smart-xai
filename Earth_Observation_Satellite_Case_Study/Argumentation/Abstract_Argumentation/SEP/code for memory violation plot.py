@@ -1,10 +1,11 @@
+# This file checks if there is a violation of the onboard memory when an action at any point in time is replaced with another
 import pandas as pd
 
 day = 3
 
-filename1 = 'SEP_Results/Day/Attack_summary_a1' + str(day) + '.txt'
-filename2 = 'SEP_Results/Day/Attack_summary_a2' + str(day) + '.txt'
-filename3 = 'SEP_Results/Day/Attack_summary_a3' + str(day) + '.txt'
+filename1 = 'SEP_Results/Day/Attack_violation_summary_a12' + str(day) + '.txt'
+# filename2 = 'SEP_Results/Day/Attack_summary_a2' + str(day) + '.txt'
+# filename3 = 'SEP_Results/Day/Attack_summary_a3' + str(day) + '.txt'
 # load of optimized schedule information
 solver_path = 'SEP_Results/Day/Optimized_results' + str(day) + '.txt'
 solver_coord = open(solver_path, "r")
@@ -28,7 +29,7 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
     objective_value1 = 0
     violation1 = ''
     start_time2 = 0
-
+    #attack_summary=[]
     for n in range(i, count_coord - 1):
         # for n in range (i, count_coord-1):
         solver_values = lines_cp_coord[n].split()
@@ -76,7 +77,8 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
             violation1 = 'Exceeded'
             a = '-'
             objective_value1 = objective_value
-            # attack_summary.append([i, S, start_time, start_time2, S_1, a1, mi_a1, objective_value1, violation1])
+            #return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
+            #attack_summary.append([i, S, start_time, start_time2, S_1, a, mi_a, objective_value1, violation1])
             # print(violation1)
             break
         else:
@@ -88,8 +90,9 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
             objective_value1 = objective_value1
 
             final_objective = (S_Objective_value1 + S_Objective_value2 + objective_value1)
-            # attack_summary.append([i, S,start_time, start_time2,S_1, a1, mi_a1,objective_value1,violation1])
-    return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
+            #attack_summary.append([i, S,start_time, start_time2,S_1, a, mi_a,objective_value1,violation1])
+        #print(i, a, objective_value1, violation1, start_time2, mi_a, final_objective)
+            return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
     # attack_summary.append([i, start_time, S, a1, objective_value, violation1])
 
 
@@ -125,12 +128,16 @@ S_Objective_image = int(lines_cp_coord[count_coord - 2].split()[6])
 S_Objective_process = int(lines_cp_coord[count_coord - 2].split()[8])
 S_Objective_download = (2 * int(lines_cp_coord[count_coord - 2].split()[10]))
 print(S_Objective_image, S_Objective_process, S_Objective_download)
-attack_summary1 = [['i', 'start_time', 'S', 'a1', 'objective_value', 'violation', 'time_of_incident', 'mi1', 'final_objective', 'feasible_better', 'S_Objective']]
+attack_summary1 = [['i', 'start_time', 'S', 'a1', 'm1','objective_value', 'violation', 'time_of_incident', 'mi1', 'final_objective', 'feasible_better', 'S_Objective']]
 attack_summary2 = [['i', 'start_time', 'S', 'a2', 'objective_value', 'violation', 'time_of_incident', 'mi2', 'final_objective', 'feasible_better', 'S_Objective']]
 attack_summary3 = [['i', 'start_time', 'S', 'a3', 'objective_value', 'violation', 'time_of_incident', 'mi3', 'final_objective', 'feasible_better', 'S_Objective']]
-i = 282
-# while i in range (282,289):
-while i in range(1, count_attack_coord):
+# i = 15000
+# while i in range (15000,15125):
+
+i = 1
+while i in range (1,15178):
+    # count_attack_coord-800):
+#while i in range(1, count_attack_coord):
     # print('restart')
     attack_data = lines_attack_coord[i].split()
     start_time = int(attack_data[0])
@@ -152,36 +159,103 @@ while i in range(1, count_attack_coord):
     ma2 = process_im_mem
     ma3 = -downlink_data_rate
 
+    mi_a1 = m1
+    # if a1 == '-':
+    #     i, a1, objective_value1, violation1, start_time1, mi1, final_objective1 = SEP_action_a(1, a1, m1, i, ma1, ma2, ma3, S_Objective_process, S_Objective_download)
+    #     if final_objective1 >= S_Objective:
+    #         feasible_better1 = 'Feasible_better_objective'
+    #     elif final_objective1 < S_Objective and violation1 == 'Exceeded':
+    #         feasible_better1 = 'Infeasible'
+    #     else:
+    #         feasible_better1 = 'Feasible_worse_objective'
+    #     attack_summary1.append([i, start_time, S, a1, objective_value1, violation1, start_time1, mi1, final_objective1, feasible_better1,S_Objective])
+
     # mi_a1 = m1
-    if a1 == '-':
-        i, a1, objective_value1, violation1, start_time1, mi1, final_objective1 = SEP_action_a(1, a1, m1, i, ma1, ma2, ma3, S_Objective_process, S_Objective_download)
-        if final_objective1 >= S_Objective:
-            feasible_better1 = 'Feasible_better_objective'
-        elif final_objective1 < S_Objective and violation1 == 'Exceeded':
-            feasible_better1 = 'Infeasible'
-        else:
-            feasible_better1 = 'Feasible_worse_objective'
-        attack_summary1.append([i, start_time, S, a1, objective_value1, violation1, start_time1, mi1, final_objective1, feasible_better1,S_Objective])
+    if i < 15177:
+        mi_a1 = mi
+        attack_summary1.append([i, start_time, S, a1,mi, 0, 'Not_exceeded', start_time, mi_a1, 0, 0, S_Objective])
+        #attack_summary1.append([i, start_time, S, a1, mi, objective_value1, violation1, start_time2, mi_a1, final_objective1, feasible_better1, S_Objective])
 
-    if a2 == '-':
-        i, a2, objective_value2, violation2, start_time2, mi2, final_objective2 = SEP_action_a(2, a2, m2, i, ma1, ma2, ma3, S_Objective_image, S_Objective_download)
-        if final_objective2 >= S_Objective:
-            feasible_better2 = 'Feasible_better_objective'
-        elif final_objective2 < S_Objective and violation2 == 'Exceeded':
-            feasible_better2 = 'Infeasible'
-        else:
-            feasible_better2 = 'Feasible_worse_objective'
-        attack_summary2.append([i, start_time, S, a2, objective_value2, violation2, start_time2, mi2, final_objective2, feasible_better2,S_Objective])
+    elif a1 == '-':
+        #for n in range(i, count_coord - 1):
+        for n in range(i, count_coord - 1):
 
-    if a3 == '-':
-        i, a3, objective_value3, violation3, start_time3, mi3, final_objective3 = SEP_action_a(3, a3, m3, i, ma1, ma2, ma3, S_Objective_image, S_Objective_process)
-        if final_objective3 >= S_Objective:
-            feasible_better3 = 'Feasible_better_objective'
-        elif final_objective3 < S_Objective and violation3 =='Exceeded':
-            feasible_better3 = 'Infeasible'
-        else:
-            feasible_better3 = 'Feasible_worse_objective'
-        attack_summary3.append([i, start_time, S, a3, objective_value3, violation3, start_time3, mi3, final_objective3, feasible_better3,S_Objective])
+            # for n in range (i, count_coord-1):
+            solver_values = lines_cp_coord[n].split()
+            start_time2 = int(solver_values[0])
+            S_1 = lines_attack_coord[n].split()[4]
+
+            if n == i:
+                mi_a1 = m1
+                objective_value = 1 + int(solver_values[6])
+            else:
+                if S_1 == '0':
+                    mi_a1 = mi_a1 + ma1
+                elif S_1 == '1':
+                    mi_a1 = mi_a1 + ma2
+                elif S_1 == '2':
+                    mi_a1 = mi_a1 + ma3
+                else:
+                    mi_a1 = mi_a1
+
+                objective_value = 0
+                # add the new memory to the rest of the data
+                # mi_a1 =  ma1 + int(solver_values[4])
+            # recalculate new objective
+            objective_value1 = 1 + int(solver_values[6])
+            # print(mi_a1)
+            # check if memory is exceeded
+            #attack_summary1.append([i, start_time, S, a1, objective_value1, violation1, start_time2, mi_a1, final_objective1, feasible_better1, S_Objective])
+
+            if mi_a1 > m_max or mi_a1 <= 0:
+                violation1 = 'Exceeded'
+                a1 = '-'
+                objective_value1 = objective_value
+                final_objective1 = S_Objective_process + S_Objective_download + objective_value1
+                feasible_better1 = 'Infeasible'
+
+                attack_summary1.append([i, start_time, S, a1,mi, objective_value1, violation1, start_time2, mi_a1, final_objective1, feasible_better1,S_Objective])
+                #print(violation1)
+                #break
+            else:
+                if n == count_coord - 1:
+                    violation1 = 'Not_exceeded'
+                else:
+                    violation1 = 'Not_exceeded'
+                a1 = '-'
+
+
+                objective_value1 = objective_value1
+                final_objective1 =  S_Objective_process + S_Objective_download + objective_value1
+
+                if final_objective1 >= S_Objective:
+                    feasible_better1 = 'Feasible_better_objective'
+                elif final_objective1 < S_Objective and violation1 == 'Exceeded':
+                    feasible_better1 = 'Infeasible'
+                else:
+                    feasible_better1 = 'Feasible_worse_objective'
+                attack_summary1.append([i, start_time, S, a1, mi, objective_value1, violation1, start_time2, mi_a1, final_objective1, feasible_better1,S_Objective])
+    #else:
+
+    # if a2 == '-':
+    #     i, a2, objective_value2, violation2, start_time2, mi2, final_objective2 = SEP_action_a(2, a2, m2, i, ma1, ma2, ma3, S_Objective_image, S_Objective_download)
+    #     if final_objective2 >= S_Objective:
+    #         feasible_better2 = 'Feasible_better_objective'
+    #     elif final_objective2 < S_Objective and violation2 == 'Exceeded':
+    #         feasible_better2 = 'Infeasible'
+    #     else:
+    #         feasible_better2 = 'Feasible_worse_objective'
+    #     attack_summary2.append([i, start_time, S, a2, objective_value2, violation2, start_time2, mi2, final_objective2, feasible_better2,S_Objective])
+    #
+    # if a3 == '-':
+    #     i, a3, objective_value3, violation3, start_time3, mi3, final_objective3 = SEP_action_a(3, a3, m3, i, ma1, ma2, ma3, S_Objective_image, S_Objective_process)
+    #     if final_objective3 >= S_Objective:
+    #         feasible_better3 = 'Feasible_better_objective'
+    #     elif final_objective3 < S_Objective and violation3 =='Exceeded':
+    #         feasible_better3 = 'Infeasible'
+    #     else:
+    #         feasible_better3 = 'Feasible_worse_objective'
+    #     attack_summary3.append([i, start_time, S, a3, objective_value3, violation3, start_time3, mi3, final_objective3, feasible_better3,S_Objective])
 
     i = i + 1
 
@@ -190,15 +264,15 @@ df = pd.DataFrame(attack_summary1)
 file1.writelines(df.to_string(header=False, index=False))
 file1.close()
 
-file1 = open(filename2, 'w')
-df = pd.DataFrame(attack_summary2)
-file1.writelines(df.to_string(header=False, index=False))
-file1.close()
-
-file1 = open(filename3, 'w')
-df = pd.DataFrame(attack_summary3)
-file1.writelines(df.to_string(header=False, index=False))
-file1.close()
+# file1 = open(filename2, 'w')
+# df = pd.DataFrame(attack_summary2)
+# file1.writelines(df.to_string(header=False, index=False))
+# file1.close()
+#
+# file1 = open(filename3, 'w')
+# df = pd.DataFrame(attack_summary3)
+# file1.writelines(df.to_string(header=False, index=False))
+# file1.close()
 
 # def SEP_action_a1(a1, m1, i, ma1, ma2, ma3):
 #     mi_a1 = m1

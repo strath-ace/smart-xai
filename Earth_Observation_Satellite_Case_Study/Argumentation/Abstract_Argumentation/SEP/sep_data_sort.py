@@ -1,16 +1,18 @@
-# file number 2- used to create the initial argumentation documents
+# file number 2 - used to create the initial argumentation documents
 
 import pandas as pd
 
+
 # if a conflict with action 1 occurs for images to be taken
 def a1_action(a1, memory1):
-    if a1 == '0' :
+    if a1 == '0':
         action_1 = '-'
         m1 = memory1
     else:
         m1 = 0
         action_1 = 'N/A'
     return action_1, m1
+
 
 # if a conflict occurs for action 2 (image processing) to occur
 def a2_action(a2, memory2):
@@ -21,6 +23,7 @@ def a2_action(a2, memory2):
         m2 = 0
         action_2 = 'N/A'
     return action_2, m2
+
 
 # if a conflict occurs for action 3 (down-linking) to take place
 def a3_action(a3, memory3):
@@ -58,7 +61,7 @@ def attack_summary():
     lines_cp_coord = content_cp_coord.split('\n')
     # print(lines_cp_coord)
 
-    final_list = [['start_time','land', 'station', 'day', 'S*', 'mi', 'a1', 'a2', 'a3', 'mi1', 'mi2', 'mi3', 'Mmax']]
+    final_list = [['start_time', 'land', 'station', 'day', 'S*', 'mi', 'a1', 'a2', 'a3', 'mi1', 'mi2', 'mi3', 'Mmax']]
     # changing data format
     for i in range(1, count_coord):
         SEP_data = lines_cp_coord[i].split()
@@ -74,9 +77,9 @@ def attack_summary():
         m1 = SEP_data[8]
         m2 = SEP_data[12]
         m3 = SEP_data[16]
-        mfinal = SEP_data[6]
         start_time = SEP_data[0]
 
+        # Check what actions are scheduled followed by the conflict conditions
         if S == 0:
             action_1 = 'N/A'
             m1 = 0
@@ -108,8 +111,9 @@ def attack_summary():
             action_2, m2 = a2_action(a2, m2)
             # if action 3 conflict is present
             action_3, m3 = a3_action(a3, m3)
-        final_list.append([start_time,land, station, day, S, mi, action_1, action_2, action_3, m1, m2, m3, onboard_mem])
+        final_list.append([start_time, land, station, day, S, mi, action_1, action_2, action_3, m1, m2, m3, onboard_mem])
 
+    # Write data to file
     file1 = open(filename1, 'w')
     df = pd.DataFrame(final_list)
     file1.writelines(df.to_string(header=False, index=False))

@@ -1,6 +1,6 @@
 # PEP calculation 3
 
-from mathpaper.memory.PEP.contraints_considered_add2 import attack_calculation
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.contraints_considered_add2 import attack_calculation
 
 def PEP_action_a(a, m, i, ma1, ma2, ma3,  count_coord, lines_cp_coord, lines_attack_coord, addrx, a2, m_max, add1, add2):
     mi_a = m

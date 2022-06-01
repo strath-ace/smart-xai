@@ -1,8 +1,8 @@
-#PEP calculation 1
+# PEP calculation 1 used to initiate swapping between actions
 
 import pandas as pd
 
-from mathpaper.memory.PEP.PEP_Feasible_check import PEP_check_Swap
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_Feasible_check import PEP_check_Swap
 
 day = 3
 filename1 = '../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a' + str(day) + '.txt'
@@ -51,7 +51,7 @@ dataend = count_attack_coord-1
 #dataend = count_attack_coord-2270
 #dataend = count_attack_coord-2100
 
-#Extract all matching data for times of action execution and action execution itself
+# Extract all matching data for times of action execution and action execution itself
 for i in range(datastart, dataend):
     x_y_data = lines_attack_coord[i].split()
     x_time = int(x_y_data[0])
@@ -72,16 +72,23 @@ y1_coordinates=[]
 mem_violation =[]
 file1 = open(filename1, 'w')
 final_list =[['i', 'start_time','swap_location', 'S', 'a1','a2','a3', 'idle', 'mi', 'violation','mem_vio', 'time_of_incident', 'mem1','mem2','mem3']]
-#final_list = []
+
+# Create an (n x m) matrix with each action scheduled and check if they both can be swapped once they aren't the same action
+# Meaning can any 2 actions be swapped?
+# rows
 for i in range(len(x) - 1):
+    # initialize list
     if i > 0:
         final_list = []
-    # #print(i)
+
+    # columns
     for j in range(len(y) - 1):
 
       # print(i,j,x_action[i], y_action[j])
         action_swap1 = x_action[i]
         action_swap2 = y_action[j]
+
+      # first 2 functions to check if images with processing can be swapped
         if  [x_action[i], y_action[j]] == [0, 1]:
             x1 = x[i]
             y1 = y[j]
@@ -100,7 +107,7 @@ for i in range(len(x) - 1):
           # print('1, 0', x1, addr1,':', y1, addr2)
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
             #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
-
+        # The next 2 if statements are swapping image taking with idle time
         elif [x_action[i], y_action[j]] == [0, -1]:
             x1 = x[i]
             y1 = y[j]
@@ -116,10 +123,10 @@ for i in range(len(x) - 1):
             addr1 = i
             addr2 = j
 
-          # print('-1, 0', x1, addr1, ':', y1, addr2)
+            # print('-1, 0', x1, addr1, ':', y1, addr2)
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
-            #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
-        # Swap with image taking and downlinking
+            # final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
+        # The next 2 if statements are swapping with image taking and down-linking
         elif [x_action[i], y_action[j]] == [0, 2]:
             x1 = x[i]
             y1 = y[j]
@@ -138,7 +145,7 @@ for i in range(len(x) - 1):
           # print('2, 0', x1, addr1, ':', y1, addr2)
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
             #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
-
+        # The next 2 if statements are swapping with image taking and idle time
         elif [x_action[i], y_action[j]] == [1, -1]:
             x1 = x[i]
             y1 = y[j]
@@ -148,17 +155,18 @@ for i in range(len(x) - 1):
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
             #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
             # print(attack_swap)
+
         elif [x_action[i], y_action[j]] == [-1, 1]:
             x1 = x[i]
             y1 = y[j]
             addr1 = i
             addr2 = j
 
-            #print('-1, 0', x1, addr1, ':', y1, addr2)
+            # print('-1, 0', x1, addr1, ':', y1, addr2)
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
-            #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
+            # final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
 
-        #Swap with process and downlink
+        # The next 2 statements are swapping with actions process and down-link
         elif [x_action[i], y_action[j]] == [1, 2]:
             x1 = x[i]
             y1 = y[j]
@@ -168,6 +176,7 @@ for i in range(len(x) - 1):
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
             #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
             # print(attack_swap)
+
         elif [x_action[i], y_action[j]] == [2, 1]:
             x1 = x[i]
             y1 = y[j]
@@ -177,6 +186,8 @@ for i in range(len(x) - 1):
             #print('2, 1', x1, addr1, ':', y1, addr2)
             final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
             #final_list = PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2,action_swap1,action_swap2)
+
+        # The next 2 if statements are swapping with idle time with downlink
         elif [x_action[i], y_action[j]] == [2, -1]:
             x1 = x[i]
             y1 = y[j]

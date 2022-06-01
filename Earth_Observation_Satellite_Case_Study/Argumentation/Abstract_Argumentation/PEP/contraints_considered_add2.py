@@ -1,4 +1,4 @@
-#PEP calculation 4
+# PEP calculation 4
 
 def action_1(image_mem, memory_before_action, onboard_mem):
     if memory_before_action + image_mem <= onboard_mem:
