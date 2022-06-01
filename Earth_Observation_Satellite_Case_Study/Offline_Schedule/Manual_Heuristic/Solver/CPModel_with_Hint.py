@@ -126,8 +126,8 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
     # the objective function is to maximize the occurrences of images taken, processed and downlinked. Can be altered
     # shifts[(2, s)] = downlink, shifts[(1, s)] = process, shifts[(0, s)] = pics
     # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
-    # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
-    model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
+    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
+    # model.Maximize(sum((shifts[(0, s)]) for s in mod_shifts))
     #model.Minimize(sum((shifts[(3, s)]) for s in mod_shifts))
     # manual schedule inputted here as a hint to the solution
     if hot_start == 1:
@@ -145,6 +145,6 @@ def CPModel_data(day, interval, onboard_mem, image_mem, downlink_data_rate, proc
             if mem_data_list[n][2] == 2:
                 model.AddHint(shifts[(2, s)], 1)
 
-    model.Maximize(sum((shifts[(0, s)]) for s in mod_shifts))
+    model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
     # returns the overall model to the solver, the summary table, shifts, the start and end time for the loop (intervals) can be altered
     return model, summary, shifts, b, c
