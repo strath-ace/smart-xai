@@ -9,8 +9,6 @@ day = 3
 line_file= 'SEP_Results/Day/line_argument' + str(day) + '.png'
 
 # load a1 attack file
-
-
 action_a1_path = 'SEP_Results/Day/Attack_violation_summary_a12' + str(day) + '.txt'
 action_a1_coord = open(action_a1_path, "r")
 count_a1_coord = 0
