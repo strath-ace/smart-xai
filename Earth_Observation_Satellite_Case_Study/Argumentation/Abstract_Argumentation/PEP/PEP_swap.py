@@ -88,7 +88,7 @@ for i in range(len(x) - 1):
         action_swap1 = x_action[i]
         action_swap2 = y_action[j]
 
-      # first 2 functions to check if images with processing can be swapped
+      # first 2 if statements to exchange processing with images taken
         if  [x_action[i], y_action[j]] == [0, 1]:
             x1 = x[i]
             y1 = y[j]
@@ -229,8 +229,3 @@ for i in range(len(x) - 1):
         #file1.write("\n")
         file1.writelines(df.to_string(header=False, index=False))
 
-# file1 = open(filename1, 'w')
-# #file1.write("\n")
-# df = pd.DataFrame(final_list)
-# # file1.write("\n")
-# file1.writelines(df.to_string(header=False, index=False))

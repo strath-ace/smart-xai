@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from mathpaper.memory.PEP.PEP_calc import PEP_action_a
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import PEP_action_a
 
 day = 3
 filename1 = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a1_2' + str(day) + '.txt'

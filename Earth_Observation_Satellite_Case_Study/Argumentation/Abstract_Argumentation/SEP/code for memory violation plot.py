@@ -77,8 +77,8 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
             violation1 = 'Exceeded'
             a = '-'
             objective_value1 = objective_value
-            #return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
-            #attack_summary.append([i, S, start_time, start_time2, S_1, a, mi_a, objective_value1, violation1])
+            # return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
+            # attack_summary.append([i, S, start_time, start_time2, S_1, a, mi_a, objective_value1, violation1])
             # print(violation1)
             break
         else:
@@ -128,9 +128,9 @@ S_Objective_image = int(lines_cp_coord[count_coord - 2].split()[6])
 S_Objective_process = int(lines_cp_coord[count_coord - 2].split()[8])
 S_Objective_download = (2 * int(lines_cp_coord[count_coord - 2].split()[10]))
 print(S_Objective_image, S_Objective_process, S_Objective_download)
-attack_summary1 = [['i', 'start_time', 'S', 'a1', 'm1','objective_value', 'violation', 'time_of_incident', 'mi1', 'final_objective', 'feasible_better', 'S_Objective']]
-attack_summary2 = [['i', 'start_time', 'S', 'a2', 'objective_value', 'violation', 'time_of_incident', 'mi2', 'final_objective', 'feasible_better', 'S_Objective']]
-attack_summary3 = [['i', 'start_time', 'S', 'a3', 'objective_value', 'violation', 'time_of_incident', 'mi3', 'final_objective', 'feasible_better', 'S_Objective']]
+attack_summary1 = [['i', 'start_time', 'S', 'ap', 'm1','objective_value', 'violation', 'time_of_incident', 'mi1', 'final_objective', 'feasible_better', 'S_Objective']]
+attack_summary2 = [['i', 'start_time', 'S', 'ar', 'objective_value', 'violation', 'time_of_incident', 'mi2', 'final_objective', 'feasible_better', 'S_Objective']]
+attack_summary3 = [['i', 'start_time', 'S', 'ad', 'objective_value', 'violation', 'time_of_incident', 'mi3', 'final_objective', 'feasible_better', 'S_Objective']]
 # i = 15000
 # while i in range (15000,15125):
 

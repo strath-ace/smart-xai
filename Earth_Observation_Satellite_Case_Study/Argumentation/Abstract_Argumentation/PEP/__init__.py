@@ -2,3 +2,5 @@
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import *
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_Feasible_check import *
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.contraints_considered_add2 import *
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange.\
+    PEP_vio_ex_for_plot import *

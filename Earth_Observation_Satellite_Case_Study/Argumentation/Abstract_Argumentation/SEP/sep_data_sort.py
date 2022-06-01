@@ -41,7 +41,6 @@ def attack_summary():
     # interval = 3000
     # onboard memory is 80% of total memory
     onboard_mem = int(0.8 * 24 * 10 ** 5)
-    #  memory required per image
 
     filename1 = 'SEP_Results/Day/Argumentation' + str(day) + '.txt'
 
