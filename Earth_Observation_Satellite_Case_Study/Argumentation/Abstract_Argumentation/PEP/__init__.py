@@ -1,0 +1,4 @@
+# This file is created to call the functions from existing files
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import *
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_Feasible_check import *
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.contraints_considered_add2 import *

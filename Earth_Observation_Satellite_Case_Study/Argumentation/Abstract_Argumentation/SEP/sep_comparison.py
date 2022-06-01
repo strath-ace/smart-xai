@@ -4,16 +4,18 @@ from Earth_Observation_Satellite_Case_Study.Environment.environment_data_to_solv
 
 # action 1 function called if images can be taken
 def action_1(image_mem, memory_before_action, final_day_memory, memory_of_old_action, onboard_mem):
+    # checking if the addition of the new action (taking images) exceeds the onboard  memory limit
     if memory_before_action + image_mem <= onboard_mem:
         extracted_action1 = 0
         memory_after_action1 = memory_before_action + image_mem
-        # final memory recalculated with initial action replaced with new action
+        # final memory recalculated with initial action replaced with the new action
         final_day_memory1 = final_day_memory - memory_of_old_action + image_mem
         if final_day_memory1 < onboard_mem:
             final_day_memory1_message = 'Memory_within_limit:_' + str(final_day_memory1)
         else:
             final_day_memory1_message = 'Memory_exceeded_limit:_' + str(final_day_memory1)
     else:
+        # if the onboard memory is exceeded, then keep the initial action
         extracted_action1 = '00'
         memory_after_action1 = '00'
         final_day_memory1 = final_day_memory
@@ -22,6 +24,7 @@ def action_1(image_mem, memory_before_action, final_day_memory, memory_of_old_ac
 
 # action 2 function called if image processing can occur
 def action_2(num_images, memory_before_action, process_im_mem, final_day_memory, memory_of_old_action, onboard_mem):
+    # check if there is at least 1 image left in memory to be processed
     if num_images >= 1:
         # yes it can process
         extracted_action2 = 1
@@ -103,7 +106,7 @@ def initial_attack_calculation():
     content_cp_coord = solver_coord.read()
     lines_cp_coord = content_cp_coord.split('\n')
     # print(lines_cp_coord)
-
+    # Headings for data file
     SEP_data = [['time', 'land_access', 'station_access', 'day_access', 'extracted_action', 'memory_after_action', 'final_memory', 'action1', 'memory_after_action1', 'final_day_memory1', 'final_day_memory1_message',
                  'action2', 'memory_after_action2', 'final_day_memory2', 'final_day_memory2_message', 'action3', 'memory_after_action3', 'final_day_memory3', 'final_day_memory3_message']]
 
@@ -337,7 +340,7 @@ def initial_attack_calculation():
         SEP_data.append([solver_details[0], land_access, station_access, day_access, extracted_action, memory_after_action, final_day_memory, extracted_action1, memory_after_action1, final_day_memory1,
                          final_day_memory1_message, extracted_action2, memory_after_action2, final_day_memory2, final_day_memory2_message, extracted_action3, memory_after_action3, final_day_memory3,
                          final_day_memory3_message])
-
+    # Write data to file
     file1 = open(filename, 'w')
     df = pd.DataFrame(SEP_data)
     file1.writelines(df.to_string(header=False, index=False))

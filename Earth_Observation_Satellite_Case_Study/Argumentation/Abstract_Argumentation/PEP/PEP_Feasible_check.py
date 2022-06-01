@@ -1,6 +1,6 @@
 # PEP calculation 2
 
-from mathpaper.memory.PEP.PEP_calc import PEP_action_a
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import PEP_action_a
 
 
 day = 3
