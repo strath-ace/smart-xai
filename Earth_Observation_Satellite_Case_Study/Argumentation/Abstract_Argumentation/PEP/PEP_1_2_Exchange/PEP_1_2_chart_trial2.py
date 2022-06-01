@@ -85,10 +85,10 @@ for i in range(datastart, dataend):
     x_coordinates.append(S_x_data)
     y_coordinates.append(S_y_data)
 
-# create a list to collect the summary of attacks.
+# Create a list to collect the summary of attacks.
 swap_1_2_summary = []
 
-# extract the data 'start time', 'swap location', 'memory violation'  collect a summary of the attacks.
+# Extract the data 'start time', 'swap location', 'memory violation'  collect a summary of the attacks.
 for n in range(1, count_attack_coord_0_1):
     # for n in range (9275768-1,9275768+2):
     swap_1_2x = int(lines_attack_coord_0_1[n].split()[1])
@@ -132,6 +132,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 0 and 1.
         if [x_coordinates[i], y_coordinates[j]] == [0, 1]:
 
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -139,39 +140,11 @@ for i in range(1603):
                 y1_coordinates.append(y1)
             else:
                 vio = 0
-            #
-            # x1 = x[i]
-            # y1 = y[j]
-            # addr1 = i
-            # addr2 = j
-            #
-            # # Extract the position of these actions from the scheduled list where they overlap.
-            # index = [(a, swap_add.index(x1)) for a, swap_add in enumerate(swap_1_2_summary) if x1 in swap_add]
-            # index2 = [(a, swap_add.index(y1)) for a, swap_add in enumerate(swap_1_2_summary) if y1 in swap_add]
-            #
-            # # Use the extracted position data to cross-reference with the data containing the/
-            # # violation if there is a violation in memory.
-            # # If there is a violation, then extract that data to support grid.
-            # for v in range(len(index) - 1):
-            #     pos1 = index[v][0]
-            #     vio1 = swap_1_2_summary[pos1][2]
-            #     for v2 in range(len(index2) - 1):
-            #         pos2 = index2[v2][0]
-            #         vio2 = swap_1_2_summary[pos2][2]
-            #         if pos1 == pos2:
-            #             vio = vio1
-            #             # y1 = vio
-            #             if vio == 1:
-            #                 x1_coordinates.append(x1)
-            #                 y1_coordinates.append(y1)
-            #         else:
-            #             vio = 0
 
-            # print('index 1',index,'\nindex 2', index2)
         # If statement to see if actions overlap containing action 1 and 0.
         elif [x_coordinates[i], y_coordinates[j]] == [1, 0]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -179,12 +152,11 @@ for i in range(1603):
                 y1_coordinates.append(y1)
             else:
                 vio = 0
-
 
         # If statement to see if actions overlap containing action 0 and 2.
         elif [x_coordinates[i], y_coordinates[j]] == [0, 2]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -196,7 +168,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 2 and 0.
         elif [x_coordinates[i], y_coordinates[j]] == [2, 0]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -208,7 +180,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 1 and 2.
         elif [x_coordinates[i], y_coordinates[j]] == [1, 2]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -220,7 +192,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 2 and 1.
         elif [x_coordinates[i], y_coordinates[j]] == [2, 1]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -232,7 +204,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 0 and -1.
         elif [x_coordinates[i], y_coordinates[j]] == [0, -1]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -244,7 +216,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action -1 and 0.
         elif [x_coordinates[i], y_coordinates[j]] == [-1, 0]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -256,7 +228,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 1 and -1.
         elif [x_coordinates[i], y_coordinates[j]] == [1, -1]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -268,7 +240,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action -1 and 1.
         elif [x_coordinates[i], y_coordinates[j]] == [-1, 1]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -280,7 +252,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action 2 and -1.
         elif [x_coordinates[i], y_coordinates[j]] == [2, -1]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -292,7 +264,7 @@ for i in range(1603):
         # If statement to see if actions overlap containing action -1 and 2.
         elif [x_coordinates[i], y_coordinates[j]] == [-1, 2]:
 
-            # Returning values from function that checks for violations
+            # Returning values from function that checks for violations.
             x1, y1, vio = vio_check(vio, x[i], y[j], swap_1_2_summary)
 
             if vio == 1:
@@ -310,15 +282,15 @@ for i in range(1603):
         y1_coordinates.append(y1)
         vio_list.append(vio)
 
-# Function to plot figure
+# Function to plot figure.
 f = plt.figure()
 f.set_figwidth(20)
 f.set_figheight(30)
 
-# Plot for histogram with colour map
+# Plot for histogram with colour map.
 binvalues, _, _, _ = plt.hist2d(x1_coordinates, y1_coordinates, bins=[x, y], cmap=cmap)
 
-# Conditions to determine the colour of position in the plot where violations occur when 2 actions attack each other
+# Conditions to determine the colour of position in the plot where violations occur when 2 actions attack each other.
 for i in range(len(x) - 1):
     for j in range(len(y) - 1):
         plt.text((x[i] + x[i + 1]) / 2, (y[j] + y[j + 1]) / 2, [x_coordinates[i], y_coordinates[j]],
