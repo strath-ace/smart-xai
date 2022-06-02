@@ -75,7 +75,7 @@ for i in range(1, 17278):
     else:
         action = 'optm_idle'
 
-    #data from exported data format - start time| end time| action- optm for optimized| memory | pictures in memory| processed images in memory| photos downloaded
+    # data from exported data format - start time| end time| action- optm for optimized| memory | pictures in memory| processed images in memory| photos downloaded
     constraint_land_list.append(
         [(dt.timedelta(seconds=(int(daily_cp_details[0])))), (dt.timedelta(seconds=int(daily_cp_details[1]))), action, daily_cp_details[4], float(daily_cp_details[5]), daily_cp_details[9], daily_cp_details[11]])
 

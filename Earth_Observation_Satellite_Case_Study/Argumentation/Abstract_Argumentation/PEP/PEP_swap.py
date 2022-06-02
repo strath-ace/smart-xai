@@ -1,9 +1,10 @@
-# PEP calculation 1 used to initiate swapping between actions
+# PEP calculation 1 used to initiate swapping between actions.
+# Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
 
 import pandas as pd
 
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_Feasible_check import \
-    PEP_check_Swap
+    pep_check_swap
 
 day = 3
 filename1 = '../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a' + str(day) + '.txt'
@@ -97,7 +98,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 1 and 0.
         elif [x_action[i], y_action[j]] == [1, 0]:
@@ -107,7 +108,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 0 and -1.
         elif [x_action[i], y_action[j]] == [0, -1]:
@@ -117,7 +118,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action -1 and 0.
         elif [x_action[i], y_action[j]] == [-1, 0]:
@@ -127,7 +128,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 0 and 2.
         elif [x_action[i], y_action[j]] == [0, 2]:
@@ -137,7 +138,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 2 and 0.
         elif [x_action[i], y_action[j]] == [2, 0]:
@@ -147,7 +148,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 1 and -1.
         elif [x_action[i], y_action[j]] == [1, -1]:
@@ -157,7 +158,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action -1 and 1.
         elif [x_action[i], y_action[j]] == [-1, 1]:
@@ -167,7 +168,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 1 and 2.
         elif [x_action[i], y_action[j]] == [1, 2]:
@@ -177,7 +178,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 2 and 1.
         elif [x_action[i], y_action[j]] == [2, 1]:
@@ -187,7 +188,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action 2 and -1.
         elif [x_action[i], y_action[j]] == [2, -1]:
@@ -197,7 +198,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         # If statement to enable exchange of action -1 and 2.
         elif [x_action[i], y_action[j]] == [-1, 2]:
@@ -208,7 +209,7 @@ for i in range(len(x) - 1):
             addr2 = j
 
             # Add data containing whether there is a violation/breach in memory.
-            final_list.append(PEP_check_Swap(datastart, dataend, x1, addr1, y1, addr2, action_swap1, action_swap2))
+            final_list.append(pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2))
 
         else:
             x1 = x_action[i]

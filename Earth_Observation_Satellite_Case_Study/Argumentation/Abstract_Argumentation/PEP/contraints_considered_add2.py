@@ -1,4 +1,6 @@
 # PEP calculation 4
+# Note: Actions in a schedule were given numbers idle - '-1', image taking - '0', processing - '1',
+# and down-linking - '2'.
 
 def action_1(image_mem, memory_before_action, onboard_mem):
     if memory_before_action + image_mem <= onboard_mem:
@@ -6,25 +8,31 @@ def action_1(image_mem, memory_before_action, onboard_mem):
 
     else:
         memory_after_action1 = -1
+
     return memory_after_action1
 
 
 def action_2(num_images, memory_before_action, process_im_mem):
     if num_images >= 1 :
-        # replace action memory at that point in time
+
+        # Replace action memory at that point in time
         memory_after_action2 = memory_before_action + process_im_mem
-    else:  # if less than 1 image is in memory
+
+    # If less than 1 image is in memory
+    else:
         memory_after_action2 = -1
 
     return  memory_after_action2
 
 def action_3(num_process, memory_before_action, downlink_data_rate):
-    # can it down-link? processing needs to occur 5.6 or 6 times (in memory) before down-link can take place
+
+    # Can it down-link? processing needs to occur 5.6 or 6 times (in memory) before down-link can take place
     if num_process >= 6:
         # yes it can down-link
         memory_after_action3 = memory_before_action - downlink_data_rate
     else:
         memory_after_action3 = -1
+
     return memory_after_action3
 
 def action_4 (memory_before_action):
