@@ -1,20 +1,21 @@
 # PEP calculation - 5th file, used to create plot chart.
-
+###################################################################################################################################
 # This file is used to plot an nxm matrix plot showing where every 2 action can be replaced at every/
-# instance throughout a scheduled day displaying where conflicts occur.
+# Instance throughout a scheduled day displaying where conflicts occur.
+# The actions for (taking, processing, down-linking and idle) of images are assigned numbers (0, 1, 2 and -1) respectively
+###################################################################################################################################
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from matplotlib.colors import ListedColormap
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange. \
-    PEP_vio_ex_for_plot import vio_check
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange.PEP_vio_ex_for_plot import vio_check
 
 # Day number used to name file when saved.
 day = 3
 
 # Name of file after saved.
-filename = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_a' + str(day) + '.txt'
+filename = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_apc' + str(day) + '.txt'
 
 # Load of attacks summary information.
 attack_path_0_1 = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a' + str(day) + '.txt'
@@ -50,11 +51,10 @@ attack_coord = open(attack_path, "r")
 attack_cp_coord = attack_coord.read()
 lines_attack_coord = attack_cp_coord.split('\n')
 
-# To initiate the range of data for the plot.
+# To initiate the range of data for the plot, can be altered as data set can be large.
 datastart = 1
-# dataend = 1604
-# dataend = count_attack_coord-2270
-dataend = count_attack_coord - 2
+dataend = 1604
+
 
 # Extract the starting (minimum) time from the generated schedule for 1 day.
 min_number = int(lines_attack_coord[datastart].split()[0])
@@ -88,24 +88,22 @@ for i in range(datastart, dataend):
 # Create a list to collect the summary of attacks.
 swap_1_2_summary = []
 
-# Extract the data 'start time', 'swap location', 'memory violation'  collect a summary of the attacks.
+# Extract the data 'start time', 'swap location', 'memory violation' to collect a summary of the attacks.
 for n in range(1, count_attack_coord_0_1):
-    # for n in range (9275768-1,9275768+2):
     swap_1_2x = int(lines_attack_coord_0_1[n].split()[1])
     swap_1_2y = int(lines_attack_coord_0_1[n].split()[2])
-    # print(n,lines_attack_coord_0_1[n].split())
     swap_1_2_vio = int(lines_attack_coord_0_1[n].split()[10])
     swap_1_2_summary.append([swap_1_2x, swap_1_2y, swap_1_2_vio])
 
-# write data to file.
+# Write data to file.
 file1 = open(filename, 'w')
 df = pd.DataFrame(swap_1_2_summary)
 file1.writelines(df.to_string(header=False, index=False))
-# print(len(swap_1_2_summary))
 
 
-# Create a colormap with two colors, min and max are chosen so that their center is the pivot value.
-cmap = ListedColormap(['indigo', 'red', 'gold'])
+
+# Create a colormap with three colors, min and max are chosen so that their center is the pivot value.
+cmap = ListedColormap(['blueviolet','tomato', 'limegreen'])
 
 pivot_value = 1
 
@@ -122,7 +120,7 @@ vio_list = []
 # and display where a violation occurs. The order of the possible exchange of the actions are 0,1; 1,0; 0,2; 2,0; 1,2;/
 # 2,1; 0,-1; -1,0; 1,-1; -1,1; 2,-1; -1,2.
 # For i in range(len(x) - 2):
-for i in range(1603):
+for i in range(len(x) - 2):
     for j in range(len(y) - 2):
 
         # Re-initiate vio to be 0 as each time the code is executed and a violation of memory occurs, this will/
