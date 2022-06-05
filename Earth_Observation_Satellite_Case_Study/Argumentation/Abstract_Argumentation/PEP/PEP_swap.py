@@ -49,9 +49,12 @@ y_action = []
 datastart = 1
 dataend = count_attack_coord - 1
 
-# datastart = 15000
-# dataend = count_attack_coord-2270
-# dataend = count_attack_coord-2100
+# The commented section below are used for testing start and end times for data testing
+#########################################
+# datastart = 15000                     #
+# dataend = count_attack_coord-2270     #
+# dataend = count_attack_coord-2100     #
+#########################################
 
 # Extract all matching data for times of action execution and action execution itself
 for i in range(datastart, dataend):
