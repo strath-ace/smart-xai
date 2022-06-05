@@ -1,4 +1,4 @@
-# PEP calculation 2 - checks for feasibility.
+# PEP calculation 2 - checks for feasibility with pair exchanges.
 #####################################################################################################################
 # Checks which action of the 2 appears first in the schedule, to then swap and calculate the memory
 # change throughout until the first action (now the second) has been reached. Which then alters the memory at that
@@ -54,10 +54,10 @@ solver_coord = open(solver_path, "r")
 content_cp_coord = solver_coord.read()
 lines_cp_coord = content_cp_coord.split('\n')
 
-# Time for every action is 5s
+# Time for every action is 5s.
 time_interval = 5
 
-# Onboard memory is 80% of total memory 2TB - 1,920,000
+# Onboard memory is 80% of total memory 2TB - 1,920,000.
 onboard_mem = int(0.8 * 24 * 10 ** 5)
 
 #  Memory required per image.
