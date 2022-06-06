@@ -1,6 +1,13 @@
+#------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+#--------------------------------- Author: Cheyenne Powell -------------------------------------------------
+#------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# Function used for creating the gantt chart to show where all actions are scheduled to be executed and where
+# the actions have attacked resulting with infeasible results.
+#===========================================================================================================
+
 import pandas as pd
 import datetime as dt
-
 import plotly.express as px
 
 day = 3
@@ -60,19 +67,19 @@ attack_path = '../SEP_Results/Day/Argumentation' + str(day) + '.txt'
 attack_coord = open(attack_path, "r")
 count_attack_coord = 0
 
-# for loop to count the number of lines in file
+# For loop to count the number of lines in file.
 for line in attack_coord:
     if line != "\n":
         count_attack_coord += 1
 attack_coord.close()
 print(count_attack_coord)
 
-# load data line by line
+# Load data line by line.
 attack_coord = open(attack_path, "r")
 attack_cp_coord = attack_coord.read()
 lines_attack_coord = attack_cp_coord.split('\n')
 
-
+# Read data for action "image taking" to attack other actions where it's infeasible.
 ap_attack = []
 for i in range(1, count_ap_coord):
     ap_data = lines_ap_coord[i].split()
@@ -95,6 +102,7 @@ for i in range(1, count_ap_coord):
 dc = pd.DataFrame({'Task': [(ap_attack[i][2]) for i in range(0, len(ap_attack))], 'Start': ['1970-01-01 ' + str(ap_attack[i][0]) for i in range(0, len(ap_attack))],
                    'Finish': ['1970-01-01 ' + str(ap_attack[i][1]) for i in range(0, len(ap_attack))], 'Resource': [(ap_attack[i][2]) for i in range(0, len(ap_attack))]})
 
+# Read data for action "process images" to attack other actions where it's infeasible.
 ar_attack = []
 for i in range(1, count_ar_coord):
     ar_data = lines_ar_coord[i].split()
@@ -117,10 +125,10 @@ for i in range(1, count_ar_coord):
 dl = pd.DataFrame({'Task': [(ar_attack[i][2]) for i in range(0, len(ar_attack))], 'Start': ['1970-01-01 ' + str(ar_attack[i][0]) for i in range(0, len(ar_attack))],
                    'Finish': ['1970-01-01 ' + str(ar_attack[i][1]) for i in range(0, len(ar_attack))], 'Resource': [(ar_attack[i][2]) for i in range(0, len(ar_attack))]})
 
+# Read data for action "down-linking" to attack other actions where it's infeasible.
 ad_attack = []
 for i in range(1, count_ad_coord):
     ad_data = lines_ad_coord[i].split()
-    # print(int(ad_data[1]))
     start_time = int(ad_data[1])
     end_time = start_time + 5
     if ad_data[3] == '-' and ad_data[5] == 'Exceeded':
@@ -139,8 +147,8 @@ ad_attack.append([(dt.timedelta(seconds=(int(0)))), (dt.timedelta(seconds=(int(0
 dj = pd.DataFrame({'Task': [(ad_attack[i][2]) for i in range(0, len(ad_attack))], 'Start': ['1970-01-01 ' + str(ad_attack[i][0]) for i in range(0, len(ad_attack))],
                    'Finish': ['1970-01-01 ' + str(ad_attack[i][1]) for i in range(0, len(ad_attack))], 'Resource': [(ad_attack[i][2]) for i in range(0, len(ad_attack))]})
 
+# Scheduled actions.
 attack_summary = []
-
 for i in range(15000, count_attack_coord - 800):
     all_data = lines_attack_coord[i].split()
     # ar_data = lines_ar_coord[i].split()
