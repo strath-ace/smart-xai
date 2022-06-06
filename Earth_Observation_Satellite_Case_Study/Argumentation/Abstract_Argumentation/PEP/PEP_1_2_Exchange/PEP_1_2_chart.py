@@ -1,18 +1,26 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # PEP calculation - 5th file, used to create plot chart.
-###################################################################################################################################
 # This file is used to plot an nxm matrix plot showing where every 2 action can be replaced at every/
-# Instance throughout a scheduled day displaying where conflicts occur.
-# The actions for (taking, processing, down-linking and idle) of images are assigned numbers (0, 1, 2 and -1) respectively
-###################################################################################################################################
+# instance throughout a scheduled day displaying where conflicts occur.
+# ===========================================================================================================
 
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from matplotlib.colors import ListedColormap
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange.PEP_vio_ex_for_plot import vio_check
+from matplotlib.patches import Rectangle
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange. \
+    PEP_vio_ex_for_plot import vio_check
+
 
 # Day number used to name file when saved.
 day = 3
+
+# Chart name after saved.
+chartname = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_a' + str(day) + '.png'
 
 # Name of file after saved.
 filename = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_apc' + str(day) + '.txt'
@@ -22,7 +30,7 @@ attack_path_0_1 = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a' + str(day) 
 attack_coord_0_1 = open(attack_path_0_1, "r")
 count_attack_coord_0_1 = 0
 
-# For loop to count the number of lines in file.
+# For loop to count the number of lines in the file.
 for line in attack_coord_0_1:
     if line != "\n":
         count_attack_coord_0_1 += 1
@@ -53,7 +61,7 @@ lines_attack_coord = attack_cp_coord.split('\n')
 
 # To initiate the range of data for the plot, can be altered as data set can be large.
 datastart = 1
-dataend = 1604
+dataend = count_attack_coord - 2
 
 
 # Extract the starting (minimum) time from the generated schedule for 1 day.
@@ -101,9 +109,13 @@ df = pd.DataFrame(swap_1_2_summary)
 file1.writelines(df.to_string(header=False, index=False))
 
 
-
 # Create a colormap with three colors, min and max are chosen so that their center is the pivot value.
 cmap = ListedColormap(['blueviolet','tomato', 'limegreen'])
+
+# Create a colormap with two colors, min and max are chosen so that their center is the pivot value.
+colors = ['indigo', 'red', 'gold']
+cmap = ListedColormap(colors)
+
 
 pivot_value = 1
 
@@ -119,9 +131,9 @@ vio_list = []
 # This function is used to check where every 2 action can be replaced at every instance throughout a scheduled day/
 # and display where a violation occurs. The order of the possible exchange of the actions are 0,1; 1,0; 0,2; 2,0; 1,2;/
 # 2,1; 0,-1; -1,0; 1,-1; -1,1; 2,-1; -1,2.
-# For i in range(len(x) - 2):
-for i in range(len(x) - 2):
-    for j in range(len(y) - 2):
+for i in range(len(x) - 1):
+    for j in range(len(y) - 1):
+
 
         # Re-initiate vio to be 0 as each time the code is executed and a violation of memory occurs, this will/
         # be carried over.
@@ -276,6 +288,7 @@ for i in range(len(x) - 2):
             y1 = y_coordinates[j]
             vio = 0
 
+        # Tabulate data for grid plot.
         x1_coordinates.append(x1)
         y1_coordinates.append(y1)
         vio_list.append(vio)
@@ -295,9 +308,17 @@ for i in range(len(x) - 1):
                  color='white' if binvalues[i, j] < pivot_value else 'black',
                  ha='center', va='center', size=8)
 
-plt.yticks(y)
-plt.xticks(x, rotation=90)
+# Create legend.
+handles = [Rectangle((0, 0), 1, 1, color=c, ec="k") for c in colors]
+labels = ['Same actions', 'Infeasible', 'Feasible']
+plt.legend(handles, labels, bbox_to_anchor=(0.9, 1.1), ncol=3, fontsize=40)
+
+plt.xlabel("Scheduled times", fontsize=40)
+plt.ylabel("scheduled times", fontsize=40)
+plt.yticks(y, size=40)
+plt.xticks(x, rotation=90, size=40)
 plt.gca().invert_yaxis()
 plt.grid(True, ls='-', lw=1, color='black')
 
+plt.savefig(chartname)
 plt.show()

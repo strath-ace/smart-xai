@@ -1,9 +1,12 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # PEP calculation 4- function used to check which action is a.
 # Note: Actions in a schedule were given numbers idle - '-1', image taking - '0', processing - '1',
 # and down-linking - '2'.
-
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
-######################################################################################################################
+# ===========================================================================================================
 
 # Function used to calculate if images can be taken based on memory availability.
 def action_1(image_mem, memory_before_action, onboard_mem):
@@ -150,5 +153,5 @@ def attack_calculation(a2, addrx, mem, lines_cp_coord, lines_attack_coord):
 
     else:
         memory_after_action = -1
-    #print('mem action',memory_after_action)
+
     return memory_after_action

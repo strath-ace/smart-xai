@@ -1,13 +1,15 @@
+# ------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # PEP calculation 2 - checks for feasibility with pair exchanges.
-#####################################################################################################################
 # Checks which action of the 2 appears first in the schedule, to then swap and calculate the memory
 # change throughout until the first action (now the second) has been reached. Which then alters the memory at that
 # instance to then cascade the change throughout the rest of the schedule.
-
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
-######################################################################################################################
+# ===========================================================================================================
 
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import PEP_action_a
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import pep_action_a
 
 day = 3
 <<<<<<< Updated upstream
@@ -129,7 +131,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         # PEP function called to do the memory calculations following the swap if the
         # memory constraint has been violated.
         i, a1, violation, start_time1, mi1, mi_a2 = \
-            PEP_action_a(a1, m1, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_2, m_max,
+            pep_action_a(a1, m1, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_2, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -149,7 +151,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         # PEP function called to do the memory calculations following the swap if the
         # memory constraint has been violated.
         i, a2, violation, start_time1, mi1, mi_a2 = \
-            PEP_action_a(a2, m2, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_2, m_max,
+            pep_action_a(a2, m2, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_2, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -168,7 +170,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
     elif (a1 == '-') and s == '2' and (addr2 > addr1) and (action_swap_1_2 == 1):
         a_3 = '2'
         i, a1, violation, start_time1, mi1, mi_a3 = \
-            PEP_action_a(a1, m1, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
+            pep_action_a(a1, m1, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -187,7 +189,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
     elif (a3 == '-') and s == '0' and (addr2 > addr1) and (action_swap_1_2 == 1):
         a_3 = '0'
         i, a3, violation, start_time1, mi1, mi_a3 = \
-            PEP_action_a(a3, m3, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
+            pep_action_a(a3, m3, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -206,7 +208,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
     elif (a2 == '-') and s == '2' and (addr2 > addr1) and (action_swap_1_2 == 2):
         a_3 = '2'
         i, a2, violation, start_time1, mi2, mi_a3 = \
-            PEP_action_a(a2, m2, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
+            pep_action_a(a2, m2, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -225,7 +227,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
     elif (a3 == '-') and s == '1' and (addr2 > addr1) and (action_swap_1_2 == 2):
         a_3 = '1'
         i, a3, violation, start_time1, mi2, mi_a3 = \
-            PEP_action_a(a3, m3, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
+            pep_action_a(a3, m3, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, a_3, m_max,
                          addr1, addr2)
         if violation == 'Not_exceeded':
             violation = 'feasible'
@@ -245,7 +247,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         m = mi
 
         i, a1, violation, start_time1, mi1, mi_a2 = \
-            PEP_action_a(a1, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
+            pep_action_a(a1, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
                          addr1, addr2)
 
         if violation == 'Not_exceeded':
@@ -266,7 +268,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         m = mi
 
         i, a2, violation, start_time1, mi1, mi_a2 = \
-            PEP_action_a(a2, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
+            pep_action_a(a2, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
                          addr1, addr2)
 
         if violation == 'Not_exceeded':
@@ -287,7 +289,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         m = mi
 
         i, a3, violation, start_time1, mi1, mi_a2 = \
-            PEP_action_a(a3, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
+            pep_action_a(a3, m, i, ma1, ma2, ma3, count_coord, lines_cp_coord, lines_attack_coord, addrx, idle, m_max,
                          addr1, addr2)
 
         if violation == 'Not_exceeded':

@@ -1,5 +1,5 @@
 # smart-xai 
-# Google OR-Tools Earth Observation Case study
+# Earth Observation Case study
 
 This project creates both a simple manual schedule and an updated schedule using Google-OR-Tools using the initially 
 created schedule, thus in combination generating a heuristic OPTIMAL schedule.
@@ -15,15 +15,15 @@ When processing images however, the satellite will retain the images until down-
 processed images becomes corrupt, the original file is there to be reprocessed.
 
 The amount of images processed and downlink is based on the hardware limitations of the satellite and as a result, 
-depending on the on-board processing capabilities, it can take several processing instances to complete a image and 
-several downlinking instances to send 1 image after it has been processed.
+depending on the on-board processing capabilities, it can take several processing instances to complete an image and 
+several down-linking instances to send 1 image after it has been processed.
 
 The structure of this folder is shown below
 
 
  - ## Environment
-    This folder contains the both the raw data of the satellites' positions and the initial code that
-     is used to create the manual schedule as stated above.
+    This folder contains both the raw data of the satellites' positions and the initial code that
+     was used to create the manual schedule as stated above.
       - ### Data
         The data in this folder, contains the raw text files extracted from the AGI STK software of the 
         satellites position and exposure when over land.
