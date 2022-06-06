@@ -1,5 +1,8 @@
-# PEP calculation 3 - function used to calculate for feasibility with first number cascaded to the second number.
+###################Copyright (C) 2022 University of Strathclyde and Author #################################
+################################## Author: Cheyenne Powell #################################################
+########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
 
+# PEP calculation 3 - function used to calculate for feasibility with first number cascaded to the second number.
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
 ######################################################################################################################
 

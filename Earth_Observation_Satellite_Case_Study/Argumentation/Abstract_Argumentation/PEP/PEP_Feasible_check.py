@@ -1,5 +1,8 @@
+###################Copyright (C) 2022 University of Strathclyde and Author #################################
+################################## Author: Cheyenne Powell #################################################
+########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+
 # PEP calculation 2 - checks for feasibility with pair exchanges.
-#####################################################################################################################
 # Checks which action of the 2 appears first in the schedule, to then swap and calculate the memory
 # change throughout until the first action (now the second) has been reached. Which then alters the memory at that
 # instance to then cascade the change throughout the rest of the schedule.

@@ -1,6 +1,9 @@
+###################Copyright (C) 2022 University of Strathclyde and Author #################################
+################################## Author: Cheyenne Powell #################################################
+########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+
 # PEP calculation 1 - used to initiate swapping between actions.
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
-
 ######################################################################################################################
 
 import pandas as pd
