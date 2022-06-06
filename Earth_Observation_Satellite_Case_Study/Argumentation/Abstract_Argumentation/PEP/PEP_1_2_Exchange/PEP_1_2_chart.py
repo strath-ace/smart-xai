@@ -1,7 +1,12 @@
-# PEP calculation - 5th file, used to create plot chart.
+###################Copyright (C) 2022 University of Strathclyde and Author #################################
+################################## Author: Cheyenne Powell #################################################
+########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
 
+
+# PEP calculation - 5th file, used to create plot chart.
 # This file is used to plot an nxm matrix plot showing where every 2 action can be replaced at every/
 # instance throughout a scheduled day displaying where conflicts occur.
+######################################################################################################################
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -25,7 +30,7 @@ attack_path_0_1 = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_swap_a' + str(day) 
 attack_coord_0_1 = open(attack_path_0_1, "r")
 count_attack_coord_0_1 = 0
 
-# For loop to count the number of lines in file.
+# For loop to count the number of lines in the file.
 for line in attack_coord_0_1:
     if line != "\n":
         count_attack_coord_0_1 += 1
@@ -56,8 +61,6 @@ lines_attack_coord = attack_cp_coord.split('\n')
 
 # To initiate the range of data for the plot.
 datastart = 1
-# dataend = 1604
-# dataend = count_attack_coord-2270
 dataend = count_attack_coord - 2
 
 # Extract the starting (minimum) time from the generated schedule for 1 day.
@@ -127,8 +130,8 @@ vio_list = []
 # and display where a violation occurs. The order of the possible exchange of the actions are 0,1; 1,0; 0,2; 2,0; 1,2;/
 # 2,1; 0,-1; -1,0; 1,-1; -1,1; 2,-1; -1,2.
 # For i in range(len(x) - 2):
-for i in range(1603):
-    for j in range(len(y) - 2):
+for i in range(len(x) - 1):
+    for j in range(len(y) - 1):
 
         # Re-initiate vio to be 0 as each time the code is executed and a violation of memory occurs, this will/
         # be carried over.
