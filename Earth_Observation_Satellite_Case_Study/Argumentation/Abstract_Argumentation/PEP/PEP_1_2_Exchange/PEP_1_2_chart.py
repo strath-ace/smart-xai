@@ -14,6 +14,9 @@ from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation
 # Day number used to name file when saved.
 day = 3
 
+# Chart name after saved.
+chartname = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_a' + str(day) + '.png'
+
 # Name of file after saved.
 filename = '../../PEP_Results/Day/PEP_1_2_Swap/Attack_summary_a' + str(day) + '.txt'
 
@@ -280,6 +283,7 @@ for i in range(1603):
             y1 = y_coordinates[j]
             vio = 0
 
+        # Tabulate data for grid plot.
         x1_coordinates.append(x1)
         y1_coordinates.append(y1)
         vio_list.append(vio)
@@ -299,7 +303,7 @@ for i in range(len(x) - 1):
                  color='white' if binvalues[i, j] < pivot_value else 'black',
                  ha='center', va='center', size=8)
 
-# Create legend
+# Create legend.
 handles = [Rectangle((0, 0), 1, 1, color=c, ec="k") for c in colors]
 labels = ['Same actions', 'Infeasible', 'Feasible']
 plt.legend(handles, labels, bbox_to_anchor=(0.9, 1.1), ncol=3, fontsize=40)
@@ -311,4 +315,5 @@ plt.xticks(x, rotation=90, size=40)
 plt.gca().invert_yaxis()
 plt.grid(True, ls='-', lw=1, color='black')
 
+plt.savefig(chartname)
 plt.show()
