@@ -42,7 +42,13 @@ def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboar
 
             total, Actives, tot_pic, count_pic, tot_idle = Memory_calculation_support_2(Demands, final_total, h, tot_idle, onboard_mem, final_jobs, tot_proc, count_proc, count_pic, tot_pic, total_pics)
 
+
             end = start + time_interval
+            # if the time of action over laps with next day meaning start at 82800 -> 23:00:00 and ends between midnight (86399) and next day "1 day, 3:46:40" (100,000)
+            # the action should end at 86399
+            if start > 82800 and 86399 < end < 100000:
+                end = 86399
+
             # total memory used from the available on-board memory
             final_total.append(total)
             # tasks in this case represents actions, what actions are selected

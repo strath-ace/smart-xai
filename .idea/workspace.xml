@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf18f13-4a7e-459f-881b-3986059e0b51" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Sentinel 2A Case Study/Environment/Offline_Schedule/Results/test" beforeDir="false" />
-    </list>
+    <list default="true" id="3cf18f13-4a7e-459f-881b-3986059e0b51" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +19,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../New folder" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -34,6 +32,9 @@
       <workItem from="1636016575971" duration="93000" />
       <workItem from="1636016764501" duration="9000" />
       <workItem from="1636018062341" duration="9000" />
+      <workItem from="1638795714593" duration="607000" />
+      <workItem from="1640011166780" duration="366000" />
+      <workItem from="1653309496224" duration="442000" />
     </task>
     <servers />
   </component>
@@ -50,6 +51,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

@@ -51,7 +51,7 @@ def CP_solver(b, c,day, shifts, image_mem, downlink_data_rate, process_im_mem, f
     # solver.parameters.search_branching = cp_model.LP_SEARCH
     solver.parameters.max_time_in_seconds = 5000
     solver.parameters.log_search_progress = True
-    solver.parameters.num_search_workers = 8
+    solver.parameters.num_search_workers = 6 # 8 for personal laptop, 4 for Strathclyde pc
 
     status = solver.Solve(model)
     print(status)
