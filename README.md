@@ -1,9 +1,9 @@
 # smart-xai
 
-Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence
+Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence (XAI)
 
 ## Available Repositories
-* [Earth Observation Case study](#Earth_Observation_Case_study)
+* [Earth Observation Case study](#Earth Observation Case study)
 
 
 ## Earth Observation Case study
@@ -14,9 +14,9 @@ Abstract Argumentation (AA) was applied to the schedule that is contained within
 
 Within this project there are 3 main sub repositories.
 * [Environment](#Environment)
-* [Offline schedule](#Offline_schedule)
+* [Offline schedule](#Offline schedule)
 * [Argumentation](#Argumentation)
-  * [Abstract Argumentation](#Abstract_Argumentation)
+  * [Abstract Argumentation](#Abstract Argumentation)
 
 ### Environment
 This file contains the coordinates of the satellite and the code used to determine day, 
