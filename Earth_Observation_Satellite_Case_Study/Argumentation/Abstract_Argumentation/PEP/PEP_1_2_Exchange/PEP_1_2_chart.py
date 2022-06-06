@@ -1,11 +1,11 @@
-###################Copyright (C) 2022 University of Strathclyde and Author #################################
-################################## Author: Cheyenne Powell #################################################
-########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
 # PEP calculation - 5th file, used to create plot chart.
 # This file is used to plot an nxm matrix plot showing where every 2 action can be replaced at every/
 # instance throughout a scheduled day displaying where conflicts occur.
-######################################################################################################################
+# ===========================================================================================================
 
 import matplotlib.pyplot as plt
 import pandas as pd

@@ -1,7 +1,13 @@
-# PEP calculation - 6th file, used to extract violations where conflicts occur and return data to be plotted.
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
+# PEP calculation - 6th file, used to extract violations where conflicts occur and return data to be plotted.
 # This function is called in the PEP 1_2_chart to generate a plot to provide a visual where PEP
 # in breach of memory constraint
+# ===========================================================================================================
+
+
 def vio_check(vio, xi, yj, swap_1_2_summary):
     x1 = xi
     y1 = yj
@@ -20,9 +26,6 @@ def vio_check(vio, xi, yj, swap_1_2_summary):
             pos2 = index2[v2][0]
             if pos1 == pos2:
                 vio = vio1
-                # if vio == 1:
-                #     x1_coordinates.append(x1)
-                #     y1_coordinates.append(y1)
             else:
                 vio = 0
 

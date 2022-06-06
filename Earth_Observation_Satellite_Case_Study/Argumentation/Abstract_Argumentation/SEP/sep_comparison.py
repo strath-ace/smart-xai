@@ -1,4 +1,11 @@
+#------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+#--------------------------------- Author: Cheyenne Powell -------------------------------------------------
+#------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # File number 1 to extract data from solver schedule and create options where attacks can occur.
+
+#===========================================================================================================
+
 import pandas as pd
 from Earth_Observation_Satellite_Case_Study.Environment.environment_data_to_solver import environment_data
 

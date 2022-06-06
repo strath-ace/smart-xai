@@ -1,16 +1,16 @@
-###################Copyright (C) 2022 University of Strathclyde and Author #################################
-################################## Author: Cheyenne Powell #################################################
-########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
 # Function used for creating the line plot for the generated schedule by the solver.
-######################################################################################################################
+# ===========================================================================================================
 
 import datetime as dt
 import matplotlib.dates as mdates
 import pandas as pd
 from matplotlib import pyplot as plt
 
-def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard_mem, Max_pictures):
+def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard_mem, max_pictures):
     constraint_land_list = []
 
     cp_coord = open(path, "r")
@@ -57,7 +57,7 @@ def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard
     data = {'Time': [str(constraints[i][0]) for i in range(0, len(constraints))],
             'Memory': [str(constraints[i][3]) for i in range(0, len(constraints))],
             'Max_Memory': [onboard_mem for _ in range(0, len(constraints))],
-            'Max_pics': [Max_pictures for _ in range(0, len(constraints))],
+            'Max_pics': [max_pictures for _ in range(0, len(constraints))],
             'Pics': [(constraints[i][4]) for i in range(0, len(constraints))],
             'Process': [str(float(constraints[i][5]) / float(image_mem / process_im_mem))
                         for i in range(0, len(constraints))],
@@ -87,7 +87,7 @@ def solver_plot(day, path, solver_plot_image, image_mem, process_im_mem, onboard
     z1['Max_Memory'] = z1['Max_Memory'].astype(float)
     z1 = z1[["Time", "Memory", "Max_Memory"]].set_index("Time")
 
-    # Merge the 2 plots.
+    # Merge the 2 plots z on the right, z1 on the left of the graph.
     ax1 = z.plot(grid=True)
     ax2 = ax1.twinx()
     z1.Memory.plot(ax=ax2, color='purple', label='Memory')
