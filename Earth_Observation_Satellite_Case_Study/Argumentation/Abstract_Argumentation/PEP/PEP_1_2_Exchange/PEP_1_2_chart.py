@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 from matplotlib.colors import ListedColormap
+from matplotlib.patches import Rectangle
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange. \
     PEP_vio_ex_for_plot import vio_check
 
@@ -105,7 +106,8 @@ file1.writelines(df.to_string(header=False, index=False))
 
 
 # Create a colormap with two colors, min and max are chosen so that their center is the pivot value.
-cmap = ListedColormap(['indigo', 'red', 'gold'])
+colors = ['indigo', 'red', 'gold']
+cmap = ListedColormap(colors)
 
 pivot_value = 1
 
@@ -297,8 +299,15 @@ for i in range(len(x) - 1):
                  color='white' if binvalues[i, j] < pivot_value else 'black',
                  ha='center', va='center', size=8)
 
-plt.yticks(y)
-plt.xticks(x, rotation=90)
+# Create legend
+handles = [Rectangle((0, 0), 1, 1, color=c, ec="k") for c in colors]
+labels = ['Same actions', 'Infeasible', 'Feasible']
+plt.legend(handles, labels, bbox_to_anchor=(0.9, 1.1), ncol=3, fontsize=40)
+
+plt.xlabel("Scheduled times", fontsize=40)
+plt.ylabel("scheduled times", fontsize=40)
+plt.yticks(y, size=40)
+plt.xticks(x, rotation=90, size=40)
 plt.gca().invert_yaxis()
 plt.grid(True, ls='-', lw=1, color='black')
 
