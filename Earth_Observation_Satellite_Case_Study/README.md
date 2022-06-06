@@ -1,5 +1,5 @@
 # smart-xai 
-# Google OR-Tools Earth Observation Case study
+# Earth Observation Case study
 
 This project creates both a simple manual schedule and an updated schedule using Google-OR-Tools using the initially 
 created schedule, thus in combination generating a heuristic OPTIMAL schedule.
