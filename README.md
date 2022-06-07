@@ -14,13 +14,14 @@ Abstract Argumentation (AA) was applied to the schedule that is contained within
 
 Within this project there are 3 main sub repositories.
 * [Environment](#Environment)
-* [Offline schedule](#Offline schedule)
+* [Offline schedule](#Offline-schedule)
 * [Argumentation](#Argumentation)
-  * [Abstract Argumentation](#Abstract Argumentation)
+  * [Abstract Argumentation](#Abstract-Argumentation)
 
 ### Environment
 This file contains the coordinates of the satellite and the code used to determine day, 
 night and land exposure.
+
 
 ### Offline schedule
 This folder contains the code used to generate an offline schedule for heuristic with a suggested input 
