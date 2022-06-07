@@ -46,7 +46,7 @@ The structure of this folder is shown below
              Uses the function below.
              - start_end_points_data.py
 
- - ## Offline_Schecule
+ - ## Offline_Schedule
     This folder contains the generated offline schedules both manually created solver and the 
     solver. Here, the solver uses both the manual created schedule in combination with the satellites positions from the 
     raw data previously mentioned.
@@ -54,7 +54,7 @@ The structure of this folder is shown below
         contains all the codes used for generating the schedules in addition, their respective graphs.
           - #### Manually_created_schedule
               This folder contains the codes used for creating the manual schedule
-              The first is the main that is used for testing and generating results encorporating 3 functions
+              The first is the main that is used for testing and generating results incorporating 3 functions
               with each containing their support functions
                - test_manual_schedule.py<br/> 
                    Uses the 3 functions  below.
