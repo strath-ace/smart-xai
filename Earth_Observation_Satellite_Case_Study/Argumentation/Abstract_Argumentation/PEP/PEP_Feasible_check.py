@@ -12,9 +12,14 @@
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import pep_action_a
 
 day = 3
+<<<<<<< Updated upstream
 
 # Load of attacks summary information.
 attack_path = '../SEP_Results/Day/Argumentation' + str(day) + '.txt'
+=======
+# load of attacks summary information
+attack_path = '../../SEP_Results/Day/Argumentation' + str(day) + '.txt'
+>>>>>>> Stashed changes
 attack_coord = open(attack_path, "r")
 count_attack_coord = 0
 
@@ -30,7 +35,12 @@ attack_coord = open(attack_path, "r")
 attack_cp_coord = attack_coord.read()
 lines_attack_coord = attack_cp_coord.split('\n')
 
+<<<<<<< Updated upstream
 solver_path = '../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+=======
+
+solver_path = '../../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+>>>>>>> Stashed changes
 solver_coord = open(solver_path, "r")
 count_coord = 0
 

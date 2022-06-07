@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3cf18f13-4a7e-459f-881b-3986059e0b51" name="Changes" comment="" />
+    <list default="true" id="3cf18f13-4a7e-459f-881b-3986059e0b51" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Argumentation/Abstract_Argumentation/PEP/PEP_1_2_Exchange/PEP_1_2_chart.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Argumentation/Abstract_Argumentation/PEP/PEP_1_2_Exchange/PEP_1_2_chart.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Argumentation/Abstract_Argumentation/PEP/PEP_swap.py" beforeDir="false" afterPath="$PROJECT_DIR$/Earth_Observation_Satellite_Case_Study/Argumentation/Abstract_Argumentation/PEP/PEP_swap.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,6 +40,8 @@
       <workItem from="1638795714593" duration="607000" />
       <workItem from="1640011166780" duration="366000" />
       <workItem from="1653309496224" duration="442000" />
+      <workItem from="1654474707849" duration="38000" />
+      <workItem from="1654474770602" duration="252000" />
     </task>
     <servers />
   </component>
@@ -51,5 +58,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
