@@ -1,4 +1,4 @@
-- # Manual_Heuristic
+# Manual_Heuristic
 Contains all the files and codes used for generating the schedules in addition, their respective graphs.
 
 Namely:
