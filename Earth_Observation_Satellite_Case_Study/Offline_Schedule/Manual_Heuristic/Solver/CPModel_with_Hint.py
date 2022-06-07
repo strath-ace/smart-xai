@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This file contains the or-tools model and hints a solution from the manual schedule created
+# ===========================================================================================================
 
 from __future__ import print_function
 from ortools.sat.python import cp_model
@@ -6,7 +11,7 @@ from file_recall import file_recall
 import os
 
 
-def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, process_im_mem, filename, mem_data_list, 
+def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, process_im_mem, filename, mem_data_list,
                  country_data_list, gnd_data_list, day_data_list, horizon):
     # using idle time
     all_actions = range(0, 3)
@@ -44,6 +49,8 @@ def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, pro
     # j is the remainder of division
     j = horizon % interval
     # check the division to determine loops (reps)
+    # This is done for every 3000 data points, due to hardware limitations, accuracy of schedule can be improved\
+    # with larger ranges
     if j > 0 and ((b + j) == horizon):
         c = b + j
     else:
@@ -86,11 +93,8 @@ def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, pro
         # time over a day period.
         model.Add(gnd_data_list[n][2] == 1).OnlyEnforceIf(shifts[(2, s)])
 
-
-
-    # constraints are applied here, based on the calculations, float values are created that the model is unable 
-    # to handle, therefore.
-    # multiples of 100 are used.
+    # constraints are applied here, based on the calculations, float values are created that the model is unable
+    # to handle, therefore multiples of 100 are used.
     # The constraints here means an image has to be taken first and once taken, processing can occur at any time, 
     # followed by down-linking based on the images processed.
     # The images taken are kept in memory when processing has occurred until they are down-linked, when an equivalent
@@ -127,7 +131,7 @@ def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, pro
         model.Add(num_pics > 0).OnlyEnforceIf(shifts[(1, s)])
 
         # action '3' - idle time is assigned a boolean value of '1' when no actions are present
-       # model.Add(shifts[(0, s)] == shifts[(1, s)] == shifts[(2, s)]== 0).OnlyEnforceIf(shifts[(3, s)])
+        # model.Add(shifts[(0, s)] == shifts[(1, s)] == shifts[(2, s)]== 0).OnlyEnforceIf(shifts[(3, s)])
 
         total_to_process = (num_pics * int((image_mem / process_im_mem)))
         model.Add(num_processed <= total_to_process)
@@ -135,11 +139,14 @@ def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, pro
         summary.append([num_pics, num_processed, memory])
 
     # the objective function is to maximize the occurrences of images taken, processed and down_linked. Can be altered
+    # some options are as follows:
     # shifts[(2, s)] = down_link, shifts[(1, s)] = process, shifts[(0, s)] = pics
-    # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
-    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
+    # model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] for s in mod_shifts))
     # model.Maximize(sum((shifts[(0, s)]) for s in mod_shifts))
-    #model.Minimize(sum((shifts[(3, s)]) for s in mod_shifts))
+    # model.Minimize(sum((shifts[(3, s)]) for s in mod_shifts))
+
+    # function used
+    model.Maximize(sum((shifts[(2, s)]) + shifts[(0, s)] + shifts[(1, s)] for s in mod_shifts))
     # manual schedule inputted here as a hint to the solution
     if hot_start == 1:
 
@@ -156,7 +163,9 @@ def CPModel_data(day, interval, onboard_mem, image_mem, down_link_data_rate, pro
             if mem_data_list[n][2] == 2:
                 model.AddHint(shifts[(2, s)], 1)
 
-    model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
+    # additional 2nd objectective for a nested objective function can be used as follows in comment below:
+    # model.Maximize(sum((shifts[(2, s)]) for s in mod_shifts))
+
     # returns the overall model to the solver, the summary table, shifts, the start and end time for the loop
     # (intervals) can be altered.
     return model, summary, shifts, b, c
