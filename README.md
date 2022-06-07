@@ -28,7 +28,8 @@ from the end user.
 
 ### Argumentation
 This file currently contains:
-###Abstract Argumentation
+
+#### Abstract Argumentation
 This contains 2 different types of techniques that may be used:
 * SEP - Singular Exchange Property.
 * PEP - Pairwise exchange properties
