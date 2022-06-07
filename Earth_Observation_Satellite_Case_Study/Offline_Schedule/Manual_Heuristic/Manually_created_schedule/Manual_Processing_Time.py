@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This function generates the processing times based on the gaps between the actions within a given day
+# ===========================================================================================================
 
 import datetime as dt
 import itertools
@@ -33,13 +38,16 @@ def processing_time(day, month, year, country, time_interval):
             if (Total_Table[b][0] >= Total_Table[b - 1][1]) and (Total_Table[b - 1][0] < Total_Table[b - 1][1]):
 
                 Satellite_status = 'Process_images'
-                idle_start_time = (dt.datetime.strptime(Total_Table[b - 1][1], '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)) + time_second_interval
-                idle_end_time = (dt.datetime.strptime(Total_Table[b][0], '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)) - time_second_interval
+                idle_start_time = (dt.datetime.strptime(Total_Table[b - 1][1], '%H:%M:%S.%f') -
+                                   dt.datetime(1900, 1, 1)) + time_second_interval
+                idle_end_time = (dt.datetime.strptime(Total_Table[b][0], '%H:%M:%S.%f') -
+                                 dt.datetime(1900, 1, 1)) - time_second_interval
 
                 idle_duration = idle_end_time - idle_start_time
                 # if idle time is greater than 1 minute
                 if idle_duration >= time_second_interval * 60:
-                    idle_time.append([str(idle_start_time)[:-3], str(idle_end_time)[:-3], str(idle_duration.total_seconds()), Satellite_status])
+                    idle_time.append([str(idle_start_time)[:-3], str(idle_end_time)[:-3],
+                                      str(idle_duration.total_seconds()), Satellite_status])
         # idle time in the form -  start, end, duration and status - Process
         # total table in the form - start, end, duration and status - Land, light/shade exposure, ground station access
         # country access in the form - start, end, duration and status - Land

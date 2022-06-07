@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This function is used for generating the boolean data to be sent to the solver and for generating the gantt plot
+# ===========================================================================================================
 
 import pandas as pd
 import datetime as dt

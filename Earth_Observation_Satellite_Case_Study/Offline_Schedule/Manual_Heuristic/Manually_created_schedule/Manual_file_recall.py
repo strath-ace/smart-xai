@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # Function used to check if files for previous day exist and forward the last generated results from the previous day to the current day
+# ===========================================================================================================
 
 def Manual_file_recall(patha, day, image_mem, downlink_data_rate, process_im_mem):
     # all values initialised
