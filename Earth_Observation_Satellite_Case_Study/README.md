@@ -2,7 +2,8 @@
 # Earth Observation Case study
 
 This project creates both a simple manual schedule and an updated schedule using Google-OR-Tools using the initially 
-created schedule, thus in combination generating a heuristic OPTIMAL schedule.
+created schedule, thus in combination generating a heuristic OPTIMAL schedule. 
+In addition, Abstract Argumentation used in support of XAI has been implemented. 
 
 The schedules are both created based on the positions of an Earth Observation (EO) Satellite in LEO over a period 
 of 6 months, between December 2020 and May 2021.

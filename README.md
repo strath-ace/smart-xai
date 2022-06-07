@@ -22,12 +22,14 @@ Within this project there are 3 main sub repositories.
 This file contains the coordinates of the satellite and the code used to determine day, 
 night and land exposure.
 
-### Offline_schedule
+### Offline schedule
 This folder contains the code used to generate an offline schedule for heuristic with a suggested input 
 from the end user.
 
 ### Argumentation
-This file contains 2 different types of techniques that may be used for Abstract Argumentation namely:
+This file currently contains:
+###Abstract Argumentation
+This contains 2 different types of techniques that may be used:
 * SEP - Singular Exchange Property.
 * PEP - Pairwise exchange properties
 

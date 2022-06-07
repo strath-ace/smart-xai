@@ -1,4 +1,9 @@
-# This function is used to send satellites position data to the function solver test
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This function is used to send satellites position data to the function solver test.
+# ===========================================================================================================
 
 from Earth_Observation_Satellite_Case_Study.Environment.Land_visibility import country_access
 from Earth_Observation_Satellite_Case_Study.Environment.ground_station_access import xband_stations
@@ -6,7 +11,8 @@ from Earth_Observation_Satellite_Case_Study.Environment.Shade_exposure import ec
 
 
 def environment_data(path, time_interval, day, month, year, country):
-    # select the first of the 2 printed data (first is binary data at intervals of 5 seconds, the second is summary of all times)
+    # select the first of the 2 printed data (first is binary data at intervals of 5 seconds,
+    # the second is summary of all times).
     country_data_list = country_access(path, time_interval, day, month, year, country)[0]
     gnd_data_list = xband_stations(path, time_interval, day, month, year)[0]
     day_data_list = eclipse(path, time_interval, day, month, year)[0]
