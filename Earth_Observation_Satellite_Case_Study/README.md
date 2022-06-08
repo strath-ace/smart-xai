@@ -25,16 +25,16 @@ The structure of this folder is shown below:
 - ## [Offline Schedule](#Offline-schedule)
 - ## [Argumentation](#Argumentation)
 
-- ## Environment
+- ### Environment
    This folder contains both the raw data of the satellites' positions and the initial code that
     was used to create the manual schedule as stated above.
-     - ### Data
+     - #### Data
        The data in this folder, contains the raw text files extracted from the AGI STK software of the 
        satellites position and exposure when over land.
          - Land
          - Ground_Stations
          - Day/Night
-     - ### 'test_environment_data.py' and 'environment_data_to_solver.py' 
+     - #### 'test_environment_data.py' and 'environment_data_to_solver.py' 
          The 2 functions listed above, 1 is for testing and the other is for pushing the data to another function.
          These files are used to look for the complete land list or specific country including all ground station access and shade/sun exposure.<br/>
       
@@ -49,13 +49,13 @@ The structure of this folder is shown below:
             Uses the function below.
             - **start_end_points_data.py**
 
-- ## Offline_Schedule
+- ### Offline_Schedule
    This folder contains the generated offline schedules both manually created solver and the 
    solver. Here, the solver uses both the manual created schedule in combination with the satellites positions from the 
    raw data previously mentioned.
-     - ### Manual_Heuristic
+     - #### Manual_Heuristic
        contains all the codes used for generating the schedules in addition, their respective graphs.
-         - #### Manually_created_schedule
+         - ##### Manually_created_schedule
              This folder contains the codes used for creating the manual schedule
              The first is the main that is used for testing and generating results incorporating 3 functions
              with each containing their support functions
@@ -72,7 +72,7 @@ The structure of this folder is shown below:
                       Uses the function below.
                         - **start_end_points_data.py**
         
-         - #### Solver
+         - ##### Solver
            This folder generates the final schedules using the manual results in a boolean format
            in combination with the satellites positions using the constraints
             
@@ -93,18 +93,18 @@ The structure of this folder is shown below:
                for each respective day. 
                This code initially creates the folder and files for each day if they don't exist to generate results
           
-         - #### graph_plot_code
+         - ##### graph_plot_code
              - **call_plots_test.py**
                  - **manual_memory_plot.py**
                  - **Solver_plot.py**
                  - **gantt_plot.py**
      
-- ## Argumentation
+- ### Argumentation
     This folder contains the Abstract Argumentation Framework that was developed to implement 2 different techniques namely Single Exchange Properties (SEP) and Pairwise Exchange Properties (PEP)
     of the derived schedule to assist in support of an Explainable layer.
     The layout of the folder is as follows:
 
-  - ### Single Exchange Property (SEP)
+  - #### Single Exchange Property (SEP)
     Contains the following files below:
     - **sep_comparison.py** 
     - **sep_data_sort.py**
@@ -118,7 +118,7 @@ The structure of this folder is shown below:
     - **Feasible_better_or_worse_chart.py** 
 
 
-  - ### Pairwise Exchange Property (PEP)
+  - #### Pairwise Exchange Property (PEP)
     Contains the following files below:
     - **PEP_swap.py** \
     Uses the function below.
