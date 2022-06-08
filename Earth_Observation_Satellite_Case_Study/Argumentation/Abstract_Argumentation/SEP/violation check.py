@@ -1,4 +1,13 @@
-# old file -This file checks if there is a violation of the onboard memory when an action at any point in time is replaced with another
+# ------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# File 3 a -This file checks if there is a violation of the onboard memory when an action at any point in\
+# time is replaced with another.
+# used to calculate the objective each time SEP is used and determine if the result for each action is\
+# feasible with a better objective or feasible with a worse objective.
+# ===========================================================================================================
+
 import pandas as pd
 
 day = 3
@@ -23,7 +32,7 @@ content_cp_coord = solver_coord.read()
 lines_cp_coord = content_cp_coord.split('\n')
 
 
-# function to calculate if each SEP change is feasible - meaning if an action replaces an existing action, will the memory be exceeded further down?
+# function to calculate if each SEP change is feasible - meaning if an action replaces an existing action, will the memory be exceeded later?
 def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Objective_value2):
     mi_a = m
     final_objective = 0
@@ -32,7 +41,7 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
     start_time2 = 0
 
     for n in range(i, count_coord - 1):
-        # for n in range (i, count_coord-1):
+
         solver_values = lines_cp_coord[n].split()
         start_time2 = int(solver_values[0])
         S_1 = lines_attack_coord[n].split()[4]
@@ -44,6 +53,7 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
         else:
             obj = 0
 
+        # If the action to be executed is 1,2 or 3 excluding 4
         if chosen_action == 1:
             obj_val_for_action = 1 + int(solver_values[6]) - obj
         elif chosen_action == 2:
@@ -53,6 +63,7 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
         else:
             obj_val_for_action = 'error'
 
+        # Calculation for alternate memory values
         if n == i:
             mi_a = m
             objective_value = obj_val_for_action
@@ -68,18 +79,16 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
 
             objective_value = 0
             final_objective = 0
-            # add the new memory to the rest of the data
-            # mi_a1 =  ma1 + int(solver_values[4])
+
         # recalculate new objective
         objective_value1 = obj_val_for_action
-        # print(mi_a1)
+
         # check if memory is exceeded
         if mi_a > m_max or mi_a <= 0:
             violation1 = 'Exceeded'
             a = '-'
             objective_value1 = objective_value
-            # attack_summary.append([i, S, start_time, start_time2, S_1, a1, mi_a1, objective_value1, violation1])
-            # print(violation1)
+
             break
         else:
             if n == count_coord - 1:
@@ -90,9 +99,9 @@ def SEP_action_a(chosen_action, a, m, i, ma1, ma2, ma3, S_Objective_value1, S_Ob
             objective_value1 = objective_value1
 
             final_objective = (S_Objective_value1 + S_Objective_value2 + objective_value1)
-            # attack_summary.append([i, S,start_time, start_time2,S_1, a1, mi_a1,objective_value1,violation1])
+
     return i, a, objective_value1, violation1, start_time2, mi_a, final_objective
-    # attack_summary.append([i, start_time, S, a1, objective_value, violation1])
+
 
 
 # load of attack information
@@ -127,13 +136,15 @@ S_Objective_image = int(lines_cp_coord[count_coord - 2].split()[6])
 S_Objective_process = int(lines_cp_coord[count_coord - 2].split()[8])
 S_Objective_download = (2 * int(lines_cp_coord[count_coord - 2].split()[10]))
 print(S_Objective_image, S_Objective_process, S_Objective_download)
+
+# Headings created to summarize each action attack on the schedule.
 attack_summary1 = [['i', 'start_time', 'S', 'a1', 'objective_value', 'violation', 'time_of_incident', 'mi1', 'final_objective', 'feasible_better', 'S_Objective']]
 attack_summary2 = [['i', 'start_time', 'S', 'a2', 'objective_value', 'violation', 'time_of_incident', 'mi2', 'final_objective', 'feasible_better', 'S_Objective']]
 attack_summary3 = [['i', 'start_time', 'S', 'a3', 'objective_value', 'violation', 'time_of_incident', 'mi3', 'final_objective', 'feasible_better', 'S_Objective']]
-i = 282
-# while i in range (282,289):
+
+# To go through the schedule for each action and where an attack can occur is recorded.
+i = 1
 while i in range(1, count_attack_coord):
-    # print('restart')
     attack_data = lines_attack_coord[i].split()
     start_time = int(attack_data[0])
     end_time = start_time + time_interval
@@ -154,7 +165,8 @@ while i in range(1, count_attack_coord):
     ma2 = process_im_mem
     ma3 = -downlink_data_rate
 
-    # mi_a1 = m1
+    # Used to check the feasibility of each action when an attack takes place on each action.
+    # Image taking attacks.
     if a1 == '-':
         i, a1, objective_value1, violation1, start_time1, mi1, final_objective1 = SEP_action_a(1, a1, m1, i, ma1, ma2, ma3, S_Objective_process, S_Objective_download)
         if final_objective1 >= S_Objective:
@@ -165,6 +177,7 @@ while i in range(1, count_attack_coord):
             feasible_better1 = 'Feasible_worse_objective'
         attack_summary1.append([i, start_time, S, a1, objective_value1, violation1, start_time1, mi1, final_objective1, feasible_better1,S_Objective])
 
+    # Processing of an image, action attack.
     if a2 == '-':
         i, a2, objective_value2, violation2, start_time2, mi2, final_objective2 = SEP_action_a(2, a2, m2, i, ma1, ma2, ma3, S_Objective_image, S_Objective_download)
         if final_objective2 >= S_Objective:
@@ -175,6 +188,7 @@ while i in range(1, count_attack_coord):
             feasible_better2 = 'Feasible_worse_objective'
         attack_summary2.append([i, start_time, S, a2, objective_value2, violation2, start_time2, mi2, final_objective2, feasible_better2,S_Objective])
 
+    # Down-linking of an image action attack.
     if a3 == '-':
         i, a3, objective_value3, violation3, start_time3, mi3, final_objective3 = SEP_action_a(3, a3, m3, i, ma1, ma2, ma3, S_Objective_image, S_Objective_process)
         if final_objective3 >= S_Objective:
@@ -187,6 +201,7 @@ while i in range(1, count_attack_coord):
 
     i = i + 1
 
+# Save file.
 file1 = open(filename1, 'w')
 df = pd.DataFrame(attack_summary1)
 file1.writelines(df.to_string(header=False, index=False))
@@ -201,147 +216,3 @@ file1 = open(filename3, 'w')
 df = pd.DataFrame(attack_summary3)
 file1.writelines(df.to_string(header=False, index=False))
 file1.close()
-
-# def SEP_action_a1(a1, m1, i, ma1, ma2, ma3):
-#     mi_a1 = m1
-#     for n in range(i, count_coord - 1):
-#         # for n in range (i, count_coord-1):
-#         solver_values = lines_cp_coord[n].split()
-#         start_time2 = int(solver_values[0])
-#         S_1 = lines_attack_coord[n].split()[4]
-#
-#         if n == i:
-#             mi_a1 = m1
-#             objective_value = 1 + int(solver_values[6])
-#         else:
-#             if S_1 == '0':
-#                 mi_a1 = mi_a1 + ma1
-#             elif S_1 == '1':
-#                 mi_a1 = mi_a1 + ma2
-#             elif S_1 == '2':
-#                 mi_a1 = mi_a1 + ma3
-#             else:
-#                 mi_a1 = mi_a1
-#
-#             objective_value = 0
-#             # add the new memory to the rest of the data
-#             # mi_a1 =  ma1 + int(solver_values[4])
-#         # recalculate new objective
-#         objective_value1 = 1 + int(solver_values[6])
-#         # print(mi_a1)
-#         # check if memory is exceeded
-#         if mi_a1 > m_max:
-#             violation1 = 'Exceeded'
-#             a1 = '-'
-#             objective_value1 = objective_value
-#             # attack_summary.append([i, S, start_time, start_time2, S_1, a1, mi_a1, objective_value1, violation1])
-#             # print(violation1)
-#             break
-#         else:
-#             if n == count_coord - 1:
-#                 violation1 = 'Not_exceeded'
-#             else:
-#                 violation1 = 'Not_exceeded'
-#             a1 = '-'
-#             objective_value1 = objective_value1
-#             # attack_summary.append([i, S,start_time, start_time2,S_1, a1, mi_a1,objective_value1,violation1])
-#     return i, a1, objective_value1, violation1, start_time2, mi_a1
-#     # attack_summary.append([i, start_time, S, a1, objective_value, violation1])
-#
-#
-# def SEP_action_a2(a2, m2, i, ma1, ma2, ma3):
-#     mi_a2 = m2
-#     for n in range(i, count_coord - 1):
-#         # for n in range (i, count_coord-1):
-#         solver_values = lines_cp_coord[n].split()
-#
-#         start_time2 = int(solver_values[0])
-#         S_2 = lines_attack_coord[n].split()[4]
-#
-#         if n == i:
-#             mi_a2 = m2
-#             objective_value = 1 + int(solver_values[8])
-#         else:
-#             if S_2 == '0':
-#                 mi_a2 = mi_a2 + ma1
-#             elif S_2 == '1':
-#                 mi_a2 = mi_a2 + ma2
-#             elif S_2 == '2':
-#                 mi_a2 = mi_a2 + ma3
-#             else:
-#                 mi_a2 = mi_a2
-#             a2 = 'Null'
-#             objective_value = 0
-#             # add the new memory to the rest of the data
-#             # mi_a1 =  ma1 + int(solver_values[4])
-#         # recalculate new objective
-#         objective_value2 = 1 + int(solver_values[8])
-#         # print(mi_a1)
-#         # check if memory is exceeded
-#         if mi_a2 > m_max:
-#             violation2 = 'Exceeded'
-#             a2 = '-'
-#             objective_value2 = objective_value
-#             # attack_summary.append([i, S, start_time, start_time2, S_1, a1, mi_a1, objective_value1, violation1])
-#             # return i, a2, start_time2, S_2, mi_a2, objective_value2, violation2
-#             break
-#         else:
-#             if n == count_coord - 1:
-#                 violation2 = 'Not_exceeded'
-#             else:
-#                 violation2 = 'Not_exceeded'
-#             a2 = '-'
-#             objective_value2 = objective_value2
-#             # attack_summary.append([i, S,start_time, start_time2,S_1, a1, mi_a1,objective_value1,violation1])
-#
-#     return i, a2, objective_value2, violation2, start_time2, mi_a2
-#     # return i, a2,start_time2,S_2,mi_a2, objective_value2, violation2
-#     # attack_summary.append([i, start_time, S, a1, objective_value, violation1])
-#
-#
-# def SEP_action_a3(a3, m3, i, ma1, ma2, ma3):
-#     if a3 == '-':
-#         mi_a3 = m3
-#         for n in range(i, count_coord - 1):
-#             # for n in range (i, count_coord-1):
-#             solver_values = lines_cp_coord[n].split()
-#             start_time2 = int(solver_values[0])
-#             S_3 = lines_attack_coord[n].split()[4]
-#
-#             if n == i:
-#                 mi_a3 = m3
-#                 objective_value = 1 + int(solver_values[10])
-#             else:
-#                 if S_3 == '0':
-#                     mi_a3 = mi_a3 + ma1
-#                 elif S_3 == '1':
-#                     mi_a3 = mi_a3 + ma2
-#                 elif S_3 == '2':
-#                     mi_a3 = mi_a3 + ma3
-#                 else:
-#                     mi_a3 = mi_a3
-#                 a3 = 'Null'
-#                 objective_value = 0
-#                 # add the new memory to the rest of the data
-#                 # mi_a1 =  ma1 + int(solver_values[4])
-#             # recalculate new objective
-#             objective_value3 = 1 + int(solver_values[10])
-#             # print(mi_a1)
-#             # check if memory is exceeded
-#             if mi_a3 > m_max:
-#                 violation3 = 'Exceeded'
-#                 a3 = '-'
-#                 objective_value3 = objective_value
-#                 # attack_summary.append([i, S, start_time, start_time2, S_1, a1, mi_a1, objective_value1, violation1])
-#
-#                 break
-#             else:
-#                 if n == count_coord - 1:
-#                     violation3 = 'Not_exceeded'
-#                 else:
-#                     violation3 = 'Not_exceeded'
-#                 objective_value3 = objective_value3
-#                 a3 = '-'
-#                 # attack_summary.append([i, S,start_time, start_time2,S_1, a1, mi_a1,objective_value1,violation1])
-#         return i, a3, objective_value3, violation3, start_time2, mi_a3
-#         # attack_summary.append([i, start_time, S, a1, objective_value, violation1])

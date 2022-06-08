@@ -1,4 +1,4 @@
-    i start_time  S  a1      m1 objective_value    violation time_of_incident     mi1 final_objective           feasible_better S_Objective
+    i start_time  S   a       m objective_value    violation time_of_incident     mi1 final_objective           feasible_better S_Objective
     1          6  1 N/A 1580046               0 Not_exceeded                6 1580046               0                         0       47089
     2         11  1 N/A 1580296               0 Not_exceeded               11 1580296               0                         0       47089
     3         16  1 N/A 1580546               0 Not_exceeded               16 1580546               0                         0       47089
