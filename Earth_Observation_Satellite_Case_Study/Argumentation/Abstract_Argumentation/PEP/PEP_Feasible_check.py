@@ -12,14 +12,9 @@
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import pep_action_a
 
 day = 3
-<<<<<<< Updated upstream
 
-# Load of attacks summary information.
-attack_path = '../SEP_Results/Day/Argumentation' + str(day) + '.txt'
-=======
 # load of attacks summary information
 attack_path = '../../SEP_Results/Day/Argumentation' + str(day) + '.txt'
->>>>>>> Stashed changes
 attack_coord = open(attack_path, "r")
 count_attack_coord = 0
 
@@ -35,12 +30,8 @@ attack_coord = open(attack_path, "r")
 attack_cp_coord = attack_coord.read()
 lines_attack_coord = attack_cp_coord.split('\n')
 
-<<<<<<< Updated upstream
-solver_path = '../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
-=======
-
+# load of attacks summary information.
 solver_path = '../../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
->>>>>>> Stashed changes
 solver_coord = open(solver_path, "r")
 count_coord = 0
 
@@ -223,7 +214,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
                        'N/A', mi2, mi_a3]
 
 
-    # 1,2
+    # a3 attack a2 for swap  1,2
     elif (a3 == '-') and s == '1' and (addr2 > addr1) and (action_swap_1_2 == 2):
         a_3 = '1'
         i, a3, violation, start_time1, mi2, mi_a3 = \
@@ -241,8 +232,8 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         attack_swap = [i, start_time, swap_pos, s, 'N/A', a_2, a_3, idle, mi, violation, mem_violation, start_time1,
                        'N/A', mi2, mi_a3]
 
-        # If idle, and action a1 attacks 0, -1  -1,0
-    elif (a1 == '-') and s == '-1' and (addr2 > addr1) and action_idle_attack == 0:  # and action_swap_1_2 == -1:
+        # If idle, and action a1 attacks 0, -1 -> -1, 0
+    elif (a1 == '-') and s == '-1' and (addr2 > addr1) and action_idle_attack == 0:
         idle = '-1'
         m = mi
 
@@ -283,7 +274,7 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
         attack_swap = [i, start_time, swap_pos, s, 'N/A', a_2, 'N/A', idle, mi, violation, mem_violation, start_time1,
                        mi1, mi_a2, 'N/A']
 
-
+    # idle, and action a3 attacks  2,-1
     elif (a3 == '-') and s == '-1' and (addr2 > addr1) and action_idle_attack == 2:
         idle = '-1'
         m = mi
@@ -305,7 +296,6 @@ def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
                        mi1, mi_a2, 'N/A']
 
     else:
-
         swap_pos = int(lines_attack_coord[addrx].split()[0])
         violation = 'Infeasible'
         mem_violation = 0

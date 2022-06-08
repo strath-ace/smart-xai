@@ -2,7 +2,7 @@
 # --------------------------------- Author: Cheyenne Powell -------------------------------------------------
 # ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
-# PEP calculation 4- function used to check which action is a.
+# PEP calculation 4- function used to check if the second action exchange can be completed without violating the constraints.
 # Note: Actions in a schedule were given numbers idle - '-1', image taking - '0', processing - '1',
 # and down-linking - '2'.
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.

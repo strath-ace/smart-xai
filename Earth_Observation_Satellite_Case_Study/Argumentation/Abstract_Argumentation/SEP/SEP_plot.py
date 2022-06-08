@@ -2,7 +2,8 @@
 #--------------------------------- Author: Cheyenne Powell -------------------------------------------------
 #------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
-# Function used for creating the line plot for the generated schedule by the solver.
+# Function used for creating the line plot with the variance in memory due to an attack on action 1 comparing to\
+# the generated schedule by the solver, can be used for actions 2 and 3. slight mods required.
 #===========================================================================================================
 
 import matplotlib.pyplot as plt
@@ -12,10 +13,10 @@ from matplotlib.dates import DateFormatter
 
 day = 3
 
-line_file = 'SEP_Results/Day/line_argument' + str(day) + '.png'
+line_file = '../SEP_Results/Day/line_argument' + str(day) + '.png'
 
 # Load a1 attack file.
-action_a1_path = 'SEP_Results/Day/Attack_violation_summary_a12' + str(day) + '.txt'
+action_a1_path = '../SEP_Results/Day/Attack_violation_summary_a12' + str(day) + '.txt'
 action_a1_coord = open(action_a1_path, "r")
 count_a1_coord = 0
 # For loop to count the number of lines in file.
@@ -48,7 +49,7 @@ for i in range(1, 17278):
     a1_attack.append([(dt.timedelta(seconds=(int(start_time)))), (dt.timedelta(seconds=(int(end_time)))),
                       Status, (dt.timedelta(seconds=(int(time_start_2)))), memory])
 
-cp_path = 'SEP_Results/Day/Optimized_Results' + str(day) + '.txt'
+cp_path = '../SEP_Results/Day/Optimized_Results' + str(day) + '.txt'
 cp_coord = open(cp_path, "r")
 cp_count_coord = 0
 for line in cp_coord:

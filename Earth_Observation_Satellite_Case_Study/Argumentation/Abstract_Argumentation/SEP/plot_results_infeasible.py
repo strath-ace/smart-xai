@@ -2,7 +2,7 @@
 #--------------------------------- Author: Cheyenne Powell -------------------------------------------------
 #------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
-# Function used for creating the gantt chart to show where all actions are scheduled to be executed and where
+# Function used for creating the gantt chart to show where all actions are scheduled to be executed and where\
 # the actions have attacked resulting with infeasible results.
 #===========================================================================================================
 

@@ -1,10 +1,10 @@
-#------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
-#--------------------------------- Author: Cheyenne Powell -------------------------------------------------
-#------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+# ------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
 # File number 1 to extract data from solver schedule and create options where attacks can occur.
 
-#===========================================================================================================
+# ===========================================================================================================
 
 import pandas as pd
 from Earth_Observation_Satellite_Case_Study.Environment.environment_data_to_solver import environment_data
@@ -100,9 +100,9 @@ def initial_attack_calculation():
     # 5000Kbit/s to process images
     process_im_mem = 50 * time_interval
 
-    filename = 'SEP_Results/Day/Day' + str(day) + '.txt'
+    filename = '../SEP_Results/Day/Day' + str(day) + '.txt'
 
-    absolute_path = 'C:/Users/User/Documents/GitHub/smart-xai'
+    absolute_path = '../../../..'
 
     # Loading the satellites position based on date.
     path = absolute_path + '/Earth_Observation_Satellite_Case_Study/Environment/'
@@ -111,7 +111,7 @@ def initial_attack_calculation():
     print(len(country_data_list))
 
     # Loading the solvers results.
-    solver_path = 'SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+    solver_path = '../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
     solver_coord = open(solver_path, "r")
     count_coord = 0
 
