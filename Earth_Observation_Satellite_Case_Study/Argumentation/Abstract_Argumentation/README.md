@@ -3,7 +3,7 @@
 AA s a technique used to provide information, highlighting where conflicts of elements may occur in a system. 
 This project contains the AA methods used to support with providing explanations to the End User of an EO satellite schedule.
 The satellite schedule has 3 main actions and a fourth created when no other actions have occurred. 
-Each of these actions as described in [EO case study](././README.md#Earth-Observation-Case-study).
+Each of these actions as described in [EO case study](/./README.md#Earth-Observation-Case-study).
 
 The four actions are:
 1. **Taking of images** - given a label '0' and 'a1' throughout the codes.
@@ -27,10 +27,10 @@ Note, the 4th action idle, can only be attacked by other actions for SEP as it h
 Within SEP, there are 7 codes that are used within:
 
 Note: Points 1 and 2 **must** be executed in this order.
-1. **sep_comparison** - used to extract data from the solver schedule and create options where attacks can occur.
-2. **sep_data_sort** - used to create the initial argumentation documents.
+1. **sep_comparison.py** - used to extract data from the solver schedule and create options where attacks can occur.
+2. **sep_data_sort.py** - used to create the initial argumentation documents.
 3. Can be executed in any order.
-   1. **violation_check** - used to calculate the objective each time SEP is used and determine if the result is feasible better or
+   1. **violation_check.py** - used to calculate the objective each time SEP is used and determine if the result is feasible better or
    feasible with a worse objective.
    2. **code for memory violation plot.py** - This code creates a summary following an attack of action a1 on other actions at selected time t,
    to the rest of the schedule. This time can be altered.
@@ -57,8 +57,8 @@ There is 1 main code that is reliant on 3 functions namely:
    1. **PEP_Feasible_check.py** - checks for feasibility with pair exchanges by checking which action of the 2 appears first in the schedule,
        to then swap and calculate the memory using:
       1. **PEP_calc.py** -  function used to calculate for feasibility with first number cascaded to the second number. 
-      However to check the constraints of the main problem, the following code was derived:
-         1. **contraints_considered_add2.py** - used to check if the second action exchange can be completed without violating the constraints.
+      However, to check the constraints of the main problem, the following code was derived:
+         1. **constraints_considered_add2.py** - used to check if the second action exchange can be completed without violating the constraints.
 
 #### PEP Graphs
 The following codes were used to support providing results to the end user.

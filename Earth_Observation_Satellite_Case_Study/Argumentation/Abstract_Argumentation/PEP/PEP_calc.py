@@ -6,7 +6,7 @@
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
 # ===========================================================================================================
 
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.contraints_considered_add2 \
+from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.constraints_considered_add2 \
     import attack_calculation
 
 
