@@ -1,3 +1,12 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This file is used to run all the codes for all the days entered. This will automatically run until the end\
+# last day has ended. This will also plot all graphs required for each respective day, once a folder has been\
+# created.
+# ===========================================================================================================
+
 import os
 from CPModel_with_Hint import CPModel_data
 from CPSolver import CP_solver

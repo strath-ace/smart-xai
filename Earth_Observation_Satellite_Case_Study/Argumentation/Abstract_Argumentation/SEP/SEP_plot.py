@@ -1,9 +1,9 @@
-###################Copyright (C) 2022 University of Strathclyde and Author #################################
-################################## Author: Cheyenne Powell #################################################
-########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+#------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+#--------------------------------- Author: Cheyenne Powell -------------------------------------------------
+#------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
 # Function used for creating the line plot for the generated schedule by the solver.
-############################################################################################################
+#===========================================================================================================
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -62,7 +62,7 @@ content_cp_coord = daily_cp_coord.read()
 lines_cp_coord = content_cp_coord.split('\n')
 
 constraint_land_list = []
-# for i in range(283, 3488):
+
 for i in range(1, 17278):
     daily_cp_details = lines_cp_coord[i].split()
     if daily_cp_details[2] == '0':

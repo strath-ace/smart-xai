@@ -1,17 +1,23 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # Function for generating the schedule-
 # 1 prevents images from being taken when in the shade
-# 2 where actions overlap  a weight is given to the actions to prioritise 1 over the other, thus durations for the lower prioritised action is altered
+# 2 where actions overlap  a weight is given to the actions to prioritise 1 over the other, thus durations for the\
+# lower prioritised action is altered.
 # Finally, generates the final schedule
+# ===========================================================================================================
 
 import collections
 import datetime as dt
 import itertools
 import numpy as np
 import pandas as pd
-
 from ortools.sat.python import cp_model
 from collections import namedtuple
-from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.Manual_Processing_Time import processing_time
+from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Manually_created_schedule.\
+    Manual_Processing_Time import processing_time
 
 satellite_coordinates = namedtuple("satellite_coordinates", ['index', 'day', 'month', 'year', 'time', 'latitude',
                                                              'longitude'])
@@ -37,19 +43,26 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
     # assign integer values to condition situations
     while a < len(occurrence_list):
 
-        start_time = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
-        end_time = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
+        start_time = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f') -
+                            dt.datetime(1900, 1, 1)).total_seconds())))
+        end_time = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f') -
+                          dt.datetime(1900, 1, 1)).total_seconds())))
 
         prenum_repeat = 1
-        # check to see if land is in night and removes options for pictures to be taken and replaces it with processing
+        # check to see if land is visible at night and removes options for pictures to be\
+        # taken and replaces it with processing
         if occurrence_list[a][3] == 'Penumbra Shade':
 
-            penumbra_starttime = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
-            penumbra_endtime = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
+            penumbra_starttime = (int(((dt.datetime.strptime(str(occurrence_list[a][0]), '%H:%M:%S.%f')
+                                        - dt.datetime(1900, 1, 1)).total_seconds())))
+            penumbra_endtime = (int(((dt.datetime.strptime(str(occurrence_list[a][1]), '%H:%M:%S.%f')
+                                      - dt.datetime(1900, 1, 1)).total_seconds())))
 
             for z in range(a, len(occurrence_list)):
-                start_time = (int(((dt.datetime.strptime(str(occurrence_list[z][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
-                end_time = (int(((dt.datetime.strptime(str(occurrence_list[z][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds())))
+                start_time = (int(((dt.datetime.strptime(str(occurrence_list[z][0]), '%H:%M:%S.%f')
+                                    - dt.datetime(1900, 1, 1)).total_seconds())))
+                end_time = (int(((dt.datetime.strptime(str(occurrence_list[z][1]), '%H:%M:%S.%f')
+                                  - dt.datetime(1900, 1, 1)).total_seconds())))
 
                 if penumbra_starttime <= start_time <= penumbra_endtime and any(
                         e[3] == occurrence_list[z][3] for e in stations_summary) and (start_time < end_time):
@@ -61,8 +74,8 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
                     a = z
 
                 # if country is seen at night
-                elif penumbra_starttime <= start_time <= penumbra_endtime and any(e[3] == occurrence_list[z][3] for e in country_access_summary) and \
-                        (start_time < end_time):
+                elif penumbra_starttime <= start_time <= penumbra_endtime and any(e[3] == occurrence_list[z][3]\
+                        for e in country_access_summary) and (start_time < end_time):
                     start_time = occurrence_list[z][0]
                     end_time = occurrence_list[z][1]
                     duration = occurrence_list[z][2]
@@ -79,14 +92,16 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
                     jobs_data.append([job_action, start_time, end_time, duration])
                     a = z
 
-        elif any(e[3] == str(occurrence_list[a][3]) for e in stations_summary) and (prenum_repeat == 1) and (start_time < end_time):
+        elif any(e[3] == str(occurrence_list[a][3]) for e in stations_summary) and (prenum_repeat == 1)\
+                and (start_time < end_time):
             start_time = occurrence_list[a][0]
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
             job_action = 4
             jobs_data.append([job_action, start_time, end_time, duration])
 
-        elif any(e[3] == str(occurrence_list[a][3]) for e in country_access_summary) and (prenum_repeat == 1) and (start_time < end_time):
+        elif any(e[3] == str(occurrence_list[a][3]) for e in country_access_summary) and (prenum_repeat == 1)\
+                and (start_time < end_time):
             start_time = occurrence_list[a][0]
             end_time = occurrence_list[a][1]
             duration = occurrence_list[a][2]
@@ -110,8 +125,7 @@ def task_decision(day, occurrence_list, stations_summary, country_access_summary
 
         a += 1
     jobs_data = np.array(jobs_data)
-    # print(occurrence_list)
-    # print(jobs_data)
+
 
     df = pd.DataFrame(jobs_data)
     file2.writelines(df.to_string(header=False, index=False))
@@ -125,8 +139,10 @@ def heuristic(path, day, month, year, country, time_interval):
     file2 = open(path + str(day) + '/jobs_daily_schedule' + str(day) + '.txt', 'w')
     file3 = open(path + str(day) + '/Manual_Results' + str(day) + '.txt', 'w')
 
-    # processing time function called as processing is manually added  based on the availability of the gaps between actions
-    idle_time, Total_Table, country_access_summary, stations_summary, eclipse_final = processing_time(day, month, year, country, time_interval)
+    # processing time function called as processing is manually added  based on the\
+    # availability of the gaps between actions
+    idle_time, Total_Table, country_access_summary, stations_summary, eclipse_final = \
+        processing_time(day, month, year, country, time_interval)
     occurrence_list = [Total_Table, idle_time]
     occurrence_list = (list(itertools.chain.from_iterable(occurrence_list)))
     # converts all the times to seconds so they can be sorted
@@ -144,12 +160,14 @@ def heuristic(path, day, month, year, country, time_interval):
     occurrence_list1 = []
     for i in range(0, len(sorted_list)):
         new_list = str(dt.timedelta(seconds=(sorted_list[i][0])))[:-3]
-        # prevents the action from going over to the next day since they are only in hh:mm:ss if action is to take place between 11:59 pm and 00:23 am
-        # only let action occur for in the day for 1 minute
+        # prevents the action from going over to the next day since they are only in hh:mm:ss if action\
+        # is to take place between 11:59 pm and 00:23 am.
+        # only let action occur for in the day for 1 minute.
         if new_list > '23:00:00.001' and '00:00:00.000' < sorted_list[i][1] < '01:00:00.000':
 
             sorted_list[i][1] = '23:59:59.000'
-            sorted_list[i][2] = (dt.datetime.strptime(sorted_list[i][1], '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)) - (dt.datetime.strptime(new_list, '%H:%M:%S.%f') - dt.datetime(1900, 1, 1))
+            sorted_list[i][2] = (dt.datetime.strptime(sorted_list[i][1], '%H:%M:%S.%f') - dt.datetime(1900, 1, 1))\
+                                - (dt.datetime.strptime(new_list, '%H:%M:%S.%f') - dt.datetime(1900, 1, 1))
             sorted_list[i][2] = sorted_list[i][2].total_seconds()
             occurrence_list1.append([new_list, sorted_list[i][1], sorted_list[i][2], sorted_list[i][3]])
         else:
@@ -179,12 +197,15 @@ def heuristic(path, day, month, year, country, time_interval):
     jobs_model_list = collections.defaultdict(list)
     task_type = collections.namedtuple('task_type', 'start job_task end interval')
 
-    # initialize variables and assign weights to task to determine the start and end time of actions if they overlap, the higher the weight, the more the action is prioritised
+    # initialize variables and assign weights to task to determine the start and end time of actions if they overlap,
+    # the higher the weight, the more the action is prioritised.
     for task in range(0, len(jobs_data)):
 
         # total memory onboard memory allocation
-        start_variables = int(((dt.datetime.strptime(str(jobs_data[task][1]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds()) * 1000)
-        end_variables = int(((dt.datetime.strptime(str(jobs_data[task][2]), '%H:%M:%S.%f') - dt.datetime(1900, 1, 1)).total_seconds()) * 1000)
+        start_variables = int(((dt.datetime.strptime(str(jobs_data[task][1]), '%H:%M:%S.%f') -
+                                dt.datetime(1900, 1, 1)).total_seconds()) * 1000)
+        end_variables = int(((dt.datetime.strptime(str(jobs_data[task][2]), '%H:%M:%S.%f') -
+                              dt.datetime(1900, 1, 1)).total_seconds()) * 1000)
         suffix = '_%i' % task
         start_var = model.NewIntVar(start_variables, end_variables - 1, 'start' + suffix)
         end_var = model.NewIntVar(start_variables + 1, end_variables, 'end' + suffix)
@@ -231,8 +252,6 @@ def heuristic(path, day, month, year, country, time_interval):
     final_jobs = []
     print_list = []
 
-    # if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
-
     # Print out makespan and the start times for all tasks.
     # print('Optimal Schedule Length: %i' % solver.ObjectiveValue())
     for jobs in jobs_model_list:
@@ -241,7 +260,7 @@ def heuristic(path, day, month, year, country, time_interval):
         end = solver.Value(end_jobs[jobs])
         duration = (solver.Value(duration_vars[jobs]))
 
-        print_list.append([jobs, start, end, duration, all_tasks[jobs].job_task])  # ,solver.Value(w[jobs]),solver.Value(x[jobs]),solver.Value(y[jobs]),solver.Value(z[jobs])])
+        print_list.append([jobs, start, end, duration, all_tasks[jobs].job_task])
 
         final_start.append(start)
         final_end.append(end)

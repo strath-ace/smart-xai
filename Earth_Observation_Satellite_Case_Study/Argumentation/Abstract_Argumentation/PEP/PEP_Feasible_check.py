@@ -1,20 +1,25 @@
-###################Copyright (C) 2022 University of Strathclyde and Author #################################
-################################## Author: Cheyenne Powell #################################################
-########################### e-mail: cheyenne.powell@strath.ac.uk ###########################################
+# ------------------ Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
 
 # PEP calculation 2 - checks for feasibility with pair exchanges.
 # Checks which action of the 2 appears first in the schedule, to then swap and calculate the memory
 # change throughout until the first action (now the second) has been reached. Which then alters the memory at that
 # instance to then cascade the change throughout the rest of the schedule.
 # Note: Actions were given numbers idle - '-1', image taking - '0', processing - '1', and down-linking - '2'.
-######################################################################################################################
+# ===========================================================================================================
 
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import pep_action_a
 
 day = 3
+<<<<<<< Updated upstream
 
 # Load of attacks summary information.
 attack_path = '../SEP_Results/Day/Argumentation' + str(day) + '.txt'
+=======
+# load of attacks summary information
+attack_path = '../../SEP_Results/Day/Argumentation' + str(day) + '.txt'
+>>>>>>> Stashed changes
 attack_coord = open(attack_path, "r")
 count_attack_coord = 0
 
@@ -30,7 +35,12 @@ attack_coord = open(attack_path, "r")
 attack_cp_coord = attack_coord.read()
 lines_attack_coord = attack_cp_coord.split('\n')
 
+<<<<<<< Updated upstream
 solver_path = '../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+=======
+
+solver_path = '../../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+>>>>>>> Stashed changes
 solver_coord = open(solver_path, "r")
 count_coord = 0
 

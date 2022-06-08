@@ -1,4 +1,9 @@
-# This file is used for generating data where light/shade exposures occur over a sected day
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This file is used for generating data where light/shade exposures occur over a selected day.
+# ===========================================================================================================
 
 from collections import namedtuple
 import numpy as np
@@ -16,29 +21,27 @@ station_access = namedtuple("station_access", ['index', 'day', 'month', 'year', 
 
 
 def eclipse(path, time_interval, day, month, year):
-    # light/shade exposure txt file imported
-    path_Eclipse = path + 'Data/Light_Shade_exposure.txt'
 
-    f_Eclipse = open(path_Eclipse, "r")
-
-    line_count_Eclipse = 0
-    for line in f_Eclipse:
+    # Light/shade exposure txt file imported.
+    path_eclipse = path + 'Data/Light_Shade_exposure.txt'
+    f_eclipse = open(path_eclipse, "r")
+    line_count_eclipse = 0
+    for line in f_eclipse:
         if line != "\n":
-            line_count_Eclipse += 1
-    f_Eclipse.close()
+            line_count_eclipse += 1
+    f_eclipse.close()
 
-    f_Eclipse = open(path_Eclipse, "r")
-    # print(line_count)
-    node_count_eclipse = line_count_Eclipse
-    content_eclipse = f_Eclipse.read()
+    f_eclipse = open(path_eclipse, "r")
+    node_count_eclipse = line_count_eclipse
+    content_eclipse = f_eclipse.read()
     lines_eclipse = content_eclipse.split('\n')
 
     eclipse_sum = []
     eclipse_final = []
-    # import function to determine start and end time of the day
+    # Import function to determine start and end time of the day.
     start_second_interval, end_second_interval = time_select(day, month)
 
-    # extraction of all shade instances from the list
+    # Extraction of all shade instances from the list.
     for i in range(6, node_count_eclipse + 1):
 
         line_details_eclipse = lines_eclipse[i].split()
@@ -51,20 +54,21 @@ def eclipse(path, time_interval, day, month, year):
                                                int(line_details_eclipse[2]), str(line_details_eclipse[3]),
                                                str(line_details_eclipse[15]), float(line_details_eclipse[17])))
 
-    # Extraction of data containing shade exposure based on the date selected
+    # Extraction of data containing shade exposure based on the date selected.
     for i in range(0, len(eclipse_sum)):
         if eclipse_sum[i].day == day and eclipse_sum[i].month == month and eclipse_sum[i].year == year:
             eclipse_final.append(
                 [eclipse_sum[i].start_time, eclipse_sum[i].stop_time, eclipse_sum[i].duration, 'Penumbra Shade'])
 
-    # sort list in ascending order based on start time - list contains the full summary based on the date selected
+    # Sort list in ascending order based on start time - list contains the full summary based on the date selected.
     eclipse_final = sorted(eclipse_final, key=lambda x: x[0])
     np.set_printoptions(threshold=np.inf)
     eclipse_final = np.array(eclipse_final)
 
     day_data_list = []
 
-    # to create a boolean list when day/night occurs out of selected day using the start and end time for the day and each action
+    # To create a boolean list when day/night occurs out of selected day using the start and end time for the\
+    # day and each action.
     for i in range(0, len(eclipse_final)):
         dn_start = int((dt.datetime.strptime(str(eclipse_final[i][0]), '%H:%M:%S.%f') - dt.datetime(1900, 1,
                                                                                                     1)).total_seconds())
@@ -93,7 +97,9 @@ def eclipse(path, time_interval, day, month, year):
             day_data_list.append([g, g + time_interval, dn_access])
             g += time_interval
 
-    # returns the list of light/shade exposure in boolean form at time intervals of x seconds and returns the summary of all light/shade times
-    # day data list in the form of start, end, and 1/0 based on light exposure - 1 for light, 0 for shade
-    # eclipse final contains a summary of shade times in the form of start, end, duration and whether or not there is an eclipse (shade)
+    # Returns the list of light/shade exposure in boolean form at time intervals of x seconds and returns the\
+    # summary of all light/shade times.
+    # Day data list, in the form of start, end, and 1/0 based on light exposure - 1 for light, 0 for shade.
+    # Eclipse final, contains a summary of shade times in the form of start, end, duration and whether or not\
+    # there is an eclipse (shade).
     return day_data_list, eclipse_final

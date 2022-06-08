@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # Function used for plotting the line graph for the manual day schedule
+# ===========================================================================================================
 
 import pandas as pd
 from matplotlib import pyplot as plt

@@ -1,5 +1,10 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This function is used to extract all the selected ground station access for an Earth Observation satellite
 # for selected day from the txt file
+# ===========================================================================================================
 
 import datetime as dt
 from collections import namedtuple

@@ -1,3 +1,7 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This function is a test environment used for creating a manual schedule for the satellite for a selected day
 
 # functions imported

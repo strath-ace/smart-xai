@@ -1,4 +1,10 @@
-# to call last read data in file n-1 or n depending on the day and if file already exists
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# To call last read data in file n-1 or n depending on the day and if file already exists
+# ===========================================================================================================
+
 def file_recall(filename, list_num):
     results_coord = open(filename, "r")
     results_count_coord = 0
