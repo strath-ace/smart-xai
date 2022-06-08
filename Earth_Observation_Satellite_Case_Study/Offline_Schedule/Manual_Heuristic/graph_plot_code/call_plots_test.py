@@ -1,4 +1,9 @@
+# ------------------Copyright (C) 2022 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
 # This file calls all the functions for creating graphs
+# ===========================================================================================================
 
 from manual_memory_plot import manual_memory_plot
 from Solver_plot import solver_plot

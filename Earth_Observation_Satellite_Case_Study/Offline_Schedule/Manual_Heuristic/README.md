@@ -1,9 +1,11 @@
-- # Manual_Heuristic
+# Manual_Heuristic
 Contains all the files and codes used for generating the schedules in addition, their respective graphs.
 
 Namely:
 1. [Manually_created_schedule](#Manually_created_schedule)
-2. [graph_plot_code](#graph_plot_code)
+2. [Solver](#Solver)
+3. [graph_plot_code](#graph_plot_code)
+
 
 ## Manually_created_schedule
 This folder contains the codes used for creating the manual schedule
@@ -20,6 +22,17 @@ The first is the main that is used for testing and generating results incorporat
     3. **Manual_binary_data.py**\
        Uses the function below\.
          - **start_end_points_data.py**
-      
+
+
+## Solver
+This folder contains the codes used for creating the heuristic schedule with a suggested input generated from the manually created schedule 
+to guide the generation of the results.       
+
 ## Graph_plot_code
 This folder contains all the files linked required or plotting the graphs after the results have been generated.
+
+Namely:
+ - **call_plots_test.py**
+ - **gantt_plot.py**
+ - **manual_memory_plot.py**
+ - **Solver_plot.py**

@@ -16,11 +16,16 @@ from Earth_Observation_Satellite_Case_Study.Offline_Schedule.Manual_Heuristic.Ma
     Memory_calculation_support_2 import Memory_calculation_support_2
 
 
-def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboard_mem, image_mem, downlink_data_rate, process_im_mem):
+def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboard_mem, image_mem,
+                                        downlink_data_rate, process_im_mem):
+
+    # Create files to write data
     file1 = open(patha + str(day) + '/manual_memory_states' + str(day) + '.txt', "w")
     file2 = open(patha + str(day) + '/manual_memory_states_seconds' + str(day) + '.txt', "w")
 
-    node_count_coord, lines_coord, tot_pic, tot_proc, tot_down, tot_idle, count_pic, count_proc, count_down, final_total = Manual_file_recall(patha, day, image_mem, downlink_data_rate, process_im_mem)
+    # Calls function to check if files for previous day exists or to create a new file.
+    node_count_coord, lines_coord, tot_pic, tot_proc, tot_down, tot_idle, count_pic, count_proc, count_down,\
+    final_total = Manual_file_recall(patha, day, image_mem, downlink_data_rate, process_im_mem)
 
     Demands_mem = []
     total_pics = []
@@ -44,7 +49,7 @@ def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboar
 
         while h <= (int(final_end / 1000) - int(final_start / 1000)) and (int(final_end / 1000) -
                                                                           int(final_start / 1000)) > time_interval:
-            # for i in range(int(final_start[task]/1000),int(final_end[task]/1000)):
+
             start, Demands, tasks, tot_pic, tot_proc, tot_down, count_down, count_pic, count_proc = \
                 Memory_calculation_support_1(first_run, h, final_start, final_jobs, tot_down, tasks_list, tot_pic,
                                              count_pic, image_mem,onboard_mem,process_im_mem, tot_proc, count_proc,
@@ -55,6 +60,7 @@ def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboar
 
 
             end = start + time_interval
+
             # if the time of action over laps with next day meaning start at 82800 -> 23:00:00 and ends between\
             # midnight (86399) and next day "1 day, 3:46:40" (100,000).
             # the action should end at 86399.
@@ -83,6 +89,7 @@ def Manual_heuristic_memory_calculation(patha, day, month, time_interval, onboar
 
             h += time_interval
 
+    # Write data to file.
     df1 = pd.DataFrame(print_list)
     file1.writelines(df1.to_string(header=False, index=False))
     file1.close()

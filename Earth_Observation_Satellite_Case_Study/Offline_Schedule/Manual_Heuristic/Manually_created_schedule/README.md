@@ -11,7 +11,9 @@
                  for the lower prioritised action is altered.
               3. Generates the final schedule.\
            Within this function, it uses: \
-           -**Manual_Processing_Time.py** to generate the processing times based on the gaps between the actions within a given day.
+           - **Manual_file_recall.py** - used to check if files for previous day exist and forward the last generated
+           results from the previous day to the current day
+           - **Manual_Processing_Time.py** - to generate the processing times based on the gaps between the actions within a given day.
         2. **Heuristic_memory_calculation.py**\
            This function is used for generating 2 lists 1 with time in hh: mm: ss and the other in milliseconds based 
      on the position of the satellite with their respective actions.\
