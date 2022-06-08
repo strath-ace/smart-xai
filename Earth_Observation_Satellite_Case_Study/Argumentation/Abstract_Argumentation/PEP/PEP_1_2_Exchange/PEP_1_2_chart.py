@@ -15,7 +15,6 @@ from matplotlib.patches import Rectangle
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange. \
     PEP_vio_ex_for_plot import vio_check
 
-
 # Day number used to name file when saved.
 day = 3
 
@@ -63,7 +62,6 @@ lines_attack_coord = attack_cp_coord.split('\n')
 datastart = 1
 dataend = count_attack_coord - 2
 
-
 # Extract the starting (minimum) time from the generated schedule for 1 day.
 min_number = int(lines_attack_coord[datastart].split()[0])
 
@@ -108,12 +106,8 @@ file1 = open(filename, 'w')
 df = pd.DataFrame(swap_1_2_summary)
 file1.writelines(df.to_string(header=False, index=False))
 
-
-# Create a colormap with three colors, min and max are chosen so that their center is the pivot value.
-cmap = ListedColormap(['blueviolet','tomato', 'limegreen'])
-
 # Create a colormap with two colors, min and max are chosen so that their center is the pivot value.
-colors = ['indigo', 'red', 'gold']
+colors = ['blueviolet','tomato', 'limegreen']
 cmap = ListedColormap(colors)
 
 
@@ -133,7 +127,6 @@ vio_list = []
 # 2,1; 0,-1; -1,0; 1,-1; -1,1; 2,-1; -1,2.
 for i in range(len(x) - 1):
     for j in range(len(y) - 1):
-
 
         # Re-initiate vio to be 0 as each time the code is executed and a violation of memory occurs, this will/
         # be carried over.
@@ -306,15 +299,15 @@ for i in range(len(x) - 1):
     for j in range(len(y) - 1):
         plt.text((x[i] + x[i + 1]) / 2, (y[j] + y[j + 1]) / 2, [x_coordinates[i], y_coordinates[j]],
                  color='white' if binvalues[i, j] < pivot_value else 'black',
-                 ha='center', va='center', size=8)
+                 ha='center', va='center', size=40)
 
 # Create legend.
 handles = [Rectangle((0, 0), 1, 1, color=c, ec="k") for c in colors]
 labels = ['Same actions', 'Infeasible', 'Feasible']
 plt.legend(handles, labels, bbox_to_anchor=(0.9, 1.1), ncol=3, fontsize=40)
 
-plt.xlabel("Scheduled times", fontsize=40)
-plt.ylabel("scheduled times", fontsize=40)
+plt.xlabel("Scheduled times (s)", fontsize=40)
+plt.ylabel("scheduled times (s)", fontsize=40)
 plt.yticks(y, size=40)
 plt.xticks(x, rotation=90, size=40)
 plt.gca().invert_yaxis()

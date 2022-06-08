@@ -52,4 +52,16 @@ solution is feasible or infeasible.
 
 There is 1 main code that is reliant on 3 functions namely:
 
-1. **
+1. **PEP_swap.py** - function used to calculate for feasibility with first number cascaded to the second number.\
+   Within this file, several functions are called:
+   1. **PEP_Feasible_check.py** - checks for feasibility with pair exchanges by checking which action of the 2 appears first in the schedule,
+       to then swap and calculate the memory using:
+      1. **PEP_calc.py** -  function used to calculate for feasibility with first number cascaded to the second number. 
+      However to check the constraints of the main problem, the following code was derived:
+         1. **contraints_considered_add2.py** - used to check if the second action exchange can be completed without violating the constraints.
+
+#### PEP Graphs
+The following codes were used to support providing results to the end user.
+1. **PEP_1_2_chart.py** - This code was used to plot an nxm matrix plot showing where every 2 action can be replaced at every instance throughout a scheduled day displaying where conflicts occur (times are adjustable).
+   This file uses the following code:
+   1. **PEP_vio_ex_for_plot** -  used to extract violations where conflicts occur and return data to be plotted. 
