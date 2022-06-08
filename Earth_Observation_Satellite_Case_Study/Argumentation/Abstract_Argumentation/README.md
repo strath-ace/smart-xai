@@ -3,7 +3,7 @@
 AA s a technique used to provide information, highlighting where conflicts of elements may occur in a system. 
 This project contains the AA methods used to support with providing explanations to the End User of an EO satellite schedule.
 The satellite schedule has 3 main actions and a fourth created when no other actions have occurred. 
-Each of these actions as described in [EO case study](././README.md#Earth-Observation-Case-study).
+Each of these actions as described in [EO case study](/./README.md#Earth-Observation-Case-study).
 
 The four actions are:
 1. **Taking of images** - given a label '0' and 'a1' throughout the codes.

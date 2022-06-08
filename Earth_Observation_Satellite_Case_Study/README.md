@@ -22,7 +22,7 @@ several down-linking instances to send 1 image after it has been processed.
 The structure of this folder is shown below:
 
 - ## [Environment](#Environment)
-- ## [Offline Schedule](#Offline-schedule)
+- ## [Offline Schedule](#Offline-Schedule)
 - ## [Argumentation](#Argumentation)
 
 - ### Environment
@@ -49,7 +49,7 @@ The structure of this folder is shown below:
             Uses the function below.
             - **start_end_points_data.py**
 
-- ### Offline_Schedule
+- ### Offline Schedule
    This folder contains the generated offline schedules both manually created solver and the 
    solver. Here, the solver uses both the manual created schedule in combination with the satellites positions from the 
    raw data previously mentioned.
