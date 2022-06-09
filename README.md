@@ -1,4 +1,4 @@
-# smart-xai
+# Smart-XAI
 
 Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence (XAI)
 
