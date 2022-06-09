@@ -14,7 +14,7 @@ The four actions are:
 
 Within AA, 2 techniques were investigated.
 
-- [Single Exchange Property(SEP)](#Single-Exchange-Property-(SEP))
+- [Single Exchange Property (SEP)](#Single-Exchange-Property-(SEP))
 - [Pairwise Exchange Property (PEP)](#Pairwise-Exchange-Property-(PEP))
 
 ### Single Exchange Property (SEP)

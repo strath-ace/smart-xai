@@ -3,7 +3,7 @@
 Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence (XAI)
 
 ## Available Repositories
-* [Earth Observation Case study](#Earth Observation Case study)
+* [Earth Observation Case study](#Earth-Observation-Case-study)
 
 
 ## Earth Observation Case study

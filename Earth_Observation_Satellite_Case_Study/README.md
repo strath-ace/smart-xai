@@ -1,4 +1,4 @@
-# smart-xai 
+# Smart-XAI 
 # Earth Observation Case study
 
 This project creates both a simple manual schedule and an updated schedule using Google-OR-Tools using the initially 
