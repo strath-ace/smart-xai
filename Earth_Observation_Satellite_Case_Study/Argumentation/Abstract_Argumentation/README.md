@@ -9,7 +9,7 @@ The four actions are:
 1. **Taking of images** - given a label '0' and 'a1' throughout the codes.
 2. **Processing** of the taken image - given the label '1' and 'a2' throughout the codes.
 3. **Down-linking** of the taken and processed image - given the label '2' and 'a3' throughout the codes.
-4. **Idle time** - created when no other actions could be executed. This was given the label '-1' and 'a4' through the codes.
+4. **Idle time** - created when no other actions could be executed. This was given the label '-1' and 'a4' throughout the codes.
 
 
 Within AA, 2 techniques were investigated.
