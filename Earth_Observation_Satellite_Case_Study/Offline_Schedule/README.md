@@ -49,10 +49,3 @@ raw data previously mentioned.
               - Solver_plot.py
               - gantt_plot.py
      
-  - ### Results - folders automatically created per daily result
-       - #### Day 1
-           - Solver
-           - Garphs
-       - #### Day 2
-           - Solver
-           - Graphs
