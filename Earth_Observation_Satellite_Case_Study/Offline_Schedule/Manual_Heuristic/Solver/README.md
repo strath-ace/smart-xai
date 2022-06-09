@@ -12,7 +12,7 @@ to guide the generation of the results.
   - **CPSolver.py**
     - This function calls the OR-Tools solver and stores the values of actions determined into a file.
 - **solver_test.py**
-    - his function uses the solver with the manually created schedule to create an optimal schedule for the selected day
+    - This function uses the solver with the manually created schedule to create an optimal schedule for the selected day
 - **run_all_days.py**
   - This file is used to run all the codes for all the days entered. This will automatically run until the end last day has ended. 
   This will also plot all graphs required for each respective day, once a folder has been created.
