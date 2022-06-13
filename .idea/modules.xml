@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$USER_HOME$/Documents/GitHub/smart-xai/.idea/smart-xai.iml" filepath="$USER_HOME$/Documents/GitHub/smart-xai/.idea/smart-xai.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/smart-xai-1.iml" filepath="$PROJECT_DIR$/.idea/smart-xai-1.iml" />
+    </modules>
+  </component>
+</project>
