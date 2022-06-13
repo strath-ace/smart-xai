@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 # smart-xai
-Explainable AI for planning and scheduling
-=======
-# Smart-XAI
 
 Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence (XAI)
 
@@ -40,4 +36,3 @@ This contains 2 different types of techniques that may be used:
 * PEP - Pairwise exchange properties
 
 
->>>>>>> master
