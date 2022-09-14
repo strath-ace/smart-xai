@@ -83,9 +83,8 @@ def action_3(num_process, memory_before_action, downlink_data_rate, final_day_me
 
 
 # Initial function to determine where attacks can occur throughout the schedule for selected day.
-def initial_attack_calculation():
-    # Day 3 selected.
-    day = 3
+def initial_attack_calculation(day, filename):
+
     month = 'Dec'
     year = 2020
     country = 'All'
@@ -100,7 +99,7 @@ def initial_attack_calculation():
     # 5000Kbit/s to process images
     process_im_mem = 50 * time_interval
 
-    filename = '../SEP_Results/Day/Day' + str(day) + '.txt'
+    filename = filename + '/Day' + str(day) + '.txt'
 
     absolute_path = '../../../..'
 
@@ -111,7 +110,7 @@ def initial_attack_calculation():
     print(len(country_data_list))
 
     # Loading the solvers results.
-    solver_path = '../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
+    solver_path = '../../../Offline_Schedule/Results_with max(pic,proc,down)/Day ' + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
     solver_coord = open(solver_path, "r")
     count_coord = 0
 
@@ -137,9 +136,9 @@ def initial_attack_calculation():
 
     for n in range(1, horizon):
         solver_details = lines_cp_coord[n].split()
-
+        # print(solver_details[15], int(solver_details[2]))
         # Check If action is executed.
-        if solver_details[15] == 'Yes':
+        if solver_details[15] == 'YES':
             extracted_action = int(solver_details[2])
         else:
             extracted_action = -1
@@ -397,4 +396,4 @@ def initial_attack_calculation():
     file1.close()
 
 
-initial_attack_calculation()
+# initial_attack_calculation()

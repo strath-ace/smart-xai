@@ -11,57 +11,56 @@
 
 from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_calc import pep_action_a
 
-day = 3
 
-# load of attacks summary information
-attack_path = '../../SEP_Results/Day/Argumentation' + str(day) + '.txt'
-attack_coord = open(attack_path, "r")
-count_attack_coord = 0
+def pep_check_swap(day, att_path, datastart, addr1, addr2, action_swap1, action_swap2):
 
-# For loop to count the number of lines in file.
-for line in attack_coord:
-    if line != "\n":
-        count_attack_coord += 1
-attack_coord.close()
-print(count_attack_coord)
+    # load of attacks summary information
+    attack_path = att_path + '/Argumentation' + str(day) + '.txt'
+    attack_coord = open(attack_path, "r")
+    count_attack_coord = 0
 
-# load data line by line.
-attack_coord = open(attack_path, "r")
-attack_cp_coord = attack_coord.read()
-lines_attack_coord = attack_cp_coord.split('\n')
+    # For loop to count the number of lines in file.
+    for line in attack_coord:
+        if line != "\n":
+            count_attack_coord += 1
+    attack_coord.close()
+    # print(count_attack_coord)
 
-# load of attacks summary information.
-solver_path = '../../SEP_Results/Day/Optimized_results' + str(day) + '.txt'
-solver_coord = open(solver_path, "r")
-count_coord = 0
+    # load data line by line.
+    attack_coord = open(attack_path, "r")
+    attack_cp_coord = attack_coord.read()
+    lines_attack_coord = attack_cp_coord.split('\n')
 
-# For loop to count the number of lines in file.
-for line in solver_coord:
-    if line != "\n":
-        count_coord += 1
-solver_coord.close()
-print(count_coord)
+    # load of attacks summary information.
+    solver_path = '../../../Offline_Schedule/Results_with max(pic,proc,down)/Day ' + str(day) + '/Solver/Optimized_results' + str(day) + '.txt'
+    solver_coord = open(solver_path, "r")
+    count_coord = 0
 
-# load data line by line.
-solver_coord = open(solver_path, "r")
-content_cp_coord = solver_coord.read()
-lines_cp_coord = content_cp_coord.split('\n')
+    # For loop to count the number of lines in file.
+    for line in solver_coord:
+        if line != "\n":
+            count_coord += 1
+    solver_coord.close()
+    # print(count_coord)
 
-# Time for every action is 5s.
-time_interval = 5
+    # load data line by line.
+    solver_coord = open(solver_path, "r")
+    content_cp_coord = solver_coord.read()
+    lines_cp_coord = content_cp_coord.split('\n')
 
-# Onboard memory is 80% of total memory 2TB - 1,920,000.
-onboard_mem = int(0.8 * 24 * 10 ** 5)
+    # Time for every action is 5s.
+    time_interval = 5
 
-#  Memory required per image.
-image_mem = 2688
+    # Onboard memory is 80% of total memory 2TB - 1,920,000.
+    onboard_mem = int(0.8 * 24 * 10 ** 5)
 
-# Downlink data rate.
-downlink_data_rate = 280 * 2 * time_interval
-process_im_mem = 50 * time_interval
+    #  Memory required per image.
+    image_mem = 2688
 
+    # Downlink data rate.
+    downlink_data_rate = 280 * 2 * time_interval
+    process_im_mem = 50 * time_interval
 
-def pep_check_swap(datastart, addr1, addr2, action_swap1, action_swap2):
     # Check to see which action of the 2 to be swapped occurs first to then make the swap and start with the
     # second action in the first action's place.
     if addr1 < addr2:
