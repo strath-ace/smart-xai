@@ -41,15 +41,16 @@ def a3_action(a3, memory3):
     return action_3, m3
 
 
-def attack_summary():
-    day = 3
+def attack_summary(day, filename):
+
+
     # interval = 3000
     # onboard memory is 80% of total memory
     onboard_mem = int(0.8 * 24 * 10 ** 5)
 
-    filename1 = '../SEP_Results/Day/Argumentation' + str(day) + '.txt'
+    filename1 = filename + '/Argumentation' + str(day) + '.txt'
 
-    solver_path = '../SEP_Results/Day/Day' + str(day) + '.txt'
+    solver_path = filename + '/Day' + str(day) + '.txt'
     solver_coord = open(solver_path, "r")
     count_coord = 0
 
@@ -136,4 +137,4 @@ def attack_summary():
     file1.close()
 
 
-attack_summary()
+# attack_summary()

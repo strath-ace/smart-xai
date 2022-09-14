@@ -24,6 +24,8 @@ SEP in this application, the concept was applied to a satellite schedule derived
 
 Note, the 4th action idle, can only be attacked by other actions for SEP as it has no value. 
 
+1. **Run_all_SEP.py** - This code is used to run all the required SEP files in order.
+
 Within SEP, there are 7 codes that are used within:
 
 Note: Points 1 and 2 **must** be executed in this order.
@@ -49,6 +51,8 @@ Note: Points 1 and 2 **must** be executed in this order.
 
 PEP in this case is the swapping of any two actions throughout a schedule to observe the effects on a schedule. This generates a solution and provides when the
 solution is feasible or infeasible.
+
+1. **Run_all_pep.py** - This code is used to run all the required PEP files in order. It contains the following:
 
 There is 1 main code that is reliant on 3 functions namely:
 
