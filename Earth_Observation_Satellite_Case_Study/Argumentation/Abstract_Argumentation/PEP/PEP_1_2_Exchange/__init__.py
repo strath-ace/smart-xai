@@ -1,3 +1,0 @@
-# This file is created to call the functions from existing files
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange.PEP_1_2_chart import *
-from Earth_Observation_Satellite_Case_Study.Argumentation.Abstract_Argumentation.PEP.PEP_1_2_Exchange.PEP_vio_ex_for_plot import *
