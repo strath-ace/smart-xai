@@ -1,0 +1,21 @@
+I want help in creating questions for the addition or removal of any action to the schedule.
+
+There are 3 actions:
+
+1. Taking of images
+2. Processing of images
+3. Downlinking of images and
+
+'idle' that is created when no other actions can occur
+
+Any of these actions can replace another within a satellite schedule apart from itself, the start times are shown in the file provided.
+Note that idle cannot replace another action but can be replaced.
+
+The column titled "Scheduled action" represents the actions scheduled with the respective time shown in column labeled start time.
+
+The numbers for the Scheduled actions represents: 1 for processing, 2 for downlinking, 0 for taking of images, and -1 represents idle.
+
+Here are 2 examples of types of questions
+1. Can action A be added at time t after action B ?
+2. Is it possible for action C to be removed?
+

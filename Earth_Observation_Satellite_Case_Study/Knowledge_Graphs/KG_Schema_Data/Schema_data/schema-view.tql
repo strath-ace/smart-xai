@@ -1,0 +1,13 @@
+# ------------------Copyright (C) 2024 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This code is an example to load the skeleton/layout of the KG.
+# ===========================================================================================================
+
+match $s sub $t; {$t type entity;} or {$t type relation;} or {$t type attribute;}; get;
+
+#match $x sub thing;get;
+
+
+

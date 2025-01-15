@@ -1,0 +1,156 @@
+# ------------------Copyright (C) 2024 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This function is used to create the schema for the satellite scheduling problem
+# ===========================================================================================================
+
+define
+
+# Creation of the Satellite entity with it's respective relations - localisation, installation, schedule
+# As well as its assigned ID, position marker 'n'
+satellite sub entity,
+    owns id,
+    plays localisation:satellite,
+    plays installation:satellite,
+    plays schedule:satellite;
+
+# Creation of the environment entity with the satellite's respective coordinates, sunlight exposure, and land visibility
+# Also has it's relations to localisation and station access
+environment sub entity,
+    owns latitude,
+    owns longitude,
+    owns daylight,
+    owns land_visibility,
+    plays localisation:environment,
+    plays station_access:environment;
+
+# Ground Station entity created with their respective coordinates with accessibility with a relation to station access
+ground_station sub entity,
+    owns id,
+    owns latitude,
+    owns longitude,
+    owns access,
+    plays station_access:station;
+
+# Creation of the memory unit entity  containing ID, the maximum capacity, and the current capacity of the memory (memory status onboard)
+# Has a relation with installation as it's installed on the satellite, and contents as the contents impacts the memory 
+memory_unit sub entity,
+    owns id,
+    owns max_capacity,
+    owns current_capacity,
+    plays installation:installed,
+    plays contents:container;
+
+# The following entities (image, processed, downlinked) share similar attributes that are related to the memory excluding the size of each individual action which is local to itself
+# for example im_size - represents the size of the image and the memory it will utilize if scheduled for execution
+# Similar to the processed entity, that has the attribute pr_size local to itself.
+# Last downlinked, entity that has its own local attribute dl_size that represents how much memory becomes available after execution.
+
+image sub entity,
+#    owns im_timestamp,
+    owns im_size,
+    owns im_in_memory,
+    owns im_total_taken,
+    owns pr_in_memory,
+    owns total_processed,
+    owns total_sent,
+#    plays schedule:scheduled_action,
+    plays contents:contained;
+
+
+processed sub entity,
+#    owns pr_timestamp,
+    owns pr_size,
+    owns pr_in_memory,
+    owns total_processed,
+    owns total_sent,
+    owns im_in_memory,
+    owns im_total_taken,
+#    plays schedule:scheduled_action,
+    plays contents:contained;
+    
+    
+downlinked sub entity,
+#    owns dl_timestamp,
+    owns dl_size,
+    owns total_sent,
+    owns pr_in_memory,
+    owns total_processed,
+    owns im_in_memory,
+    owns im_total_taken,
+#    plays schedule:scheduled_action,
+    plays contents:contained;
+    
+idle sub entity,
+#    owns dl_timestamp,
+    owns total_idle,
+    owns pr_in_memory,
+    owns total_processed,
+    owns total_sent,
+    owns im_in_memory,
+    owns im_total_taken,
+#    plays schedule:scheduled_action,
+    plays contents:contained;
+
+action sub entity,
+    owns name,
+    owns a_timestamp,
+    owns memory_requirement,
+    plays schedule:scheduled_action;
+
+# The following are the relations tied to the entities initialised above
+localisation sub relation,
+    relates satellite,
+    relates environment,
+    owns start,
+    owns end;
+
+installation sub relation,
+    relates satellite,
+    relates installed;
+
+station_access sub relation,
+    relates environment,
+    relates station;
+
+contents sub relation,
+    relates container,
+    relates contained;
+
+schedule sub relation,
+    relates satellite,
+    relates scheduled_action,
+    owns start,
+    owns end;
+
+# The following are the attributes contained within each entity, some of which are shared between entities
+id sub attribute, value long;
+latitude sub attribute, value string;
+longitude sub attribute, value string;
+daylight sub attribute, value boolean;
+land_visibility sub attribute, value boolean;
+max_capacity sub attribute, value long;
+current_capacity sub attribute, value double;
+
+a_timestamp sub attribute, value datetime;
+im_size sub attribute, value long;
+pr_size sub attribute, value long;
+dl_size sub attribute, value long;
+name sub attribute, value string;
+access sub attribute, value boolean;
+im_in_memory sub attribute, value double;
+im_total_taken sub attribute, value long;
+pr_in_memory sub attribute, value double;
+total_processed sub attribute, value double;
+total_sent sub attribute, value double; 
+total_idle sub attribute, value long;
+memory_requirement sub attribute, value long;
+start sub attribute, value datetime;
+end sub attribute, value datetime;
+
+
+#im_timestamp sub attribute, value datetime;
+#pr_timestamp sub attribute, value datetime;
+#dl_timestamp sub attribute, value datetime;
+#idl_timestamp sub attribute, value datetime;

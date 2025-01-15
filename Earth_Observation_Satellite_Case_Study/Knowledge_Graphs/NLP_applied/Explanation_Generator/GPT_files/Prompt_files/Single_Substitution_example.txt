@@ -1,0 +1,12 @@
+
+This is an example of a question and answer:
+
+Question: Can taking of images be added at 38 seconds after processing at 26 seconds?
+
+Answer: The image-taking action can replace the 'idle' action at 38 seconds as all conditions are met, but the potential future impact on the schedule, such as increased memory usage, should be considered.
+
+
+
+
+
+

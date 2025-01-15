@@ -1,0 +1,81 @@
+Assessment,Score
+Validation,0.625
+Validation,1
+Validation,1
+Validation,0.625
+Validation,0.875
+Validation,0.25
+Validation,0.5
+Validation,0
+Validation,1
+Validation,0.25
+Validation,0.25
+Validation,0.375
+Validation,0.5
+Validation,0
+Validation,0.5
+Validation,0.25
+Validation,0.5
+Validation,0
+Validation,0.25
+Validation,0.25
+Bert Score - f1,0.569550991
+Bert Score - f1,0.550734043
+Bert Score - f1,0.59941107
+Bert Score - f1,0.57463783
+Bert Score - f1,0.580744624
+Bert Score - f1,0.520114481
+Bert Score - f1,0.552905381
+Bert Score - f1,0.466256261
+Bert Score - f1,0.773709476
+Bert Score - f1,0.539703548
+Bert Score - f1,0.589853764
+Bert Score - f1,0.531494975
+Bert Score - f1,0.496535271
+Bert Score - f1,0.525037408
+Bert Score - f1,0.520512223
+Bert Score - f1,0.469016492
+Bert Score - f1,0.543592155
+Bert Score - f1,0.490041167
+Bert Score - f1,0.49158299
+Bert Score - f1,0.515630007
+Correctness,1
+Correctness,1
+Correctness,1
+Correctness,0
+Correctness,0.5
+Correctness,0
+Correctness,1
+Correctness,0
+Correctness,1
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0
+Correctness,0.5
+Correctness,0
+Final Score,0.731516997
+Final Score,0.850244681
+Final Score,0.866470357
+Final Score,0.399879277
+Final Score,0.651914875
+Final Score,0.256704827
+Final Score,0.684301794
+Final Score,0.155418754
+Final Score,0.924569825
+Final Score,0.263234516
+Final Score,0.279951255
+Final Score,0.302164992
+Final Score,0.332178424
+Final Score,0.175012469
+Final Score,0.340170741
+Final Score,0.239672164
+Final Score,0.347864052
+Final Score,0.163347056
+Final Score,0.413860997
+Final Score,0.255210002

@@ -1,0 +1,7 @@
+
+This is an example of a question and answer:
+
+Question: What would happen if taking of images was scheduled instead of processing of images at the time of 26 seconds?
+
+Answer: The criteria for the taking of images action to be scheduled is for land to be visible and in sunlight, as well as enough available memory to complete the action. At time 26 land is not visible and therefore the taking of images action cannot be scheduled in place of processing of images.
+

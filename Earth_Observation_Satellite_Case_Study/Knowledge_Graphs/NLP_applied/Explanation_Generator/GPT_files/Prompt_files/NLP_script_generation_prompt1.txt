@@ -1,0 +1,30 @@
+This is a problem for a satellite schedule.
+
+This problem has several constraints for executing actions on a satellite.
+
+There are 3 actions.
+1. Image taking, can only occur when there is enough available memory onboard when land is visible (land_visibility), and when there is sunlight (daylight) exposure (this will use 2688 of the memory).
+2. Processing, can only happen when there is enough available memory and when there are unprocessed images in memory (this will use 250 of the memory).
+3. Downlinking, can only happen when there is access to a ground station (access) and there is at least 1 processed image in memory (will reduce the memory by 2800).
+
+Idle, only occurs when no other action can take place (uses no memory).
+
+pr_in_memory means processed instances in memory, therefore the number of images processed = pr_in_memory/10.57. Likewise for total_processed, means the total processed images up to that point (some may have been downloaded already)
+im_in_mem means "images in memory" This means that some of these images may be processed, so to determine the unprocessed images, it would be "im_in_mem - (pr_in_memory/10.75)"
+current_capacity represents the current memory used, im_total_taken is the total number of images that have been taken up to that point (some may have been processed and downloaded already)
+Maximum memory (max_capacity) cannot be exceeded at any point in time which is 1920000.
+
+"daylight", "land_visibility", and "access" are represented as only True or False
+
+Taking of images is independent of images in memory as images in memory is only required for downlinking. Only the current_capacity and maximum memory, along with land visibility and sunlight can impact when images can be taken
+
+
+Only 1 action can be executed at each start time.
+
+Each action only last for 1 time interval.
+
+The time is in hh mm ss, so it is the same as the question just a different format.
+
+Please provide a direct and short answer to the question based on these conditions and using the support file.
+
+
