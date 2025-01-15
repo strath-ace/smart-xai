@@ -1,9 +1,9 @@
-# smart-xai
+# Smart-XAI
 
 Strathclyde Mechanical and Aerospace Research tools for Explainable Artificial Intelligence (XAI)
 
 ## Available Repositories
-* [Earth Observation Case study](#Earth-Observation-Case-study)
+* [Earth Observation Case study](https://github.com/strath-ace-labs/smart-xai/tree/main/Earth_Observation_Satellite_Case_Study)
 
 
 ## Earth Observation Case study
@@ -13,26 +13,22 @@ initially created schedule, thus in combination generating a heuristic OPTIMAL s
 Abstract Argumentation (AA) was applied to the schedule that is contained within.
 
 Within this project there are 3 main sub repositories.
-* [Environment](#Environment)
-* [Offline schedule](#Offline-schedule)
-* [Argumentation](#Argumentation)
-  * [Abstract Argumentation](#Abstract-Argumentation)
 
-### Environment
+- ## Environment
 This file contains the coordinates of the satellite and the code used to determine day, 
 night and land exposure.
 
 
-### Offline schedule
+- ## Offline schedule
 This folder contains the code used to generate an offline schedule for heuristic with a suggested input 
 from the end user.
 
-### Argumentation
-This file currently contains:
+- ## Argumentation
+This file currently contains the Argumentation techniques applied to the the simple satellite schedule.
 
-#### Abstract Argumentation
-This contains 2 different types of techniques that may be used:
-* SEP - Singular Exchange Property.
-* PEP - Pairwise exchange properties
+- ## Knowledge Graphs
+This repository currently contains a Knowledge Graph (KG) technique applied to the simple satellite scheduling problem. 
+
+        
 
 

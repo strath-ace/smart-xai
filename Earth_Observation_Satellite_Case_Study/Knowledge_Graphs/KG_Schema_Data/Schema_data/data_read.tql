@@ -1,0 +1,133 @@
+# ------------------Copyright (C) 2024 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This code is an example to read data from the KG
+# ===========================================================================================================
+
+
+#match $t isa thing;
+#delete $t isa thing;
+match
+    $st >= 2020-12-03T00:52:46; # Start time queried
+    $st <= 2020-12-03T00:52:51; # End time queried
+    $a isa action, has name $n, has a_timestamp $at;
+    $ret isa $ret-type;
+    {$n contains 'processed'; $x isa processed, has $ret;} or
+    {$n contains 'image'; $x isa image, has $ret;} or
+    {$n contains 'downlink'; $x isa downlinked, has $ret;};
+    $pt($x,$mem) isa contents;
+    $g isa ground_station, has access $ac, has $id;
+    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat,
+    has longitude $lon; $sat isa satellite;
+    $mem isa memory_unit, has current_capacity $cc, has $id, has max_capacity $max;
+    $t($a,$sat) isa schedule;
+    $l($mem,$sat) isa installation;
+    $sa($g,$env) isa station_access;
+    $loc($sat,$env) isa localisation, has start $st, has end $en;
+    get $n, $at, $ret, $pt, $ac, $lv, $d, $lat, $lon, $l, $sa, $t, $loc, $id, $mem, $g, $cc, $st, $en;
+#    count;
+
+
+#    $id >= 5;
+#    $id <= 10;
+##    $id =$id;
+##    $id <= 4;
+#    $a isa  action, has name $n, has a_timestamp $at;
+#    $ret isa $ret-type;
+#    {$n contains 'processed'; $x isa processed, has $ret; $ret-type type pr_in_memory;} or 
+#    {$n contains 'image'; $x isa image, has $ret; $ret-type type im_in_memory; } or 
+#    {$n contains 'downlink'; $x isa downlinked, has $ret; $ret-type type total_sent;};
+#    $pt($x,$mem);# isa contents;
+#    $g isa ground_station, has access $ac, has $id;
+#    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat, has longitude $lon;
+#    $sat isa satellite;
+#    $mem isa memory_unit, has current_capacity $cc, has $id;
+#    $t($a,$sat);#  isa schedule;
+#    $l($mem,$sat);# isa installation;
+#    $sa($g,$env); # isa station_access;
+#    $loc($sat,$env) isa localisation, has start $st, has end $en; # localisation
+#get $n, $at, $ret, $pt, $ac, $lv, $d, $lat, $lon, $l,  $sa, $t, $loc, $id, $mem;
+#count ;
+#match
+#    $st = 2020-12-03T00:18:45; # 1125 seconds converted to datetime
+#    $a isa action, has name $n, has a_timestamp $at;
+#
+#    {$n contains 'downlinked'; $ac isa downlinked;} or # before swap
+#    {$n contains 'processed'; $ac isa processed;}; # after swap
+#    $ad($a, $mem) isa contents;
+#    $g isa ground_station, has $id;
+#    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat,
+#    has longitude $lon; $sat isa satellite;
+#    $mem isa memory_unit, has current_capacity $cc, has $id, has max_capacity $max;
+#    $t($a,$sat) isa schedule;
+#    $l($mem,$sat) isa installation;
+#    $sa($g,$env) isa station_access;
+#    $loc($sat,$env) isa localisation, has start $st, has end $en;
+#    get $n, $at, $ac, $mem, $g, $cc, $ad, $st, $en;
+
+
+#     get $a, $n, $at, $ret, $pt, $g, $ac, $env, $lv, $d, $lat, $lon, $sat, $l,  $sa, $mem, $t, $loc, $id;
+    
+#    offset 2; limit 3; #group $mem;
+   
+#    
+#match
+#    $id has 15;
+##  $id = $id;
+#    $a isa  action, has name $n, has a_timestamp $at;
+##    $p isa processed, has pr_in_memory $pr;
+##    $im isa image, has im_in_memory $i;
+##    $dl isa downlinked, has total_sent $tl;   
+##    {$n contains 'processed'; $ct($p,$mem);} or {$n contains 'image'; $ct($im,$mem);} or {$n contains 'downlinked';  $ct($dl,$mem);};
+#    $ret isa $ret-type;
+#    $idt isa $id_num;
+#    {$n contains 'processed'; $x isa processed, has $ret; $ret-type type pr_in_memory;} or 
+#    {$n contains 'image'; $x isa image, has $ret; $ret-type type im_in_memory; } or 
+#    {$n contains 'downlink'; $x isa downlinked, has $ret; $ret-type type total_sent;};
+##    {$n contains 'processed'; $x isa processed, has pr_in_memory $pr;} or 
+##    {$n contains 'image'; $x isa image, has im_in_memory $i;} or
+##    {$n contains 'downlinked'; $x isa downlinked, has total_sent $tl;};
+##    $ct($im,$mem)isa contents;
+#    $pt($x,$mem) isa contents;
+#    $g isa ground_station, has access $ac, has $id;
+#    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat, has longitude $lon;
+#    $sat isa satellite;
+#    $mem isa memory_unit, has current_capacity $cc, has $id;
+#    $t($a,$sat);#  isa schedule;
+#    $l($mem,$sat);# isa installation;
+#    $sa($g,$env); # isa station_access;
+##    $ct($x,$mem); #isa contents;
+#    $loc($sat,$env) isa localisation, has start $st, has end $en; # localisation
+# get $a, $n, $at, $ret, $pt, $g, $ac, $env, $lv, $d, $lat, $lon, $sat, $l,  $sa, $mem, $t, $loc, $id;
+##get $id;
+#
+ 
+#---------------------------------------------------------------------------------------------------------------------
+
+#match
+#    $id2 = 9;
+#    $a isa  action, has name $n, has a_timestamp $at;
+##    $p isa processed, has pr_in_memory $pr;
+##    $im isa image, has im_in_memory $i;
+##    $dl isa downlinked, has total_sent $tl;   
+##    {$n contains 'processed'; $ct($p,$mem);} or {$n contains 'image'; $ct($im,$mem);} or {$n contains 'downlinked';  $ct($dl,$mem);};
+#    $ret isa $ret-type;
+#    {$n contains 'processed'; $x isa processed, has $ret; $ret-type type pr_in_memory;} or 
+#    {$n contains 'image'; $x isa image, has $ret; $ret-type type im_in_memory; } or 
+#    {$n contains 'downlink'; $x isa downlinked, has $ret; $ret-type type total_sent;};
+##    {$n contains 'processed'; $x isa processed, has pr_in_memory $pr;} or 
+##    {$n contains 'image'; $x isa image, has im_in_memory $i;} or
+##    {$n contains 'downlinked'; $x isa downlinked, has total_sent $tl;};
+##    $ct($im,$mem)isa contents;
+#    $pt($x,$mem) isa contents;
+#    $g isa ground_station, has access $ac, has id $id;
+#    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat, has longitude $lon;
+#    $sat isa satellite;
+#    $mem isa memory_unit, has current_capacity $cc, has id $id;
+#    $t($a,$sat);#  isa schedule;
+#    $l($mem,$sat);# isa installation;
+#    $sa($g,$env); # isa station_access;
+##    $ct($x,$mem); #isa contents;
+#    $loc($sat,$env) isa localisation, has start $st, has end $en; # localisation
+# get $a, $n, $at, $ret, $pt, $g, $ac,$id, $env, $lv, $d, $lat, $lon, $sat, $l,  $sa, $mem, $t, $loc;

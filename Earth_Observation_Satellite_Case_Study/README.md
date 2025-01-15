@@ -21,9 +21,10 @@ several down-linking instances to send 1 image after it has been processed.
 
 The structure of this folder is shown below:
 
-- ## [Environment](#Environment)
-- ## [Offline Schedule](#Offline-Schedule)
-- ## [Argumentation](#Argumentation)
+- ## [Environment](#environment)
+- ## [Offline Schedule](#offline-schedule)
+- ## [Argumentation](#argumentation)
+- ## [Knowledge Graphs](#knowledge-graphs)
 
 - ### Environment
    This folder contains both the raw data of the satellites' positions and the initial code that
@@ -117,19 +118,45 @@ The structure of this folder is shown below:
     - **plot_results_infeasible.py**
     - **Feasible_better_or_worse_chart.py** 
 
-
   - #### Pairwise Exchange Property (PEP)
-    Contains the following files below:
-    - **PEP_swap.py** \
-    Uses the function below.
-      - **PEP_Feasible_check.py** \
-        Uses the function below.
-        - **PEP_calc.py** \
-         Uses the function below.
-          - **constraints_considered_add2.py** 
+      Contains the following files below:
+      - **PEP_swap.py** \
+      Uses the function below.
+        - **PEP_Feasible_check.py** \
+          Uses the function below.
+          - **PEP_calc.py** \
+           Uses the function below.
+            - **constraints_considered_add2.py** 
 
-  For Graphs:
-  The following codes were used to support providing results to the end user.
-  - **PEP_1_2_chart.py** \
-    Uses the function below.
-    - **PEP_vio_ex_for_plot** -
+      For Graphs:
+      The following codes were used to support providing results to the end user.
+      - **PEP_1_2_chart.py** \
+      Uses the function below.
+      - **PEP_vio_ex_for_plot** -
+
+- ### Knowledge Graphs
+   This repository contains the knowledge graph schema used for the simple satellite scheduling problem. It also includes Natural Language Processing (NLP) techniques applied to generate queries, code and answers related to the satellite schedule.\
+   Contains the following sub directories:
+
+  - #### KG_Schema_Data
+       Has the following folder and files below:
+    - **Schema_data** - contains the schema and codes to generate knowledge graphs
+      - **sched_schema_final.tql**
+      - **schema_view.tql**
+      - **data_read_all.tql**
+      - **data_read.tql**  
+       
+    Addtiionally, the python codes contained within are:
+    - **Satellite_migrate_csv_updated.py**
+    - **tql_merge_sched_cond.py**\
+    Uses the function:
+      - **Map_image_coord.py**
+        
+  - #### NLP_applied - Query, code, and explanation generation
+     Has 5 sub directories:
+     - #### Question_Generator 
+     - #### Code Generation
+     - #### Explanation_Generator
+     - #### Scoring
+  - #### Results
+  Contains the Schedule to transfer the database to the KG.

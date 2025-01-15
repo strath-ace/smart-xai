@@ -1,0 +1,63 @@
+This is a template code using TypeDB to extract and get all data from a dataset created for a schedule to create a knowledge graph.
+
+If there is a question asking for an explanation, only create an algorithm for the Knowledge Graph.
+
+This template is fixed and only the variable definition and the 'get' statement can be amended but must maintain the same variable labels.
+
+All variables pertaining to the questions should be defined at the beginning, after the "match" clause:
+
+for example. What would happen if time was 26 seconds? Time would be written like this 2020-12-03T00:00:26;
+Using the same year-month-day and time format. The code would be written like this:
+
+Note: $st should only be used if the question specifies it, otherwise should be removed.
+Additionally, if there are any questions with a range of variables (you should use the start time ($st)), the same variable should be used and written like this:
+$st >= a;
+$st <= b;
+
+Also if there is a question stating how many times is it possible for 'a', the "count" statement should be written after the "get" statement
+for example, how many times is ground station accessible? 
+$g isa ground_station, has access $ac;
+get $ac; count;
+
+Additionally when asked about MB, multiply by 1000000\\
+
+match
+    $st = 2020-12-03T00:00:26;
+    $a isa action, has name $n, has a_timestamp $at;
+    $ret isa $ret-type;
+    {$n contains 'processed'; $x isa processed, has $ret;} or
+    {$n contains 'image'; $x isa image, has $ret;} or
+    {$n contains 'downlink'; $x isa downlinked, has $ret;};
+    $pt($x,$mem) isa contents;
+    $g isa ground_station, has access $ac, has $id;
+    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat,
+    has longitude $lon; $sat isa satellite;
+    $mem isa memory_unit, has current_capacity $cc, has $id, has max_capacity $max;
+    $t($a,$sat) isa schedule;
+    $l($mem,$sat) isa installation;
+    $sa($g,$env) isa station_access;
+    $loc($sat,$env) isa localisation, has start $st, has end $en;
+    get $n, $at, $ret, $pt, $ac, $lv, $d, $lat, $lon, $l, $sa, $t, $loc, $id, $mem, $g, $cc, $st, $en;
+
+Here is another example:
+What would happen if ID was 7? rewrite the code
+
+match
+    $id = 7;
+    $a isa action, has name $n, has a_timestamp $at;
+    $ret isa $ret-type;
+    {$n contains 'processed'; $x isa processed, has $ret;} or
+    {$n contains 'image'; $x isa image, has $ret;} or
+    {$n contains 'downlink'; $x isa downlinked, has $ret;};
+    $pt($x,$mem) isa contents;
+    $g isa ground_station, has access $ac, has $id;
+    $env isa environment, has land_visibility $lv, has daylight $d, has latitude $lat,
+    has longitude $lon; $sat isa satellite;
+    $mem isa memory_unit, has current_capacity $cc, has $id, has max_capacity $max;
+    $t($a,$sat) isa schedule;
+    $l($mem,$sat) isa installation;
+    $sa($g,$env) isa station_access;
+    $loc($sat,$env) isa localisation, has start $st, has end $en;
+    get $n, $at, $ret, $pt, $ac, $lv, $d, $lat, $lon, $l, $sa, $t, $loc, $id, $mem, $g, $cc, $st, $en;
+
+create a knowledge graph based on the question and the code template provided.

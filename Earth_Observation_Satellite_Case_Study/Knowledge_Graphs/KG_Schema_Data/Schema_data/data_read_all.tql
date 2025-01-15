@@ -1,0 +1,10 @@
+# ------------------Copyright (C) 2024 University of Strathclyde and Author ---------------------------------
+# --------------------------------- Author: Cheyenne Powell -------------------------------------------------
+# ------------------------- e-mail: cheyenne.powell@strath.ac.uk --------------------------------------------
+
+# This code is an example to read ALL data from the KG, best to work with small data set. see data_read.tql
+# to narrow search
+# ===========================================================================================================
+
+match $t isa thing; get;
+

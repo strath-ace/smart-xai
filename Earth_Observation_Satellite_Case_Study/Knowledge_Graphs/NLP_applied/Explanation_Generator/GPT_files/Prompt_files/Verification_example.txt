@@ -1,0 +1,6 @@
+
+This is an example of a question and answer:
+
+Question: How many times is action downlinking of images scheduled up to time 6079 seconds?
+
+Answer: The downlinking action is scheduled to occur 187 times up until time 4411 seconds, according to the provided data.
