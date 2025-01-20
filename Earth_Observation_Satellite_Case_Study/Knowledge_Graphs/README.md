@@ -1,6 +1,21 @@
 # Knowledge Graph (KG) case study for a simple satellite schedule
 This project explores the application using Knowledge Graphs (KGs) and Large Language Models (LLMs) in supporting eXplainable Artificial Intelligence (XAI) for a simple Earth Observation Satellite Case Study and can be found [here](https://github.com/strath-ace-labs/smart-xai/tree/main/Earth_Observation_Satellite_Case_Study). 
 
+Please use the following citation to reference this work.
+
+```
+@article{PowellJAIS2025,
+author = {Powell, Cheyenne and Riccardi, Annalisa},
+title = {Question Answering over Knowledge Graphs for Explainable Satellite Scheduling},
+journal = {Journal of Aerospace Information Systems},
+volume = {0},
+number = {0},
+pages = {1-41},
+year = {2025},
+}
+```
+
+
 ## Definition of a Knowledge Graph (KG)
 A KG is a graphically structured representation of information that are in the form of entities, relationships and attributes. A KG enable data to be stored allowing querying, reasoning and answering over complex and interrelated data nabling advanced analytics and insights.
 In this project Vaticle TypeDB is used.
