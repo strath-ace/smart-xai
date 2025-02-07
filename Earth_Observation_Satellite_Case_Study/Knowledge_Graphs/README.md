@@ -1,9 +1,10 @@
 # Knowledge Graph (KG) case study for a simple satellite schedule
 This project explores the application using Knowledge Graphs (KGs) and Large Language Models (LLMs) in supporting eXplainable Artificial Intelligence (XAI) for a simple Earth Observation Satellite Case Study and can be found [here](https://github.com/strath-ace-labs/smart-xai/tree/main/Earth_Observation_Satellite_Case_Study). 
 
-Please use the following citation to reference this work.
+Please use the following citation to reference this work. Pending publication
 
 ```
+
 @article{PowellJAIS2025,
 author = {Powell, Cheyenne and Riccardi, Annalisa},
 title = {Question Answering over Knowledge Graphs for Explainable Satellite Scheduling},
