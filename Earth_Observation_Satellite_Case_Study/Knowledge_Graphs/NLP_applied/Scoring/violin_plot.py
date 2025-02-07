@@ -12,7 +12,7 @@ import sys
 import os
 
 # SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-sys.path.append('../Case_study_application/')
+sys.path.append('../')
 import seaborn as sns
 import matplotlib.pyplot as plt
 from openpyxl import load_workbook

@@ -303,9 +303,9 @@ def main():
 
                 question_number = int(input("What question would you like to get: "))
             # question_number = int(input("What question would you like to get: "))
-            # human_input_req = input("Is a human input required for the LLM response? y/n: ")
+            human_input_req = input("Is a human input required for the LLM response? y/n: ")
 
-            human_input_req = "n"
+            # human_input_req = "n"
             if human_input_req == "y":
                 updated_sheet_name = 'human_'
             else:
@@ -341,8 +341,8 @@ def main():
                               "USER_ENTERED",
                               [column], score, creds)
 
-        # cos_score_required = input("Is cosine similarity score required? y/n: ")
-        cos_score_required = "n"
+        cos_score_required = input("Is cosine similarity score required? y/n: ")
+        # cos_score_required = "n"
 
         # Generate the cosine similarity
         if cos_score_required == "y":
@@ -409,15 +409,15 @@ def main():
                 time.sleep(60)
 
         # Request if graphs are required
-        graph_required = "y"
-        # graph_required = input("Are graphs required? y/n: ")
+        # graph_required = "y"
+        graph_required = input("Are graphs required? y/n: ")
         # Generate the cosine similarity
         if graph_required == "y":
-            # compare_question = input("  Cosine comparison of questions plot required? y/n: ")
-            compare_question = "n"
+            compare_question = input("  Cosine comparison of questions plot required? y/n: ")
+            # compare_question = "n"
             cols = ["Swap_actions", "Single_Substitution", "Verification", "Forward_Backward"]
-            # human_input_req = input("  Human prompt? y/n: ")
-            human_input_req = "y"
+            human_input_req = input("  Human prompt? y/n: ")
+            # human_input_req = "y"
             if human_input_req == "y":
                 updated_sheet_name = 'human_'
             else:
@@ -448,8 +448,8 @@ def main():
                 bell_chart(plot_data2, plot_label, fig_name, fig_subtitle)
 
             # If the LLM human comparison is required
-            LLM_Human = "y"
-            # LLM_Human = input("  Comparison of questions with human vs llm required? y/n: ")
+            # LLM_Human = "y"
+            LLM_Human = input("  Comparison of questions with human vs llm required? y/n: ")
 
             if LLM_Human == 'y':
                 for t in cols:
