@@ -137,7 +137,7 @@ def satellite_template(Satellite_data):
     graql_insert_query4 += ', has im_total_taken ' + str(Satellite_data["total_pics_count"]) + ''
 
     # added
-    graql_insert_query4 += ', has pr_in_memory ' + str(Satellite_data["processed_instances_in_memory"]) + ''
+    graql_insert_query4 += ', has pr_in_memory ' + str(Satellite_data["processed_images_in_memory"]) + ''
     graql_insert_query4 += ', has total_processed ' + str(Satellite_data["total_processed_images"]) + ''
     graql_insert_query4 += ', has total_sent ' + str(Satellite_data["total_downlinked_images"]) + ''
     # if Satellite_data["extracted_action"] == '0' and Satellite_data["action_possible"] == "YES":
@@ -146,7 +146,7 @@ def satellite_template(Satellite_data):
 
     # ---------------processed-------------------------------
     graql_insert_query5 = 'insert $p isa processed '
-    graql_insert_query5 += ', has pr_in_memory ' + str(Satellite_data["processed_instances_in_memory"]) + ''
+    graql_insert_query5 += ', has pr_in_memory ' + str(Satellite_data["processed_images_in_memory"]) + ''
     graql_insert_query5 += ', has total_processed ' + str(Satellite_data["total_processed_images"]) + ''
 
     # added below
@@ -164,7 +164,7 @@ def satellite_template(Satellite_data):
     #added below
     graql_insert_query6 += ', has im_in_memory ' + str(Satellite_data["pics_in_memory"]) + ''
     graql_insert_query6 += ', has im_total_taken ' + str(Satellite_data["total_pics_count"]) + ''
-    graql_insert_query6 += ', has pr_in_memory ' + str(Satellite_data["processed_instances_in_memory"]) + ''
+    graql_insert_query6 += ', has pr_in_memory ' + str(Satellite_data["processed_images_in_memory"]) + ''
     graql_insert_query6 += ', has total_processed ' + str(Satellite_data["total_processed_images"]) + ''
     # if Satellite_data["extracted_action"] == '2' and Satellite_data["action_possible"] == "YES":
     #     graql_insert_query6 += ', has dl_timestamp ' + start_time + ''
@@ -176,7 +176,7 @@ def satellite_template(Satellite_data):
     #added below
     graql_insert_query7 += ', has im_in_memory ' + str(Satellite_data["pics_in_memory"]) + ''
     graql_insert_query7 += ', has im_total_taken ' + str(Satellite_data["total_pics_count"]) + ''
-    graql_insert_query7 += ', has pr_in_memory ' + str(Satellite_data["processed_instances_in_memory"]) + ''
+    graql_insert_query7 += ', has pr_in_memory ' + str(Satellite_data["processed_images_in_memory"]) + ''
     graql_insert_query7 += ', has total_processed ' + str(Satellite_data["total_processed_images"]) + ''
     graql_insert_query7 += ', has total_sent ' + str(Satellite_data["total_downlinked_images"]) + ''
     # if  Satellite_data["action_possible"] == "NO":
@@ -193,7 +193,7 @@ def satellite_template(Satellite_data):
     # ---------------contents-------------------------------
     graql_insert_query9 = 'match $m isa memory_unit, has current_capacity ' + str(Satellite_data["memory_used"]) + ';'
     graql_insert_query9 += '$im isa image, has im_in_memory ' + str(Satellite_data["pics_in_memory"]) + ';'
-    graql_insert_query9 += '$p isa processed, has pr_in_memory ' + str(Satellite_data["processed_instances_in_memory"]) + ';'
+    graql_insert_query9 += '$p isa processed, has pr_in_memory ' + str(Satellite_data["processed_images_in_memory"]) + ';'
     graql_insert_query9 += '$d isa downlinked, has total_sent ' + str(Satellite_data["total_downlinked_images"]) + ';'
     graql_insert_query9 += '$idl isa idle, has total_idle ' + str(Satellite_data["total_idle_instances"]) + ';'
     if action_scheduled == '"image"':
