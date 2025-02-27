@@ -106,7 +106,7 @@ def TypeDB_executor(request):
                             # data_list.append(nested)
 
                             # print(answer.get("n").as_attribute().get_value())
-                            if i <= 5:
+                            # if i <= 5:
                                 for sub_data in data2:
                                     r_data2 = 0
 
@@ -125,28 +125,28 @@ def TypeDB_executor(request):
                                         nested.append(str(data_result))
 
                                     # If a new heading is present due to different action name, create a new heading, to add as a new row (a new table)
-                                    if r_data4 not in heading and heading !=[]:
+                                    if r_data4 not in heading and heading != []:
                                         heading_list.append(r_data4)
                                         print(r_data4, heading)
                                         another_heading_list = heading_list
                                         nested.append(str(data_result))
-
+                                print('nested', heading_list, nested)
                                 i = i + 1
                                 print('loop', i)
-                                if i == 6:
-                                    # print('loop exceeded', i)
-                                    if another_heading_list == []:
-                                        heading = heading_list
-                                        data_list.append(nested)
-                                    else:
-                                        data_list.append(another_heading_list)
-                                        data_list.append(nested)
-                                    # nested_new = nested
+                                # if i == 6:
+                                # print('loop exceeded', i)
+                                if another_heading_list == []:
+                                    heading = heading_list
+                                    data_list.append(nested)
+                                else:
+                                    data_list.append(another_heading_list)
+                                    data_list.append(nested)
+                                # nested_new = nested
 
-                                    nested = []
-                                    heading_list = []
-                                    another_heading_list = []
-                                    i = 0
+                                nested = []
+                                heading_list = []
+                                another_heading_list = []
+                                i = 0
 
         print('exited')
         if limit_number < 6 and limit_number > 0:
